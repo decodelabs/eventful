@@ -2,6 +2,6 @@ parameters:
     paths:
         - src
     excludes_analyse:
-        - src/Atlas/EventLoop/Event.php
+        - src/Dispatcher/Event.php
     level: 5
     inferPrivatePropertyTypeFromConstructor: true
