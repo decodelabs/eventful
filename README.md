@@ -20,9 +20,55 @@ Install the library via composer:
 composer require decodelabs/eventful
 ```
 
-## Usage
+### Usage
 
-Coming soon..
+Listen for events on IO, Signals and Timers and respond accordingly.
+If php's Event extension is available, that will be used, otherwise a basic <code>select()</code> loop fills in the gaps.
+
+```php
+use DecodeLabs\Atlas;
+use DecodeLabs\Eventful\Factory;
+
+$broker = Atlas::newCliBroker();
+
+$eventLoop = Factory::newDispatcher()
+
+    // Run every 2 seconds
+    ->bindTimer('timer1', 2, function() use($broker) {
+        $broker->writeLine('Timer 1');
+    })
+
+    // Listen for reads, but frozen - won't activate until unfrozen
+    ->bindStreamReadFrozen($input = $broker->getFirstInputReceiver(), function() use($broker) {
+        $broker->writeLine('You said: '.$broker->readLine());
+    })
+
+    // Run once after 1 second
+    ->bindTimerOnce('timer2', 1, function($binding) use($broker, $input) {
+        $broker->writeLine('Timer 2');
+
+        // Unfreeze io reads
+        $binding->eventLoop->unfreeze($intput);
+    })
+
+    // Check if we want to bail every second
+    ->setCycleHandler(function(int $cycles) {
+        if($cycles > 10) {
+            return false;
+        }
+    });
+
+
+/*
+Outputs something like:
+
+Timer 2
+Timer 1
+Timer 1
+You said: Hello world
+Timer 1
+*/
+```
 
 
 ## Licensing
