@@ -19,6 +19,9 @@ class Timer implements Binding
         __construct as __traitConstruct;
     }
 
+    /**
+     * @var float
+     */
     public $duration;
 
     /**

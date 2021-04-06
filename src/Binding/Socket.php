@@ -24,7 +24,14 @@ class Socket implements IoBinding
     }
     use IoBindingTrait;
 
+    /**
+     * @var SocketChannel
+     */
     public $socket;
+
+    /**
+     * @var string
+     */
     public $socketId;
 
     /**
@@ -69,7 +76,8 @@ class Socket implements IoBinding
      */
     public function isStreamBased(): bool
     {
-        return $this->socket->getImplementationName() == 'streams';
+        return true;
+        //return $this->socket->isStreamBased();
     }
 
     /**

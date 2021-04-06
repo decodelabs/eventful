@@ -32,7 +32,12 @@ interface Dispatcher
     public function freezeAllBindings(): Dispatcher;
     public function unfreezeAllBindings(): Dispatcher;
     public function removeAllBindings(): Dispatcher;
+
+    /**
+     * @return array<Binding>
+     */
     public function getAllBindings(): array;
+
     public function countAllBindings(): int;
 
     public function setCycleHandler(?callable $callback = null): Dispatcher;
@@ -67,11 +72,29 @@ interface Dispatcher
 
     public function countSocketBindings(): int;
     public function countSocketBindingsFor(Socket $socket): int;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getSocketBindings(): array;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getSocketBindingsFor(Socket $socket): array;
+
     public function countSocketReadBindings(): int;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getSocketReadBindings(): array;
+
     public function countSocketWriteBindings(): int;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getSocketWriteBindings(): array;
 
 
@@ -103,36 +126,111 @@ interface Dispatcher
 
     public function countStreamBindings(): int;
     public function countStreamBindingsFor(Stream $stream): int;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getStreamBindings(): array;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getStreamBindingsFor(Stream $stream): array;
+
     public function countStreamReadBindings(): int;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getStreamReadBindings(): array;
+
     public function countStreamWriteBindings(): int;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getStreamWriteBindings(): array;
 
 
     // Signal
-    public function bindSignal(string $id, $signals, callable $callback): Dispatcher;
-    public function bindFrozenSignal(string $id, $signals, callable $callback): Dispatcher;
-    public function bindSignalOnce(string $id, $signals, callable $callback): Dispatcher;
-    public function bindFrozenSignalOnce(string $id, $signals, callable $callback): Dispatcher;
 
+    /**
+     * @param iterable<mixed> $signals
+     */
+    public function bindSignal(string $id, iterable $signals, callable $callback): Dispatcher;
+
+    /**
+     * @param iterable<mixed> $signals
+     */
+    public function bindFrozenSignal(string $id, iterable $signals, callable $callback): Dispatcher;
+
+    /**
+     * @param iterable<mixed> $signals
+     */
+    public function bindSignalOnce(string $id, iterable $signals, callable $callback): Dispatcher;
+
+    /**
+     * @param iterable<mixed> $signals
+     */
+    public function bindFrozenSignalOnce(string $id, iterable $signals, callable $callback): Dispatcher;
+
+    /**
+     * @param mixed $signal
+     */
     public function freezeSignal($signal): Dispatcher;
+
+    /**
+     * @param string|SignalBinding $binding
+     */
     public function freezeSignalBinding($binding): Dispatcher;
+
     public function freezeAllSignals(): Dispatcher;
 
+    /**
+     * @param mixed $signal
+     */
     public function unfreezeSignal($signal): Dispatcher;
+
+    /**
+     * @param string|SignalBinding $binding
+     */
     public function unfreezeSignalBinding($binding): Dispatcher;
+
     public function unfreezeAllSignals(): Dispatcher;
 
+    /**
+     * @param mixed $signal
+     */
     public function removeSignal($signal): Dispatcher;
+
+    /**
+     * @param string|SignalBinding $binding
+     */
     public function removeSignalBinding($binding): Dispatcher;
+
     public function removeAllSignals(): Dispatcher;
 
+    /**
+     * @param string|SignalBinding $id
+     */
     public function getSignalBinding($id): ?SignalBinding;
+
     public function countSignalBindings(): int;
+
+    /**
+     * @param mixed $signal
+     */
     public function countSignalBindingsFor($signal): int;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getSignalBindings(): array;
+
+    /**
+     * @param mixed $signal
+     * @return array<string, Binding>
+     */
     public function getSignalBindingsFor($signal): array;
 
 
@@ -142,16 +240,36 @@ interface Dispatcher
     public function bindTimerOnce(string $id, float $duration, callable $callback): Dispatcher;
     public function bindFrozenTimerOnce(string $id, float $duration, callable $callback): Dispatcher;
 
+    /**
+     * @param string|TimerBinding $id
+     */
     public function freezeTimer($id): Dispatcher;
+
     public function freezeAllTimers(): Dispatcher;
 
+    /**
+     * @param string|TimerBinding $id
+     */
     public function unfreezeTimer($id): Dispatcher;
+
     public function unfreezeAllTimers(): Dispatcher;
 
+    /**
+     * @param string|TimerBinding $id
+     */
     public function removeTimer($id): Dispatcher;
+
     public function removeAllTimers(): Dispatcher;
 
+    /**
+     * @param string|TimerBinding $id
+     */
     public function getTimerBinding($id): ?TimerBinding;
+
     public function countTimerBindings(): int;
+
+    /**
+     * @return array<string, Binding>
+     */
     public function getTimerBindings(): array;
 }
