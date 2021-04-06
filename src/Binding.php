@@ -9,6 +9,14 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful;
 
+/**
+ * @property string $id
+ * @property bool $persistent
+ * @property bool $frozen
+ * @property callable $handler
+ * @property mixed $resource
+ * @property Dispatcher $dispatcher
+ */
 interface Binding
 {
     public function getId(): string;
@@ -17,7 +25,14 @@ interface Binding
     public function getHandler(): callable;
     public function getDispatcher(): Dispatcher;
 
+    /**
+     * @param mixed $resource
+     */
     public function setEventResource($resource): Binding;
+
+    /**
+     * @return mixed
+     */
     public function getEventResource();
 
     public function freeze(): Binding;
@@ -27,5 +42,8 @@ interface Binding
     public function isFrozen(): bool;
     public function destroy(): Binding;
 
+    /**
+     * @param mixed $targetResource
+     */
     public function trigger($targetResource): Binding;
 }

@@ -18,6 +18,13 @@ Install the library via composer:
 composer require decodelabs/eventful
 ```
 
+### PHP version
+
+_Please note, the final v1 releases of all Decode Labs libraries will target **PHP8** or above._
+
+Current support for earlier versions of PHP will be phased out in the coming months.
+
+
 ### Usage
 
 Listen for events on IO, Signals and Timers and respond accordingly.

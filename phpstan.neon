@@ -3,5 +3,4 @@ parameters:
         - src
     excludes_analyse:
         - src/Dispatcher/Event.php
-    level: 5
-    inferPrivatePropertyTypeFromConstructor: true
+    level: max

@@ -22,13 +22,40 @@ use DecodeLabs\Systemic;
 
 trait DispatcherTrait
 {
+    /**
+     * @var bool
+     */
     protected $listening = false;
+
+    /**
+     * @var callable|null
+     */
     protected $cycleHandler;
+
+    /**
+     * @var int
+     */
     protected $cycles = 0;
 
+
+    /**
+     * @var array<string, SocketBinding>
+     */
     protected $sockets = [];
+
+    /**
+     * @var array<string, StreamBinding>
+     */
     protected $streams = [];
+
+    /**
+     * @var array<string, SignalBinding>
+     */
     protected $signals = [];
+
+    /**
+     * @var array<string, TimerBinding>
+     */
     protected $timers = [];
 
 
@@ -1382,6 +1409,8 @@ trait DispatcherTrait
 
     /**
      * Normalize signal input
+     *
+     * @param mixed $signal
      */
     protected function normalizeSignal($signal): int
     {

@@ -24,7 +24,14 @@ class Stream implements IoBinding
     }
     use IoBindingTrait;
 
+    /**
+     * @var StreamChannel
+     */
     public $stream;
+
+    /**
+     * @var string
+     */
     public $streamId;
 
     /**
@@ -40,7 +47,7 @@ class Stream implements IoBinding
         ?callable $timeoutHandler = null
     ) {
         $this->stream = $stream;
-        $this->streamId = spl_object_id($stream);
+        $this->streamId = (string)spl_object_id($stream);
         $this->ioMode = $ioMode;
 
         $this->__traitConstruct($dispatcher, $this->ioMode . ':' . $this->streamId, $persistent, $callback);

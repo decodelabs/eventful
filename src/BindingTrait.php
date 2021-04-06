@@ -11,11 +11,34 @@ namespace DecodeLabs\Eventful;
 
 trait BindingTrait
 {
+    /**
+     * @var string
+     */
     public $id;
+
+    /**
+     * @var bool
+     */
     public $persistent = true;
+
+    /**
+     * @var bool
+     */
     public $frozen = false;
+
+    /**
+     * @var callable
+     */
     public $handler;
+
+    /**
+     * @var mixed
+     */
     public $resource;
+
+    /**
+     * @var Dispatcher
+     */
     public $dispatcher;
 
     /**
@@ -64,6 +87,8 @@ trait BindingTrait
 
     /**
      * Set event lib resource
+     *
+     * @param mixed $resource
      */
     public function setEventResource($resource): Binding
     {
@@ -73,6 +98,8 @@ trait BindingTrait
 
     /**
      * Get event lib resource
+     *
+     * @return mixed
      */
     public function getEventResource()
     {

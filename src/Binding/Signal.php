@@ -15,6 +15,7 @@ use DecodeLabs\Eventful\Dispatcher;
 
 use DecodeLabs\Exceptional;
 use DecodeLabs\Systemic;
+use DecodeLabs\Systemic\Process\Signal as SignalObject;
 
 class Signal implements Binding
 {
@@ -22,16 +23,21 @@ class Signal implements Binding
         __construct as __traitConstruct;
     }
 
+    /**
+     * @var array<int, SignalObject>
+     */
     public $signals = [];
 
     /**
      * Init with timer information
+     *
+     * @param iterable<mixed> $signals
      */
     public function __construct(
         Dispatcher $dispatcher,
         string $id,
         bool $persistent,
-        $signals,
+        iterable $signals,
         callable $callback
     ) {
         if (!class_exists(Systemic::class)) {
@@ -43,7 +49,7 @@ class Signal implements Binding
         $this->__traitConstruct($dispatcher, $id, $persistent, $callback);
         $this->resource = [];
 
-        foreach ((array)$signals as $signal) {
+        foreach ($signals as $signal) {
             $signal = Systemic::$process->newSignal($signal);
             $number = $signal->getNumber();
             $this->signals[$number] = $signal;
@@ -61,6 +67,8 @@ class Signal implements Binding
 
     /**
      * Get signal list
+     *
+     * @return array<int, SignalObject>
      */
     public function getSignals(): array
     {
@@ -93,7 +101,7 @@ class Signal implements Binding
             return $this;
         }
 
-        ($this->handler)($this->signals[$number], $this);
+        ($this->handler)($this->signals[(int)$number], $this);
 
         if (!$this->persistent) {
             $this->dispatcher->removeSignalBinding($this);

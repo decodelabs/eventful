@@ -35,13 +35,36 @@ class Select implements Dispatcher
     public const RESOURCE = 0;
     public const HANDLER = 1;
 
+    /**
+     * @var bool
+     */
     protected $breakLoop = false;
+
+    /**
+     * @var bool
+     */
     protected $generateMaps = true;
 
+
+    /**
+     * @var array<int, array>|null
+     */
     protected $socketMap = [];
+
+    /**
+     * @var array<int, array>|null
+     */
     protected $streamMap = [];
+
+    /**
+     * @var array<int, array>|null
+     */
     protected $signalMap = [];
 
+
+    /**
+     * @var bool
+     */
     private $hasPcntl = false;
 
     /**
@@ -223,7 +246,7 @@ class Select implements Dispatcher
     /**
      * Generate resource maps for select()
      */
-    private function generateMaps()
+    private function generateMaps(): void
     {
         $this->socketMap = $this->streamMap = [
             self::RESOURCE => [
@@ -245,7 +268,7 @@ class Select implements Dispatcher
             $resource = $binding->getIoResource();
             $resourceId = (int)$resource;
 
-            if ($binding->isStreamBased) {
+            if ($binding->isStreamBased()) {
                 $this->streamMap[self::RESOURCE][$binding->ioMode][$resourceId] = $resource;
                 $this->streamMap[self::HANDLER][$binding->ioMode][$resourceId][$id] = $binding;
                 $streamCount++;
@@ -368,7 +391,7 @@ class Select implements Dispatcher
             return;
         }
 
-        foreach ($this->signalMap as $number => $set) {
+        foreach ($this->signalMap ?? [] as $number => $set) {
             pcntl_signal($number, function ($number) use ($set) {
                 foreach ($set as $binding) {
                     $binding->trigger($number);
@@ -386,8 +409,8 @@ class Select implements Dispatcher
             return;
         }
 
-        foreach (array_keys($this->signalMap) as $number) {
-            pcntl_signal($number, \SIG_IGN);
+        foreach (array_keys($this->signalMap ?? []) as $number) {
+            pcntl_signal((int)$number, \SIG_IGN);
         }
     }
 
