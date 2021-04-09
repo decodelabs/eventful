@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful\Binding;
 
-use DecodeLabs\Atlas\Socket as SocketChannel;
+use DecodeLabs\Deliverance\Socket as SocketChannel;
 
 use DecodeLabs\Eventful\Binding;
 use DecodeLabs\Eventful\Binding\Io as IoBinding;

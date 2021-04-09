@@ -11,7 +11,7 @@
     "require": {
         "php": "^7.2|^8.0",
 
-        "decodelabs/atlas": "^0.8",
+        "decodelabs/deliverance": "^0.1",
         "decodelabs/systemic": "^0.7",
         "decodelabs/exceptional": "^0.3"
     },
@@ -32,7 +32,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.1.x-dev"
+            "dev-develop": "0.2.x-dev"
         }
     },
     "scripts": {
