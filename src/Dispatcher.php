@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful;
 
-use DecodeLabs\Atlas\Channel\Stream;
-use DecodeLabs\Atlas\Socket;
+use DecodeLabs\Deliverance\Channel\Stream;
+use DecodeLabs\Deliverance\Socket;
 
 use DecodeLabs\Eventful\Binding\Signal as SignalBinding;
 use DecodeLabs\Eventful\Binding\Socket as SocketBinding;

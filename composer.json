@@ -11,7 +11,7 @@
     "require": {
         "php": "^7.2|^8.0",
 
-        "decodelabs/atlas": "^0.8",
+        "decodelabs/deliverance": "^0.1",
         "decodelabs/systemic": "^0.7",
         "decodelabs/exceptional": "^0.3"
     },
@@ -22,6 +22,9 @@
         "decodelabs/phpstan-decodelabs": "^0.4",
         "symplify/easy-coding-standard": "^8.3"
     },
+    "suggest": {
+        "ext-event": "Faster and more reliable event loops"
+    },
     "autoload": {
         "psr-4": {
             "DecodeLabs\\Eventful\\": "src/"
@@ -29,7 +32,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.1.x-dev"
+            "dev-develop": "0.2.x-dev"
         }
     },
     "scripts": {

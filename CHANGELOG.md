@@ -1,3 +1,6 @@
+## v0.2.0 (2021-04-09)
+* Swapped Atlas for Deliverance
+
 ## v0.1.1 (2021-04-06)
 * Updated for max PHPStan conformance
 
