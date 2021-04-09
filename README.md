@@ -31,10 +31,10 @@ Listen for events on IO, Signals and Timers and respond accordingly.
 If php's Event extension is available, that will be used, otherwise a basic <code>select()</code> loop fills in the gaps.
 
 ```php
-use DecodeLabs\Atlas;
+use DecodeLabs\Deliverance;
 use DecodeLabs\Eventful\Factory;
 
-$broker = Atlas::newCliBroker();
+$broker = Deliverance::newCliBroker();
 
 $eventLoop = Factory::newDispatcher()
 

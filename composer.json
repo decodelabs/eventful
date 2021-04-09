@@ -12,7 +12,7 @@
         "php": "^7.2|^8.0",
 
         "decodelabs/deliverance": "^0.1",
-        "decodelabs/systemic": "^0.7",
+        "decodelabs/systemic": "^0.8",
         "decodelabs/exceptional": "^0.3"
     },
     "require-dev": {
