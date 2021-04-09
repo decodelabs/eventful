@@ -22,6 +22,9 @@
         "decodelabs/phpstan-decodelabs": "^0.4",
         "symplify/easy-coding-standard": "^8.3"
     },
+    "suggest": {
+        "ext-event": "Faster and more reliable event loops"
+    },
     "autoload": {
         "psr-4": {
             "DecodeLabs\\Eventful\\": "src/"
