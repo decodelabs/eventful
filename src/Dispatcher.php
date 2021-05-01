@@ -17,8 +17,6 @@ use DecodeLabs\Eventful\Binding\Socket as SocketBinding;
 use DecodeLabs\Eventful\Binding\Stream as StreamBinding;
 use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
 
-use DecodeLabs\Systemic\Process\Signal;
-
 interface Dispatcher
 {
     /**

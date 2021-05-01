@@ -1,3 +1,6 @@
+## v0.2.2 (2021-05-01)
+* Improved return type hints
+
 ## v0.2.1 (2021-04-09)
 * Updated Systemic dependency
 
