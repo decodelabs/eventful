@@ -70,6 +70,8 @@ trait DispatcherTrait
 
     /**
      * Freeze all registered bindings
+     *
+     * @return $this
      */
     public function freezeAllBindings(): Dispatcher
     {
@@ -83,6 +85,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze all registered bindings
+     *
+     * @return $this
      */
     public function unfreezeAllBindings(): Dispatcher
     {
@@ -96,6 +100,8 @@ trait DispatcherTrait
 
     /**
      * Remove all registered bindings
+     *
+     * @return $this
      */
     public function removeAllBindings(): Dispatcher
     {
@@ -135,6 +141,8 @@ trait DispatcherTrait
 
     /**
      * Register 1sec timed callback for testing run conditions
+     *
+     * @return $this
      */
     public function setCycleHandler(?callable $callback = null): Dispatcher
     {
@@ -162,9 +170,15 @@ trait DispatcherTrait
 
     /**
      * Bind to socket read event
+     *
+     * @return $this
      */
-    public function bindSocketRead(Socket $socket, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindSocketRead(
+        Socket $socket,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             true,
@@ -178,9 +192,15 @@ trait DispatcherTrait
 
     /**
      * Bind to socket read event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenSocketRead(Socket $socket, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindFrozenSocketRead(
+        Socket $socket,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             true,
@@ -194,9 +214,15 @@ trait DispatcherTrait
 
     /**
      * Bind to single socket read event
+     *
+     * @return $this
      */
-    public function bindSocketReadOnce(Socket $socket, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindSocketReadOnce(
+        Socket $socket,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             false,
@@ -210,9 +236,15 @@ trait DispatcherTrait
 
     /**
      * Bind to single socket read event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenSocketReadOnce(Socket $socket, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindFrozenSocketReadOnce(
+        Socket $socket,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             false,
@@ -226,9 +258,15 @@ trait DispatcherTrait
 
     /**
      * Bind to socket write event
+     *
+     * @return $this
      */
-    public function bindSocketWrite(Socket $socket, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindSocketWrite(
+        Socket $socket,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             true,
@@ -242,9 +280,15 @@ trait DispatcherTrait
 
     /**
      * Bind to socket write event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenSocketWrite(Socket $socket, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindFrozenSocketWrite(
+        Socket $socket,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             true,
@@ -258,9 +302,15 @@ trait DispatcherTrait
 
     /**
      * Bind to single socket write event
+     *
+     * @return $this
      */
-    public function bindSocketWriteOnce(Socket $socket, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindSocketWriteOnce(
+        Socket $socket,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             false,
@@ -274,9 +324,15 @@ trait DispatcherTrait
 
     /**
      * Bind to single socket read event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenSocketWriteOnce(Socket $socket, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindFrozenSocketWriteOnce(
+        Socket $socket,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             false,
@@ -290,6 +346,8 @@ trait DispatcherTrait
 
     /**
      * Register a socket binding
+     *
+     * @return $this
      */
     protected function addSocketBinding(SocketBinding $binding, bool $frozen): Dispatcher
     {
@@ -317,6 +375,8 @@ trait DispatcherTrait
 
     /**
      * Freeze all bindings for socket
+     *
+     * @return $this
      */
     public function freezeSocket(Socket $socket): Dispatcher
     {
@@ -335,6 +395,8 @@ trait DispatcherTrait
 
     /**
      * Freeze read bindings for socket
+     *
+     * @return $this
      */
     public function freezeSocketRead(Socket $socket): Dispatcher
     {
@@ -349,6 +411,8 @@ trait DispatcherTrait
 
     /**
      * Freeze write bindings for socket
+     *
+     * @return $this
      */
     public function freezeSocketWrite(Socket $socket): Dispatcher
     {
@@ -363,6 +427,8 @@ trait DispatcherTrait
 
     /**
      * Freeze all socket bindings
+     *
+     * @return $this
      */
     public function freezeAllSockets(): Dispatcher
     {
@@ -377,6 +443,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze all bindings for socket
+     *
+     * @return $this
      */
     public function unfreezeSocket(Socket $socket): Dispatcher
     {
@@ -395,6 +463,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze bindings for socket reads
+     *
+     * @return $this
      */
     public function unfreezeSocketRead(Socket $socket): Dispatcher
     {
@@ -409,6 +479,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze bindings for socket writes
+     *
+     * @return $this
      */
     public function unfreezeSocketWrite(Socket $socket): Dispatcher
     {
@@ -423,6 +495,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze all socket bindings
+     *
+     * @return $this
      */
     public function unfreezeAllSockets(): Dispatcher
     {
@@ -437,6 +511,8 @@ trait DispatcherTrait
 
     /**
      * Remove all bindings for socket
+     *
+     * @return $this
      */
     public function removeSocket(Socket $socket): Dispatcher
     {
@@ -455,6 +531,8 @@ trait DispatcherTrait
 
     /**
      * Remove bindings for socket read
+     *
+     * @return $this
      */
     public function removeSocketRead(Socket $socket): Dispatcher
     {
@@ -469,6 +547,8 @@ trait DispatcherTrait
 
     /**
      * Remove bindings for socket write
+     *
+     * @return $this
      */
     public function removeSocketWrite(Socket $socket): Dispatcher
     {
@@ -483,6 +563,8 @@ trait DispatcherTrait
 
     /**
      * Remove specific socket binding
+     *
+     * @return $this
      */
     public function removeSocketBinding(SocketBinding $binding): Dispatcher
     {
@@ -494,6 +576,8 @@ trait DispatcherTrait
 
     /**
      * Remove all socket bindings
+     *
+     * @return $this
      */
     public function removeAllSockets(): Dispatcher
     {
@@ -629,9 +713,15 @@ trait DispatcherTrait
 
     /**
      * Bind to stream read event
+     *
+     * @return $this
      */
-    public function bindStreamRead(Stream $stream, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindStreamRead(
+        Stream $stream,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             true,
@@ -645,9 +735,15 @@ trait DispatcherTrait
 
     /**
      * Bind to stream read event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenStreamRead(Stream $stream, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindFrozenStreamRead(
+        Stream $stream,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             true,
@@ -661,9 +757,15 @@ trait DispatcherTrait
 
     /**
      * Bind to single stream read event
+     *
+     * @return $this
      */
-    public function bindStreamReadOnce(Stream $stream, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindStreamReadOnce(
+        Stream $stream,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             false,
@@ -677,9 +779,15 @@ trait DispatcherTrait
 
     /**
      * Bind to single stream read event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenStreamReadOnce(Stream $stream, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindFrozenStreamReadOnce(
+        Stream $stream,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             false,
@@ -693,9 +801,15 @@ trait DispatcherTrait
 
     /**
      * Bind to socket write event
+     *
+     * @return $this
      */
-    public function bindStreamWrite(Stream $stream, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindStreamWrite(
+        Stream $stream,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             true,
@@ -709,9 +823,15 @@ trait DispatcherTrait
 
     /**
      * Bind to socket write event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenStreamWrite(Stream $stream, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindFrozenStreamWrite(
+        Stream $stream,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             true,
@@ -725,9 +845,15 @@ trait DispatcherTrait
 
     /**
      * Bind to single socket write event
+     *
+     * @return $this
      */
-    public function bindStreamWriteOnce(Stream $stream, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindStreamWriteOnce(
+        Stream $stream,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             false,
@@ -741,9 +867,15 @@ trait DispatcherTrait
 
     /**
      * Bind to single socket read event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenStreamWriteOnce(Stream $stream, callable $callback, ?float $timeout = null, ?callable $timeoutHandler = null): Dispatcher
-    {
+    public function bindFrozenStreamWriteOnce(
+        Stream $stream,
+        callable $callback,
+        ?float $timeout = null,
+        ?callable $timeoutHandler = null
+    ): Dispatcher {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             false,
@@ -757,6 +889,8 @@ trait DispatcherTrait
 
     /**
      * Register a stream binding
+     *
+     * @return $this
      */
     protected function addStreamBinding(StreamBinding $binding, bool $frozen): Dispatcher
     {
@@ -783,6 +917,8 @@ trait DispatcherTrait
 
     /**
      * Freeze all bindings for stream
+     *
+     * @return $this
      */
     public function freezeStream(Stream $stream): Dispatcher
     {
@@ -801,6 +937,8 @@ trait DispatcherTrait
 
     /**
      * Freeze read bindings for stream
+     *
+     * @return $this
      */
     public function freezeStreamRead(Stream $stream): Dispatcher
     {
@@ -815,6 +953,8 @@ trait DispatcherTrait
 
     /**
      * Freeze write bindings for stream
+     *
+     * @return $this
      */
     public function freezeStreamWrite(Stream $stream): Dispatcher
     {
@@ -829,6 +969,8 @@ trait DispatcherTrait
 
     /**
      * Freeze all stream bindings
+     *
+     * @return $this
      */
     public function freezeAllStreams(): Dispatcher
     {
@@ -842,6 +984,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze all bindings for stream
+     *
+     * @return $this
      */
     public function unfreezeStream(Stream $stream): Dispatcher
     {
@@ -860,6 +1004,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze bindings for stream reads
+     *
+     * @return $this
      */
     public function unfreezeStreamRead(Stream $stream): Dispatcher
     {
@@ -874,6 +1020,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze bindings for stream writes
+     *
+     * @return $this
      */
     public function unfreezeStreamWrite(Stream $stream): Dispatcher
     {
@@ -888,6 +1036,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze all stream bindings
+     *
+     * @return $this
      */
     public function unfreezeAllStreams(): Dispatcher
     {
@@ -902,6 +1052,8 @@ trait DispatcherTrait
 
     /**
      * Remove all bindings for stream
+     *
+     * @return $this
      */
     public function removeStream(Stream $stream): Dispatcher
     {
@@ -920,6 +1072,8 @@ trait DispatcherTrait
 
     /**
      * Remove bindings for stream read
+     *
+     * @return $this
      */
     public function removeStreamRead(Stream $stream): Dispatcher
     {
@@ -934,6 +1088,8 @@ trait DispatcherTrait
 
     /**
      * Remove bindings for stream write
+     *
+     * @return $this
      */
     public function removeStreamWrite(Stream $stream): Dispatcher
     {
@@ -948,6 +1104,8 @@ trait DispatcherTrait
 
     /**
      * Remove specific stream binding
+     *
+     * @return $this
      */
     public function removeStreamBinding(StreamBinding $binding): Dispatcher
     {
@@ -959,6 +1117,8 @@ trait DispatcherTrait
 
     /**
      * Remove all stream bindings
+     *
+     * @return $this
      */
     public function removeAllStreams(): Dispatcher
     {
@@ -1102,9 +1262,14 @@ trait DispatcherTrait
 
     /**
      * Bind to signal event
+     *
+     * @return $this
      */
-    public function bindSignal(string $id, $signals, callable $callback): Dispatcher
-    {
+    public function bindSignal(
+        string $id,
+        $signals,
+        callable $callback
+    ): Dispatcher {
         return $this->addSignalBinding(new SignalBinding(
             $this,
             $id,
@@ -1116,9 +1281,14 @@ trait DispatcherTrait
 
     /**
      * Bind to signal event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenSignal(string $id, $signals, callable $callback): Dispatcher
-    {
+    public function bindFrozenSignal(
+        string $id,
+        $signals,
+        callable $callback
+    ): Dispatcher {
         return $this->addSignalBinding(new SignalBinding(
             $this,
             $id,
@@ -1130,9 +1300,14 @@ trait DispatcherTrait
 
     /**
      * Bind to single signal event
+     *
+     * @return $this
      */
-    public function bindSignalOnce(string $id, $signals, callable $callback): Dispatcher
-    {
+    public function bindSignalOnce(
+        string $id,
+        $signals,
+        callable $callback
+    ): Dispatcher {
         return $this->addSignalBinding(new SignalBinding(
             $this,
             $id,
@@ -1144,9 +1319,14 @@ trait DispatcherTrait
 
     /**
      * Bind to single signal event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenSignalOnce(string $id, $signals, callable $callback): Dispatcher
-    {
+    public function bindFrozenSignalOnce(
+        string $id,
+        $signals,
+        callable $callback
+    ): Dispatcher {
         return $this->addSignalBinding(new SignalBinding(
             $this,
             $id,
@@ -1158,6 +1338,8 @@ trait DispatcherTrait
 
     /**
      * Register a signal binding
+     *
+     * @return $this
      */
     protected function addSignalBinding(SignalBinding $binding, bool $frozen): Dispatcher
     {
@@ -1184,6 +1366,8 @@ trait DispatcherTrait
 
     /**
      * Freeze all bindings with signal
+     *
+     * @return $this
      */
     public function freezeSignal($signal): Dispatcher
     {
@@ -1200,6 +1384,8 @@ trait DispatcherTrait
 
     /**
      * Freeze specific signal binding by object or id
+     *
+     * @return $this
      */
     public function freezeSignalBinding($binding): Dispatcher
     {
@@ -1221,6 +1407,8 @@ trait DispatcherTrait
 
     /**
      * Freeze all signal bindings
+     *
+     * @return $this
      */
     public function freezeAllSignals(): Dispatcher
     {
@@ -1234,6 +1422,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze all bindings with signal
+     *
+     * @return $this
      */
     public function unfreezeSignal($signal): Dispatcher
     {
@@ -1250,6 +1440,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze specific signal binding by object or id
+     *
+     * @return $this
      */
     public function unfreezeSignalBinding($binding): Dispatcher
     {
@@ -1271,6 +1463,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze all signal bindings
+     *
+     * @return $this
      */
     public function unfreezeAllSignals(): Dispatcher
     {
@@ -1284,6 +1478,8 @@ trait DispatcherTrait
 
     /**
      * Remove all bindings with signal
+     *
+     * @return $this
      */
     public function removeSignal($signal): Dispatcher
     {
@@ -1300,6 +1496,8 @@ trait DispatcherTrait
 
     /**
      * Remove specific signal binding
+     *
+     * @return $this
      */
     public function removeSignalBinding($binding): Dispatcher
     {
@@ -1324,6 +1522,8 @@ trait DispatcherTrait
 
     /**
      * Remove all signal bindings
+     *
+     * @return $this
      */
     public function removeAllSignals(): Dispatcher
     {
@@ -1428,9 +1628,14 @@ trait DispatcherTrait
 
     /**
      * Bind to a timer event
+     *
+     * @return $this
      */
-    public function bindTimer(string $id, float $duration, callable $callback): Dispatcher
-    {
+    public function bindTimer(
+        string $id,
+        float $duration,
+        callable $callback
+    ): Dispatcher {
         return $this->addTimerBinding(new TimerBinding(
             $this,
             $id,
@@ -1442,9 +1647,14 @@ trait DispatcherTrait
 
     /**
      * Bind to a timer event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenTimer(string $id, float $duration, callable $callback): Dispatcher
-    {
+    public function bindFrozenTimer(
+        string $id,
+        float $duration,
+        callable $callback
+    ): Dispatcher {
         return $this->addTimerBinding(new TimerBinding(
             $this,
             $id,
@@ -1456,9 +1666,14 @@ trait DispatcherTrait
 
     /**
      * Bind to a single timer event
+     *
+     * @return $this
      */
-    public function bindTimerOnce(string $id, float $duration, callable $callback): Dispatcher
-    {
+    public function bindTimerOnce(
+        string $id,
+        float $duration,
+        callable $callback
+    ): Dispatcher {
         return $this->addTimerBinding(new TimerBinding(
             $this,
             $id,
@@ -1470,9 +1685,14 @@ trait DispatcherTrait
 
     /**
      * Bind to a single timer event, frozen
+     *
+     * @return $this
      */
-    public function bindFrozenTimerOnce(string $id, float $duration, callable $callback): Dispatcher
-    {
+    public function bindFrozenTimerOnce(
+        string $id,
+        float $duration,
+        callable $callback
+    ): Dispatcher {
         return $this->addTimerBinding(new TimerBinding(
             $this,
             $id,
@@ -1484,6 +1704,8 @@ trait DispatcherTrait
 
     /**
      * Register a timing binding
+     *
+     * @return $this
      */
     protected function addTimerBinding(TimerBinding $binding, bool $frozen): Dispatcher
     {
@@ -1510,6 +1732,8 @@ trait DispatcherTrait
 
     /**
      * Freeze timer binding by id
+     *
+     * @return $this
      */
     public function freezeTimer($binding): Dispatcher
     {
@@ -1531,6 +1755,8 @@ trait DispatcherTrait
 
     /**
      * Freeze all timer bindings
+     *
+     * @return $this
      */
     public function freezeAllTimers(): Dispatcher
     {
@@ -1544,6 +1770,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze timer binding by id
+     *
+     * @return $this
      */
     public function unfreezeTimer($binding): Dispatcher
     {
@@ -1565,6 +1793,8 @@ trait DispatcherTrait
 
     /**
      * Unfreeze all timer bindings
+     *
+     * @return $this
      */
     public function unfreezeAllTimers(): Dispatcher
     {
@@ -1578,6 +1808,8 @@ trait DispatcherTrait
 
     /**
      * Remove a timer binding by id or object
+     *
+     * @return $this
      */
     public function removeTimer($binding): Dispatcher
     {
@@ -1602,6 +1834,8 @@ trait DispatcherTrait
 
     /**
      * Remove all timer bindings
+     *
+     * @return $this
      */
     public function removeAllTimers(): Dispatcher
     {
