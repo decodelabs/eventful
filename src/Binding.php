@@ -27,6 +27,7 @@ interface Binding
 
     /**
      * @param mixed $resource
+     * @return $this
      */
     public function setEventResource($resource): Binding;
 
@@ -35,15 +36,36 @@ interface Binding
      */
     public function getEventResource();
 
+    /**
+     * @return $this
+     */
     public function freeze(): Binding;
+
+    /**
+     * @return $this
+     */
     public function unfreeze(): Binding;
+
+    /**
+     * @return $this
+     */
     public function setFrozen(bool $frozen): Binding;
+
+    /**
+     * @return $this
+     */
     public function markFrozen(bool $frozen): Binding;
+
     public function isFrozen(): bool;
+
+    /**
+     * @return $this
+     */
     public function destroy(): Binding;
 
     /**
      * @param mixed $targetResource
+     * @return $this
      */
     public function trigger($targetResource): Binding;
 }

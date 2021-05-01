@@ -25,6 +25,7 @@ interface Io extends Binding
 
     /**
      * @param mixed $targetResource
+     * @return $this
      */
     public function triggerTimeout($targetResource): Io;
 }

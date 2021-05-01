@@ -17,6 +17,8 @@ trait ProviderTrait
 
     /**
      * Replace current active event loop
+     *
+     * @return $this
      */
     public function setEventDispatcher(Dispatcher $dispatcher): Provider
     {

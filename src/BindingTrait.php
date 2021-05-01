@@ -89,6 +89,7 @@ trait BindingTrait
      * Set event lib resource
      *
      * @param mixed $resource
+     * @return $this
      */
     public function setEventResource($resource): Binding
     {
@@ -109,6 +110,8 @@ trait BindingTrait
 
     /**
      * Freeze this binding
+     *
+     * @return $this
      */
     public function freeze(): Binding
     {
@@ -118,6 +121,8 @@ trait BindingTrait
 
     /**
      * Unfreeze this binding
+     *
+     * @return $this
      */
     public function unfreeze(): Binding
     {
@@ -127,6 +132,8 @@ trait BindingTrait
 
     /**
      * Toggle freezing
+     *
+     * @return $this
      */
     public function setFrozen(bool $frozen): Binding
     {
@@ -141,6 +148,8 @@ trait BindingTrait
 
     /**
      * Actually mark this binding as frozen - should only be used internally
+     *
+     * @return $this
      */
     public function markFrozen(bool $frozen): Binding
     {
