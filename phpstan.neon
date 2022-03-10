@@ -1,6 +1,4 @@
 parameters:
     paths:
         - src
-    excludes_analyse:
-        - src/Dispatcher/Event.php
     level: max

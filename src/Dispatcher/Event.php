@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful\Dispatcher;
 
+use DecodeLabs\Coercion;
+
 use DecodeLabs\Eventful\Binding;
 use DecodeLabs\Eventful\Binding\Io as IoBinding;
 use DecodeLabs\Eventful\Binding\Signal as SignalBinding;
@@ -29,7 +31,14 @@ class Event implements Dispatcher
 {
     use DispatcherTrait;
 
+    /**
+     * @var EventLibBase
+     */
     protected $base;
+
+    /**
+     * @var EventLib|null
+     */
     protected $cycleHandlerEvent;
 
     /**
@@ -175,10 +184,11 @@ class Event implements Dispatcher
      */
     protected function unregisterSocketBinding(SocketBinding $binding): void
     {
-        if ($binding->resource) {
+        if ($binding->resource instanceof EventLib) {
             $binding->resource->free();
-            $binding->resource = null;
         }
+
+        $binding->resource = null;
     }
 
 
@@ -219,10 +229,11 @@ class Event implements Dispatcher
      */
     protected function unregisterStreamBinding(StreamBinding $binding): void
     {
-        if ($binding->resource) {
+        if ($binding->resource instanceof EventLib) {
             $binding->resource->free();
-            $binding->resource = null;
         }
+
+        $binding->resource = null;
     }
 
 
@@ -236,6 +247,10 @@ class Event implements Dispatcher
 
         if ($binding->persistent) {
             $flags |= EventLib::PERSIST;
+        }
+
+        if (!is_array($binding->resource)) {
+            $binding->resource = [];
         }
 
         foreach (array_keys($binding->signals) as $number) {
@@ -267,13 +282,14 @@ class Event implements Dispatcher
      */
     protected function unregisterSignalBinding(SignalBinding $binding): void
     {
-        foreach ($binding->resource as $number => $resource) {
-            if (!$resource) {
-                continue;
-            }
+        if (is_array($binding->resource)) {
+            foreach ($binding->resource as $number => $resource) {
+                if ($resource instanceof EventLib) {
+                    $resource->free();
+                }
 
-            $resource->free();
-            $binding->resource[$number] = null;
+                $binding->resource[$number] = null;
+            }
         }
     }
 
@@ -317,24 +333,34 @@ class Event implements Dispatcher
      */
     protected function unregisterTimerBinding(TimerBinding $binding): void
     {
-        if ($binding->resource) {
+        if ($binding->resource instanceof EventLib) {
             $binding->resource->free();
-            $binding->resource = null;
         }
+
+        $binding->resource = null;
     }
 
 
 
     /**
      * Register resource with event base
+     *
+     * @param mixed $target
+     * @param mixed $arg
      */
-    protected function registerEvent($target, int $flags, ?float $timeout, callable $callback, $arg = null): EventLib
-    {
+    protected function registerEvent(
+        $target,
+        int $flags,
+        ?float $timeout,
+        callable $callback,
+        $arg = null
+    ): EventLib {
         if ($timeout <= 0) {
             $timeout = null;
         }
 
         if ($flags & EventLib::SIGNAL) {
+            $target = Coercion::toInt($target);
             $event = EventLib::signal($this->base, $target, $callback, $arg);
         } elseif ($target === null) {
             $event = EventLib::timer($this->base, $callback, $arg);
