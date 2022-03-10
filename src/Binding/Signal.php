@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful\Binding;
 
+use DecodeLabs\Coercion;
+
 use DecodeLabs\Eventful\Binding;
 use DecodeLabs\Eventful\BindingTrait;
 use DecodeLabs\Eventful\Dispatcher;
@@ -50,6 +52,7 @@ class Signal implements Binding
         $this->resource = [];
 
         foreach ($signals as $signal) {
+            /** @var SignalObject $signal */
             $signal = Systemic::$process->newSignal($signal);
             $number = $signal->getNumber();
             $this->signals[$number] = $signal;
@@ -101,7 +104,8 @@ class Signal implements Binding
             return $this;
         }
 
-        ($this->handler)($this->signals[(int)$number], $this);
+        $number = Coercion::toInt($number);
+        ($this->handler)($this->signals[$number], $this);
 
         if (!$this->persistent) {
             $this->dispatcher->removeSignalBinding($this);

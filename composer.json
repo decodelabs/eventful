@@ -11,16 +11,17 @@
     "require": {
         "php": "^7.2|^8.0",
 
+        "decodelabs/coercion": "^0.1",
         "decodelabs/deliverance": "^0.1",
         "decodelabs/systemic": "^0.8",
         "decodelabs/exceptional": "^0.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^8",
-        "phpstan/phpstan": "^0.12.45",
+        "phpstan/phpstan": "^1",
         "phpstan/extension-installer": "^1.0",
-        "decodelabs/phpstan-decodelabs": "^0.4",
-        "symplify/easy-coding-standard": "^8.3"
+        "decodelabs/phpstan-decodelabs": "^0.5",
+        "symplify/easy-coding-standard": "^10"
     },
     "suggest": {
         "ext-event": "Faster and more reliable event loops"
