@@ -144,12 +144,13 @@ class Select implements Dispatcher
                 $hasHandler = true;
                 $e = null;
 
-                /** @var array<int, Socket> $read */
+                /** @var array<int, resource|Socket> $read */
                 $read = $this->socketMap[self::RESOURCE][self::READ];
-                /** @var array<int, Socket> $write */
+                /** @var array<int, resource|Socket> $write */
                 $write = $this->socketMap[self::RESOURCE][self::WRITE];
 
                 try {
+                    /* @phpstan-ignore-next-line */
                     $res = socket_select($read, $write, $e, 0, 10000);
                 } catch (Throwable $e) {
                     $res = false;
