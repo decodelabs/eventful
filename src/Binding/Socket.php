@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace DecodeLabs\Eventful\Binding;
+namespace DecodeLabs\Eventful\Binding {
 
 use DecodeLabs\Deliverance\Socket as SocketChannel;
 
@@ -129,5 +129,14 @@ class Socket implements IoBinding
         }
 
         return $this;
+    }
+}
+}
+
+namespace {
+    if (!class_exists('Socket')) {
+        class Socket
+        {
+        }
     }
 }
