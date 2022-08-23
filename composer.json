@@ -9,20 +9,20 @@
         "email": "tom@inflatablecookie.com"
     }],
     "require": {
-        "php": "^7.2|^8.0",
-        "symfony/polyfill-php80": "^1.22",
+        "php": "^8.0",
 
-        "decodelabs/coercion": "^0.1",
-        "decodelabs/deliverance": "^0.1",
-        "decodelabs/systemic": "^0.8",
-        "decodelabs/exceptional": "^0.3"
+        "decodelabs/coercion": "^0.2",
+        "decodelabs/deliverance": "^0.2",
+        "decodelabs/systemic": "^0.9",
+        "decodelabs/exceptional": "^0.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8",
+        "phpunit/phpunit": "^9",
         "phpstan/phpstan": "^1",
         "phpstan/extension-installer": "^1.0",
-        "decodelabs/phpstan-decodelabs": "^0.5",
-        "symplify/easy-coding-standard": "^10"
+        "symplify/easy-coding-standard": "^11",
+
+        "decodelabs/phpstan-decodelabs": "^0.6"
     },
     "suggest": {
         "ext-event": "Faster and more reliable event loops"
@@ -34,7 +34,12 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.2.x-dev"
+            "dev-develop": "0.3.x-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
         }
     },
     "scripts": {
