@@ -22,42 +22,42 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function listen(): Dispatcher;
+    public function listen(): static;
 
     public function isListening(): bool;
 
     /**
      * @return $this
      */
-    public function stop(): Dispatcher;
+    public function stop(): static;
 
 
 
     /**
      * @return $this
      */
-    public function freezeBinding(Binding $binding): Dispatcher;
+    public function freezeBinding(Binding $binding): static;
 
     /**
      * @return $this
      */
-    public function unfreezeBinding(Binding $binding): Dispatcher;
+    public function unfreezeBinding(Binding $binding): static;
 
 
     /**
      * @return $this
      */
-    public function freezeAllBindings(): Dispatcher;
+    public function freezeAllBindings(): static;
 
     /**
      * @return $this
      */
-    public function unfreezeAllBindings(): Dispatcher;
+    public function unfreezeAllBindings(): static;
 
     /**
      * @return $this
      */
-    public function removeAllBindings(): Dispatcher;
+    public function removeAllBindings(): static;
 
     /**
      * @return array<Binding>
@@ -70,7 +70,7 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function setCycleHandler(?callable $callback = null): Dispatcher;
+    public function setCycleHandler(?callable $callback = null): static;
     public function getCycleHandler(): ?callable;
 
 
@@ -83,7 +83,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -93,7 +93,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -103,7 +103,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -113,7 +113,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -123,7 +123,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -133,7 +133,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -143,7 +143,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -153,75 +153,75 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
 
     /**
      * @return $this
      */
-    public function freezeSocket(Socket $socket): Dispatcher;
+    public function freezeSocket(Socket $socket): static;
 
     /**
      * @return $this
      */
-    public function freezeSocketRead(Socket $socket): Dispatcher;
+    public function freezeSocketRead(Socket $socket): static;
 
     /**
      * @return $this
      */
-    public function freezeSocketWrite(Socket $socket): Dispatcher;
+    public function freezeSocketWrite(Socket $socket): static;
 
     /**
      * @return $this
      */
-    public function freezeAllSockets(): Dispatcher;
-
-
-    /**
-     * @return $this
-     */
-    public function unfreezeSocket(Socket $socket): Dispatcher;
-
-    /**
-     * @return $this
-     */
-    public function unfreezeSocketRead(Socket $socket): Dispatcher;
-
-    /**
-     * @return $this
-     */
-    public function unfreezeSocketWrite(Socket $socket): Dispatcher;
-
-    /**
-     * @return $this
-     */
-    public function unfreezeAllSockets(): Dispatcher;
+    public function freezeAllSockets(): static;
 
 
     /**
      * @return $this
      */
-    public function removeSocket(Socket $socket): Dispatcher;
+    public function unfreezeSocket(Socket $socket): static;
 
     /**
      * @return $this
      */
-    public function removeSocketRead(Socket $socket): Dispatcher;
+    public function unfreezeSocketRead(Socket $socket): static;
 
     /**
      * @return $this
      */
-    public function removeSocketWrite(Socket $socket): Dispatcher;
+    public function unfreezeSocketWrite(Socket $socket): static;
 
     /**
      * @return $this
      */
-    public function removeSocketBinding(SocketBinding $binding): Dispatcher;
+    public function unfreezeAllSockets(): static;
+
 
     /**
      * @return $this
      */
-    public function removeAllSockets(): Dispatcher;
+    public function removeSocket(Socket $socket): static;
+
+    /**
+     * @return $this
+     */
+    public function removeSocketRead(Socket $socket): static;
+
+    /**
+     * @return $this
+     */
+    public function removeSocketWrite(Socket $socket): static;
+
+    /**
+     * @return $this
+     */
+    public function removeSocketBinding(SocketBinding $binding): static;
+
+    /**
+     * @return $this
+     */
+    public function removeAllSockets(): static;
 
 
     public function countSocketBindings(): int;
@@ -261,7 +261,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -271,7 +271,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -281,7 +281,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -291,7 +291,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -301,7 +301,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -311,7 +311,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -321,7 +321,7 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -331,75 +331,75 @@ interface Dispatcher
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher;
+    ): static;
 
 
     /**
      * @return $this
      */
-    public function freezeStream(Stream $stream): Dispatcher;
+    public function freezeStream(Stream $stream): static;
 
     /**
      * @return $this
      */
-    public function freezeStreamRead(Stream $stream): Dispatcher;
+    public function freezeStreamRead(Stream $stream): static;
 
     /**
      * @return $this
      */
-    public function freezeStreamWrite(Stream $stream): Dispatcher;
+    public function freezeStreamWrite(Stream $stream): static;
 
     /**
      * @return $this
      */
-    public function freezeAllStreams(): Dispatcher;
-
-
-    /**
-     * @return $this
-     */
-    public function unfreezeStream(Stream $stream): Dispatcher;
-
-    /**
-     * @return $this
-     */
-    public function unfreezeStreamRead(Stream $stream): Dispatcher;
-
-    /**
-     * @return $this
-     */
-    public function unfreezeStreamWrite(Stream $stream): Dispatcher;
-
-    /**
-     * @return $this
-     */
-    public function unfreezeAllStreams(): Dispatcher;
+    public function freezeAllStreams(): static;
 
 
     /**
      * @return $this
      */
-    public function removeStream(Stream $stream): Dispatcher;
+    public function unfreezeStream(Stream $stream): static;
 
     /**
      * @return $this
      */
-    public function removeStreamRead(Stream $stream): Dispatcher;
+    public function unfreezeStreamRead(Stream $stream): static;
 
     /**
      * @return $this
      */
-    public function removeStreamWrite(Stream $stream): Dispatcher;
+    public function unfreezeStreamWrite(Stream $stream): static;
 
     /**
      * @return $this
      */
-    public function removeStreamBinding(StreamBinding $binding): Dispatcher;
+    public function unfreezeAllStreams(): static;
+
 
     /**
      * @return $this
      */
-    public function removeAllStreams(): Dispatcher;
+    public function removeStream(Stream $stream): static;
+
+    /**
+     * @return $this
+     */
+    public function removeStreamRead(Stream $stream): static;
+
+    /**
+     * @return $this
+     */
+    public function removeStreamWrite(Stream $stream): static;
+
+    /**
+     * @return $this
+     */
+    public function removeStreamBinding(StreamBinding $binding): static;
+
+    /**
+     * @return $this
+     */
+    public function removeAllStreams(): static;
 
     public function countStreamBindings(): int;
     public function countStreamBindingsFor(Stream $stream): int;
@@ -439,7 +439,7 @@ interface Dispatcher
         string $id,
         iterable $signals,
         callable $callback
-    ): Dispatcher;
+    ): static;
 
     /**
      * @param iterable<mixed> $signals
@@ -449,7 +449,7 @@ interface Dispatcher
         string $id,
         iterable $signals,
         callable $callback
-    ): Dispatcher;
+    ): static;
 
     /**
      * @param iterable<mixed> $signals
@@ -459,7 +459,7 @@ interface Dispatcher
         string $id,
         iterable $signals,
         callable $callback
-    ): Dispatcher;
+    ): static;
 
     /**
      * @param iterable<mixed> $signals
@@ -469,70 +469,68 @@ interface Dispatcher
         string $id,
         iterable $signals,
         callable $callback
-    ): Dispatcher;
-
-    /**
-     * @param mixed $signal
-     * @return $this
-     */
-    public function freezeSignal($signal): Dispatcher;
-
-    /**
-     * @param string|SignalBinding $binding
-     * @return $this
-     */
-    public function freezeSignalBinding($binding): Dispatcher;
+    ): static;
 
     /**
      * @return $this
      */
-    public function freezeAllSignals(): Dispatcher;
-
-    /**
-     * @param mixed $signal
-     * @return $this
-     */
-    public function unfreezeSignal($signal): Dispatcher;
-
-    /**
-     * @param string|SignalBinding $binding
-     * @return $this
-     */
-    public function unfreezeSignalBinding($binding): Dispatcher;
+    public function freezeSignal(mixed $signal): static;
 
     /**
      * @return $this
      */
-    public function unfreezeAllSignals(): Dispatcher;
-
-    /**
-     * @param mixed $signal
-     * @return $this
-     */
-    public function removeSignal($signal): Dispatcher;
-
-    /**
-     * @param string|SignalBinding $binding
-     * @return $this
-     */
-    public function removeSignalBinding($binding): Dispatcher;
+    public function freezeSignalBinding(
+        string|SignalBinding $binding
+    ): static;
 
     /**
      * @return $this
      */
-    public function removeAllSignals(): Dispatcher;
+    public function freezeAllSignals(): static;
 
     /**
-     * @param string|SignalBinding $id
+     * @return $this
      */
-    public function getSignalBinding($id): ?SignalBinding;
+    public function unfreezeSignal(mixed $signal): static;
+
+    /**
+     * @return $this
+     */
+    public function unfreezeSignalBinding(
+        string|SignalBinding $binding
+    ): static;
+
+    /**
+     * @return $this
+     */
+    public function unfreezeAllSignals(): static;
+
+    /**
+     * @return $this
+     */
+    public function removeSignal(
+        mixed $signal
+    ): static;
+
+    /**
+     * @return $this
+     */
+    public function removeSignalBinding(
+        string|SignalBinding $binding
+    ): static;
+
+    /**
+     * @return $this
+     */
+    public function removeAllSignals(): static;
+
+    public function getSignalBinding(
+        string|SignalBinding $id
+    ): ?SignalBinding;
 
     public function countSignalBindings(): int;
 
-    /**
-     * @param mixed $signal
-     */
-    public function countSignalBindingsFor($signal): int;
+    public function countSignalBindingsFor(mixed $signal): int;
 
     /**
      * @return array<string, Binding>
@@ -540,10 +538,9 @@ interface Dispatcher
     public function getSignalBindings(): array;
 
     /**
-     * @param mixed $signal
      * @return array<string, Binding>
      */
-    public function getSignalBindingsFor($signal): array;
+    public function getSignalBindingsFor(mixed $signal): array;
 
 
 
@@ -554,7 +551,7 @@ interface Dispatcher
         string $id,
         float $duration,
         callable $callback
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -563,7 +560,7 @@ interface Dispatcher
         string $id,
         float $duration,
         callable $callback
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -572,7 +569,7 @@ interface Dispatcher
         string $id,
         float $duration,
         callable $callback
-    ): Dispatcher;
+    ): static;
 
     /**
      * @return $this
@@ -581,49 +578,51 @@ interface Dispatcher
         string $id,
         float $duration,
         callable $callback
-    ): Dispatcher;
+    ): static;
 
-
-    /**
-     * @param string|TimerBinding $id
-     * @return $this
-     */
-    public function freezeTimer($id): Dispatcher;
 
     /**
      * @return $this
      */
-    public function freezeAllTimers(): Dispatcher;
-
-
-    /**
-     * @param string|TimerBinding $id
-     * @return $this
-     */
-    public function unfreezeTimer($id): Dispatcher;
+    public function freezeTimer(
+        string|TimerBinding $id
+    ): static;
 
     /**
      * @return $this
      */
-    public function unfreezeAllTimers(): Dispatcher;
+    public function freezeAllTimers(): static;
 
-
-    /**
-     * @param string|TimerBinding $id
-     * @return $this
-     */
-    public function removeTimer($id): Dispatcher;
 
     /**
      * @return $this
      */
-    public function removeAllTimers(): Dispatcher;
+    public function unfreezeTimer(
+        string|TimerBinding $id
+    ): static;
+
+    /**
+     * @return $this
+     */
+    public function unfreezeAllTimers(): static;
 
 
     /**
-     * @param string|TimerBinding $id
+     * @return $this
      */
-    public function getTimerBinding($id): ?TimerBinding;
+    public function removeTimer(
+        string|TimerBinding $id
+    ): static;
+
+    /**
+     * @return $this
+     */
+    public function removeAllTimers(): static;
+
+
+    public function getTimerBinding(
+        string|TimerBinding $id
+    ): ?TimerBinding;
 
     public function countTimerBindings(): int;
 

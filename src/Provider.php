@@ -14,7 +14,7 @@ interface Provider
     /**
      * @return $this
      */
-    public function setEventDispatcher(Dispatcher $dispatcher): Provider;
+    public function setEventDispatcher(Dispatcher $dispatcher): static;
 
     public function getEventDispatcher(): Dispatcher;
     public function isRunning(): bool;

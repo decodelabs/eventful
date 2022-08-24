@@ -28,7 +28,7 @@ class Signal implements Binding
     /**
      * @var array<int, SignalObject>
      */
-    public $signals = [];
+    public array $signals = [];
 
     /**
      * Init with timer information
@@ -89,7 +89,7 @@ class Signal implements Binding
     /**
      * Destroy and unregister this binding
      */
-    public function destroy(): Binding
+    public function destroy(): static
     {
         $this->dispatcher->removeSignalBinding($this);
         return $this;
@@ -98,7 +98,7 @@ class Signal implements Binding
     /**
      * Trigger event callback
      */
-    public function trigger($number): Binding
+    public function trigger(mixed $number): static
     {
         if ($this->frozen) {
             return $this;

@@ -13,15 +13,8 @@ use DecodeLabs\Eventful\Binding;
 
 trait IoTrait
 {
-    /**
-     * @var string
-     */
-    public $ioMode = 'r';
-
-    /**
-     * @var float|null
-     */
-    public $timeout;
+    public string $ioMode = 'r';
+    public ?float $timeout = null;
 
     /**
      * @var callable|null

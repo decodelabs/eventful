@@ -40,37 +40,26 @@ class Select implements Dispatcher
     public const RESOURCE = 0;
     public const HANDLER = 1;
 
-    /**
-     * @var bool
-     */
-    protected $breakLoop = false;
-
-    /**
-     * @var bool
-     */
-    protected $generateMaps = true;
+    protected bool $breakLoop = false;
+    protected bool $generateMaps = true;
 
 
     /**
      * @var array<int, array<string, array<int, resource|Socket|array<string, Binding>>>>|null
      */
-    protected $socketMap = [];
+    protected ?array $socketMap = [];
 
     /**
      * @var array<int, array<string, array<int, resource|array<string, Binding>>>>|null
      */
-    protected $streamMap = [];
+    protected ?array $streamMap = [];
 
     /**
      * @var array<int, array<string, Binding>>|null
      */
-    protected $signalMap = [];
+    protected ?array $signalMap = [];
 
-
-    /**
-     * @var bool
-     */
-    private $hasPcntl = false;
+    private bool $hasPcntl = false;
 
     /**
      * Check pcntl loaded
@@ -84,7 +73,7 @@ class Select implements Dispatcher
     /**
      * Listen for events in loop
      */
-    public function listen(): Dispatcher
+    public function listen(): static
     {
         $this->breakLoop = false;
         $this->listening = true;
@@ -261,7 +250,7 @@ class Select implements Dispatcher
     /**
      * Flag to regenerate maps on next loop
      */
-    public function regenerateMaps(): Dispatcher
+    public function regenerateMaps(): static
     {
         $this->generateMaps = true;
         return $this;
@@ -342,10 +331,8 @@ class Select implements Dispatcher
 
     /**
      * Convert socket resource to ID string
-     *
-     * @param mixed $socket
      */
-    protected function identifySocket($socket): int
+    protected function identifySocket(mixed $socket): int
     {
         if (is_resource($socket)) {
             return (int)$socket;
@@ -362,7 +349,7 @@ class Select implements Dispatcher
     /**
      * Stop listening and return control
      */
-    public function stop(): Dispatcher
+    public function stop(): static
     {
         if ($this->listening) {
             $this->breakLoop = true;
@@ -375,7 +362,7 @@ class Select implements Dispatcher
     /**
      * Freeze binding
      */
-    public function freezeBinding(Binding $binding): Dispatcher
+    public function freezeBinding(Binding $binding): static
     {
         $binding->markFrozen(true);
         return $this;
@@ -384,7 +371,7 @@ class Select implements Dispatcher
     /**
      * Unfreeze binding
      */
-    public function unfreezeBinding(Binding $binding): Dispatcher
+    public function unfreezeBinding(Binding $binding): static
     {
         $binding->markFrozen(false);
         return $this;

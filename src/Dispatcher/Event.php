@@ -31,15 +31,8 @@ class Event implements Dispatcher
 {
     use DispatcherTrait;
 
-    /**
-     * @var EventLibBase
-     */
-    protected $base;
-
-    /**
-     * @var EventLib|null
-     */
-    protected $cycleHandlerEvent;
+    protected EventLibBase $base;
+    protected ?EventLib $cycleHandlerEvent = null;
 
     /**
      * Setup event base
@@ -52,7 +45,7 @@ class Event implements Dispatcher
     /**
      * Begin event loop
      */
-    public function listen(): Dispatcher
+    public function listen(): static
     {
         $this->listening = true;
         $this->base->loop();
@@ -64,7 +57,7 @@ class Event implements Dispatcher
     /**
      * End event loop and return control
      */
-    public function stop(): Dispatcher
+    public function stop(): static
     {
         if ($this->listening) {
             $this->base->exit();
@@ -79,7 +72,7 @@ class Event implements Dispatcher
     /**
      * Temporarily remove binding from loop
      */
-    public function freezeBinding(Binding $binding): Dispatcher
+    public function freezeBinding(Binding $binding): static
     {
         if ($binding->isFrozen()) {
             return $this;
@@ -94,7 +87,7 @@ class Event implements Dispatcher
     /**
      * Re-register frozen binding
      */
-    public function unfreezeBinding(Binding $binding): Dispatcher
+    public function unfreezeBinding(Binding $binding): static
     {
         if (!$binding->isFrozen()) {
             return $this;
@@ -344,16 +337,13 @@ class Event implements Dispatcher
 
     /**
      * Register resource with event base
-     *
-     * @param mixed $target
-     * @param mixed $arg
      */
     protected function registerEvent(
-        $target,
+        mixed $target,
         int $flags,
         ?float $timeout,
         callable $callback,
-        $arg = null
+        mixed $arg = null
     ): EventLib {
         if ($timeout <= 0) {
             $timeout = null;

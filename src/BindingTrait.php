@@ -11,41 +11,27 @@ namespace DecodeLabs\Eventful;
 
 trait BindingTrait
 {
-    /**
-     * @var string
-     */
-    public $id;
-
-    /**
-     * @var bool
-     */
-    public $persistent = true;
-
-    /**
-     * @var bool
-     */
-    public $frozen = false;
+    public string $id;
+    public bool $persistent = true;
+    public bool $frozen = false;
 
     /**
      * @var callable
      */
     public $handler;
 
-    /**
-     * @var mixed
-     */
-    public $resource;
-
-    /**
-     * @var Dispatcher
-     */
-    public $dispatcher;
+    public mixed $resource;
+    public Dispatcher $dispatcher;
 
     /**
      * Init with ref to event loop, id, options and handler
      */
-    public function __construct(Dispatcher $dispatcher, string $id, bool $persistent, callable $handler)
-    {
+    public function __construct(
+        Dispatcher $dispatcher,
+        string $id,
+        bool $persistent,
+        callable $handler
+    ) {
         $this->id = $id;
         $this->persistent = $persistent;
         $this->handler = $handler;
@@ -91,7 +77,7 @@ trait BindingTrait
      * @param mixed $resource
      * @return $this
      */
-    public function setEventResource($resource): Binding
+    public function setEventResource(mixed $resource): static
     {
         $this->resource = $resource;
         return $this;
@@ -99,10 +85,8 @@ trait BindingTrait
 
     /**
      * Get event lib resource
-     *
-     * @return mixed
      */
-    public function getEventResource()
+    public function getEventResource(): mixed
     {
         return $this->resource;
     }
@@ -113,7 +97,7 @@ trait BindingTrait
      *
      * @return $this
      */
-    public function freeze(): Binding
+    public function freeze(): static
     {
         $this->dispatcher->freezeBinding($this);
         return $this;
@@ -124,7 +108,7 @@ trait BindingTrait
      *
      * @return $this
      */
-    public function unfreeze(): Binding
+    public function unfreeze(): static
     {
         $this->dispatcher->unfreezeBinding($this);
         return $this;
@@ -135,7 +119,7 @@ trait BindingTrait
      *
      * @return $this
      */
-    public function setFrozen(bool $frozen): Binding
+    public function setFrozen(bool $frozen): static
     {
         if ($frozen) {
             $this->freeze();
@@ -151,7 +135,7 @@ trait BindingTrait
      *
      * @return $this
      */
-    public function markFrozen(bool $frozen): Binding
+    public function markFrozen(bool $frozen): static
     {
         $this->frozen = $frozen;
         return $this;

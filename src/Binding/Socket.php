@@ -83,7 +83,7 @@ namespace DecodeLabs\Eventful\Binding {
         /**
          * Get io resource
          */
-        public function getIoResource()
+        public function getIoResource(): mixed
         {
             return $this->socket->getResource();
         }
@@ -91,7 +91,7 @@ namespace DecodeLabs\Eventful\Binding {
         /**
          * Destroy and unregister this binding
          */
-        public function destroy(): Binding
+        public function destroy(): static
         {
             $this->dispatcher->removeSocketBinding($this);
             return $this;
@@ -100,7 +100,7 @@ namespace DecodeLabs\Eventful\Binding {
         /**
          * Trigger event callback
          */
-        public function trigger($resource): Binding
+        public function trigger(mixed $resource): static
         {
             if ($this->frozen) {
                 return $this;
@@ -118,7 +118,7 @@ namespace DecodeLabs\Eventful\Binding {
         /**
          * Trigger timeout event callback
          */
-        public function triggerTimeout($resource): IoBinding
+        public function triggerTimeout(mixed $resource): static
         {
             if ($this->frozen) {
                 return $this;

@@ -26,46 +26,41 @@ interface Binding
     public function getDispatcher(): Dispatcher;
 
     /**
-     * @param mixed $resource
      * @return $this
      */
-    public function setEventResource($resource): Binding;
+    public function setEventResource(mixed $resource): static;
 
-    /**
-     * @return mixed
-     */
-    public function getEventResource();
+    public function getEventResource(): mixed;
 
     /**
      * @return $this
      */
-    public function freeze(): Binding;
+    public function freeze(): static;
 
     /**
      * @return $this
      */
-    public function unfreeze(): Binding;
+    public function unfreeze(): static;
 
     /**
      * @return $this
      */
-    public function setFrozen(bool $frozen): Binding;
+    public function setFrozen(bool $frozen): static;
 
     /**
      * @return $this
      */
-    public function markFrozen(bool $frozen): Binding;
+    public function markFrozen(bool $frozen): static;
 
     public function isFrozen(): bool;
 
     /**
      * @return $this
      */
-    public function destroy(): Binding;
+    public function destroy(): static;
 
     /**
-     * @param mixed $targetResource
      * @return $this
      */
-    public function trigger($targetResource): Binding;
+    public function trigger(mixed $targetResource): static;
 }
