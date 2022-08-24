@@ -125,10 +125,11 @@ trait DispatcherTrait
      */
     public function countAllBindings(): int
     {
-        return count($this->sockets)
-             + count($this->streams)
-             + count($this->signals)
-             + count($this->timers);
+        return
+            count($this->sockets) +
+            count($this->streams) +
+            count($this->signals) +
+            count($this->timers);
     }
 
 
