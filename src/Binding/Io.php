@@ -14,18 +14,12 @@ use DecodeLabs\Eventful\Binding;
 interface Io extends Binding
 {
     public function getIoMode(): string;
-
-    /**
-     * @return mixed
-     */
-    public function getIoResource();
-
+    public function getIoResource(): mixed;
     public function getTimeout(): ?float;
     public function getTimeoutHandler(): ?callable;
 
     /**
-     * @param mixed $targetResource
      * @return $this
      */
-    public function triggerTimeout($targetResource): Io;
+    public function triggerTimeout(mixed $targetResource): static;
 }

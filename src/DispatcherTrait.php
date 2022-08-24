@@ -22,41 +22,35 @@ use DecodeLabs\Systemic;
 
 trait DispatcherTrait
 {
-    /**
-     * @var bool
-     */
-    protected $listening = false;
+    protected bool $listening = false;
 
     /**
      * @var callable|null
      */
     protected $cycleHandler;
 
-    /**
-     * @var int
-     */
-    protected $cycles = 0;
+    protected int $cycles = 0;
 
 
     /**
      * @var array<string, SocketBinding>
      */
-    protected $sockets = [];
+    protected array $sockets = [];
 
     /**
      * @var array<string, StreamBinding>
      */
-    protected $streams = [];
+    protected array $streams = [];
 
     /**
      * @var array<string, SignalBinding>
      */
-    protected $signals = [];
+    protected array $signals = [];
 
     /**
      * @var array<string, TimerBinding>
      */
-    protected $timers = [];
+    protected array $timers = [];
 
 
     /**
@@ -73,7 +67,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeAllBindings(): Dispatcher
+    public function freezeAllBindings(): static
     {
         $this->freezeAllSockets();
         $this->freezeAllStreams();
@@ -88,7 +82,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeAllBindings(): Dispatcher
+    public function unfreezeAllBindings(): static
     {
         $this->unfreezeAllSockets();
         $this->unfreezeAllStreams();
@@ -103,7 +97,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeAllBindings(): Dispatcher
+    public function removeAllBindings(): static
     {
         $this->removeAllSockets();
         $this->removeAllStreams();
@@ -144,7 +138,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function setCycleHandler(?callable $callback = null): Dispatcher
+    public function setCycleHandler(?callable $callback = null): static
     {
         $this->cycleHandler = $callback;
         $this->registerCycleHandler($callback);
@@ -178,7 +172,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             true,
@@ -200,7 +194,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             true,
@@ -222,7 +216,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             false,
@@ -244,7 +238,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             false,
@@ -266,7 +260,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             true,
@@ -288,7 +282,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             true,
@@ -310,7 +304,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             false,
@@ -332,7 +326,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addSocketBinding(new SocketBinding(
             $this,
             false,
@@ -349,8 +343,10 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    protected function addSocketBinding(SocketBinding $binding, bool $frozen): Dispatcher
-    {
+    protected function addSocketBinding(
+        SocketBinding $binding,
+        bool $frozen
+    ): static {
         $id = $binding->getId();
 
         if (isset($this->sockets[$id])) {
@@ -378,7 +374,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeSocket(Socket $socket): Dispatcher
+    public function freezeSocket(Socket $socket): static
     {
         $id = $socket->getId();
 
@@ -398,7 +394,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeSocketRead(Socket $socket): Dispatcher
+    public function freezeSocketRead(Socket $socket): static
     {
         $id = $socket->getId();
 
@@ -414,7 +410,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeSocketWrite(Socket $socket): Dispatcher
+    public function freezeSocketWrite(Socket $socket): static
     {
         $id = $socket->getId();
 
@@ -430,7 +426,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeAllSockets(): Dispatcher
+    public function freezeAllSockets(): static
     {
         foreach ($this->sockets as $binding) {
             $this->freezeBinding($binding);
@@ -446,7 +442,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeSocket(Socket $socket): Dispatcher
+    public function unfreezeSocket(Socket $socket): static
     {
         $id = $socket->getId();
 
@@ -466,7 +462,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeSocketRead(Socket $socket): Dispatcher
+    public function unfreezeSocketRead(Socket $socket): static
     {
         $id = $socket->getId();
 
@@ -482,7 +478,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeSocketWrite(Socket $socket): Dispatcher
+    public function unfreezeSocketWrite(Socket $socket): static
     {
         $id = $socket->getId();
 
@@ -498,7 +494,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeAllSockets(): Dispatcher
+    public function unfreezeAllSockets(): static
     {
         foreach ($this->sockets as $binding) {
             $this->unfreezeBinding($binding);
@@ -514,7 +510,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSocket(Socket $socket): Dispatcher
+    public function removeSocket(Socket $socket): static
     {
         $id = $socket->getId();
 
@@ -534,7 +530,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSocketRead(Socket $socket): Dispatcher
+    public function removeSocketRead(Socket $socket): static
     {
         $id = $socket->getId();
 
@@ -550,7 +546,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSocketWrite(Socket $socket): Dispatcher
+    public function removeSocketWrite(Socket $socket): static
     {
         $id = $socket->getId();
 
@@ -566,7 +562,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSocketBinding(SocketBinding $binding): Dispatcher
+    public function removeSocketBinding(SocketBinding $binding): static
     {
         $this->unregisterSocketBinding($binding);
         unset($this->sockets[$binding->getId()]);
@@ -579,7 +575,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeAllSockets(): Dispatcher
+    public function removeAllSockets(): static
     {
         foreach ($this->sockets as $id => $binding) {
             $this->unregisterSocketBinding($binding);
@@ -721,7 +717,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             true,
@@ -743,7 +739,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             true,
@@ -765,7 +761,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             false,
@@ -787,7 +783,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             false,
@@ -809,7 +805,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             true,
@@ -831,7 +827,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             true,
@@ -853,7 +849,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             false,
@@ -875,7 +871,7 @@ trait DispatcherTrait
         callable $callback,
         ?float $timeout = null,
         ?callable $timeoutHandler = null
-    ): Dispatcher {
+    ): static {
         return $this->addStreamBinding(new StreamBinding(
             $this,
             false,
@@ -892,8 +888,10 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    protected function addStreamBinding(StreamBinding $binding, bool $frozen): Dispatcher
-    {
+    protected function addStreamBinding(
+        StreamBinding $binding,
+        bool $frozen
+    ): static {
         $id = $binding->getId();
 
         if (isset($this->streams[$id])) {
@@ -920,7 +918,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeStream(Stream $stream): Dispatcher
+    public function freezeStream(Stream $stream): static
     {
         $id = $this->getStreamId($stream);
 
@@ -940,7 +938,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeStreamRead(Stream $stream): Dispatcher
+    public function freezeStreamRead(Stream $stream): static
     {
         $id = $this->getStreamId($stream);
 
@@ -956,7 +954,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeStreamWrite(Stream $stream): Dispatcher
+    public function freezeStreamWrite(Stream $stream): static
     {
         $id = $this->getStreamId($stream);
 
@@ -972,7 +970,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeAllStreams(): Dispatcher
+    public function freezeAllStreams(): static
     {
         foreach ($this->streams as $binding) {
             $this->freezeBinding($binding);
@@ -987,7 +985,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeStream(Stream $stream): Dispatcher
+    public function unfreezeStream(Stream $stream): static
     {
         $id = $this->getStreamId($stream);
 
@@ -1007,7 +1005,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeStreamRead(Stream $stream): Dispatcher
+    public function unfreezeStreamRead(Stream $stream): static
     {
         $id = $this->getStreamId($stream);
 
@@ -1023,7 +1021,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeStreamWrite(Stream $stream): Dispatcher
+    public function unfreezeStreamWrite(Stream $stream): static
     {
         $id = $this->getStreamId($stream);
 
@@ -1039,7 +1037,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeAllStreams(): Dispatcher
+    public function unfreezeAllStreams(): static
     {
         foreach ($this->streams as $binding) {
             $this->unfreezeBinding($binding);
@@ -1055,7 +1053,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeStream(Stream $stream): Dispatcher
+    public function removeStream(Stream $stream): static
     {
         $id = $this->getStreamId($stream);
 
@@ -1075,7 +1073,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeStreamRead(Stream $stream): Dispatcher
+    public function removeStreamRead(Stream $stream): static
     {
         $id = $this->getStreamId($stream);
 
@@ -1091,7 +1089,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeStreamWrite(Stream $stream): Dispatcher
+    public function removeStreamWrite(Stream $stream): static
     {
         $id = $this->getStreamId($stream);
 
@@ -1107,7 +1105,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeStreamBinding(StreamBinding $binding): Dispatcher
+    public function removeStreamBinding(StreamBinding $binding): static
     {
         $this->unregisterStreamBinding($binding);
         unset($this->streams[$binding->getId()]);
@@ -1120,7 +1118,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeAllStreams(): Dispatcher
+    public function removeAllStreams(): static
     {
         foreach ($this->streams as $id => $binding) {
             $this->unregisterStreamBinding($binding);
@@ -1267,9 +1265,9 @@ trait DispatcherTrait
      */
     public function bindSignal(
         string $id,
-        $signals,
+        iterable $signals,
         callable $callback
-    ): Dispatcher {
+    ): static {
         return $this->addSignalBinding(new SignalBinding(
             $this,
             $id,
@@ -1286,9 +1284,9 @@ trait DispatcherTrait
      */
     public function bindFrozenSignal(
         string $id,
-        $signals,
+        iterable $signals,
         callable $callback
-    ): Dispatcher {
+    ): static {
         return $this->addSignalBinding(new SignalBinding(
             $this,
             $id,
@@ -1305,9 +1303,9 @@ trait DispatcherTrait
      */
     public function bindSignalOnce(
         string $id,
-        $signals,
+        iterable $signals,
         callable $callback
-    ): Dispatcher {
+    ): static {
         return $this->addSignalBinding(new SignalBinding(
             $this,
             $id,
@@ -1324,9 +1322,9 @@ trait DispatcherTrait
      */
     public function bindFrozenSignalOnce(
         string $id,
-        $signals,
+        iterable $signals,
         callable $callback
-    ): Dispatcher {
+    ): static {
         return $this->addSignalBinding(new SignalBinding(
             $this,
             $id,
@@ -1341,8 +1339,10 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    protected function addSignalBinding(SignalBinding $binding, bool $frozen): Dispatcher
-    {
+    protected function addSignalBinding(
+        SignalBinding $binding,
+        bool $frozen
+    ): static {
         $id = $binding->getId();
 
         if (isset($this->signals[$id])) {
@@ -1369,7 +1369,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeSignal($signal): Dispatcher
+    public function freezeSignal(mixed $signal): static
     {
         $number = $this->normalizeSignal($signal);
 
@@ -1387,8 +1387,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeSignalBinding($binding): Dispatcher
-    {
+    public function freezeSignalBinding(
+        string|SignalBinding $binding
+    ): static {
         if (!$binding instanceof SignalBinding) {
             $orig = $binding;
 
@@ -1410,7 +1411,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeAllSignals(): Dispatcher
+    public function freezeAllSignals(): static
     {
         foreach ($this->signals as $binding) {
             $this->freezeBinding($binding);
@@ -1425,7 +1426,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeSignal($signal): Dispatcher
+    public function unfreezeSignal(mixed $signal): static
     {
         $number = $this->normalizeSignal($signal);
 
@@ -1443,8 +1444,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeSignalBinding($binding): Dispatcher
-    {
+    public function unfreezeSignalBinding(
+        string|SignalBinding $binding
+    ): static {
         if (!$binding instanceof SignalBinding) {
             $orig = $binding;
 
@@ -1466,7 +1468,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeAllSignals(): Dispatcher
+    public function unfreezeAllSignals(): static
     {
         foreach ($this->signals as $binding) {
             $this->unfreezeBinding($binding);
@@ -1481,7 +1483,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSignal($signal): Dispatcher
+    public function removeSignal(mixed $signal): static
     {
         $number = $this->normalizeSignal($signal);
 
@@ -1499,8 +1501,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSignalBinding($binding): Dispatcher
-    {
+    public function removeSignalBinding(
+        string|SignalBinding $binding
+    ): static {
         if (!$binding instanceof SignalBinding) {
             $orig = $binding;
 
@@ -1525,7 +1528,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeAllSignals(): Dispatcher
+    public function removeAllSignals(): static
     {
         foreach ($this->signals as $id => $binding) {
             $this->unregisterSignalBinding($binding);
@@ -1540,8 +1543,9 @@ trait DispatcherTrait
     /**
      * Get signal binding by id or object
      */
-    public function getSignalBinding($id): ?SignalBinding
-    {
+    public function getSignalBinding(
+        string|SignalBinding $id
+    ): ?SignalBinding {
         if ($id instanceof SignalBinding) {
             $id = $id->getId();
         }
@@ -1568,7 +1572,7 @@ trait DispatcherTrait
     /**
      * Count bindings with signal
      */
-    public function countSignalBindingsFor($signal): int
+    public function countSignalBindingsFor(mixed $signal): int
     {
         $count = 0;
         $number = $this->normalizeSignal($signal);
@@ -1593,7 +1597,7 @@ trait DispatcherTrait
     /**
      * Get bidings with signal
      */
-    public function getSignalBindingsFor($signal): array
+    public function getSignalBindingsFor(mixed $signal): array
     {
         $output = [];
         $number = $this->normalizeSignal($signal);
@@ -1609,10 +1613,8 @@ trait DispatcherTrait
 
     /**
      * Normalize signal input
-     *
-     * @param mixed $signal
      */
-    protected function normalizeSignal($signal): int
+    protected function normalizeSignal(mixed $signal): int
     {
         if (!class_exists(Systemic::class)) {
             throw Exceptional::ComponentUnavailable(
@@ -1635,7 +1637,7 @@ trait DispatcherTrait
         string $id,
         float $duration,
         callable $callback
-    ): Dispatcher {
+    ): static {
         return $this->addTimerBinding(new TimerBinding(
             $this,
             $id,
@@ -1654,7 +1656,7 @@ trait DispatcherTrait
         string $id,
         float $duration,
         callable $callback
-    ): Dispatcher {
+    ): static {
         return $this->addTimerBinding(new TimerBinding(
             $this,
             $id,
@@ -1673,7 +1675,7 @@ trait DispatcherTrait
         string $id,
         float $duration,
         callable $callback
-    ): Dispatcher {
+    ): static {
         return $this->addTimerBinding(new TimerBinding(
             $this,
             $id,
@@ -1692,7 +1694,7 @@ trait DispatcherTrait
         string $id,
         float $duration,
         callable $callback
-    ): Dispatcher {
+    ): static {
         return $this->addTimerBinding(new TimerBinding(
             $this,
             $id,
@@ -1707,8 +1709,10 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    protected function addTimerBinding(TimerBinding $binding, bool $frozen): Dispatcher
-    {
+    protected function addTimerBinding(
+        TimerBinding $binding,
+        bool $frozen
+    ): static {
         $id = $binding->getId();
 
         if (isset($this->timers[$id])) {
@@ -1735,8 +1739,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeTimer($binding): Dispatcher
-    {
+    public function freezeTimer(
+        string|TimerBinding $binding
+    ): static {
         if (!$binding instanceof TimerBinding) {
             $orig = $binding;
 
@@ -1758,7 +1763,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeAllTimers(): Dispatcher
+    public function freezeAllTimers(): static
     {
         foreach ($this->timers as $binding) {
             $this->freezeBinding($binding);
@@ -1773,8 +1778,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeTimer($binding): Dispatcher
-    {
+    public function unfreezeTimer(
+        string|TimerBinding $binding
+    ): static {
         if (!$binding instanceof TimerBinding) {
             $orig = $binding;
 
@@ -1796,7 +1802,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeAllTimers(): Dispatcher
+    public function unfreezeAllTimers(): static
     {
         foreach ($this->timers as $binding) {
             $this->unfreezeBinding($binding);
@@ -1811,8 +1817,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeTimer($binding): Dispatcher
-    {
+    public function removeTimer(
+        string|TimerBinding $binding
+    ): static {
         if (!$binding instanceof TimerBinding) {
             $orig = $binding;
 
@@ -1837,7 +1844,7 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeAllTimers(): Dispatcher
+    public function removeAllTimers(): static
     {
         foreach ($this->timers as $id => $binding) {
             $this->unregisterTimerBinding($binding);
@@ -1851,8 +1858,9 @@ trait DispatcherTrait
     /**
      * Get signal binding by id or object
      */
-    public function getTimerBinding($id): ?TimerBinding
-    {
+    public function getTimerBinding(
+        string|TimerBinding $id
+    ): ?TimerBinding {
         if ($id instanceof TimerBinding) {
             $id = $id->getId();
         }

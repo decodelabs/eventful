@@ -19,10 +19,7 @@ class Timer implements Binding
         __construct as __traitConstruct;
     }
 
-    /**
-     * @var float
-     */
-    public $duration;
+    public float $duration;
 
     /**
      * Init with timer information
@@ -57,7 +54,7 @@ class Timer implements Binding
     /**
      * Destroy and unregister this binding
      */
-    public function destroy(): Binding
+    public function destroy(): static
     {
         $this->dispatcher->removeTimer($this);
         return $this;
@@ -66,7 +63,7 @@ class Timer implements Binding
     /**
      * Trigger event callback
      */
-    public function trigger($time): Binding
+    public function trigger(mixed $time): static
     {
         if ($this->frozen) {
             return $this;

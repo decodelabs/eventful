@@ -24,15 +24,8 @@ class Stream implements IoBinding
     }
     use IoBindingTrait;
 
-    /**
-     * @var StreamChannel
-     */
-    public $stream;
-
-    /**
-     * @var string
-     */
-    public $streamId;
+    public StreamChannel $stream;
+    public string $streamId;
 
     /**
      * Init with timer information
@@ -74,7 +67,7 @@ class Stream implements IoBinding
     /**
      * Get io resource
      */
-    public function getIoResource()
+    public function getIoResource(): mixed
     {
         return $this->stream->getResource();
     }
@@ -82,7 +75,7 @@ class Stream implements IoBinding
     /**
      * Destroy and unregister this binding
      */
-    public function destroy(): Binding
+    public function destroy(): static
     {
         $this->dispatcher->removeStreamBinding($this);
         return $this;
@@ -91,7 +84,7 @@ class Stream implements IoBinding
     /**
      * Trigger event callback
      */
-    public function trigger($resource): Binding
+    public function trigger(mixed $resource): static
     {
         if ($this->frozen) {
             return $this;
@@ -109,7 +102,7 @@ class Stream implements IoBinding
     /**
      * Trigger timeout event callback
      */
-    public function triggerTimeout($resource): IoBinding
+    public function triggerTimeout(mixed $resource): static
     {
         if ($this->frozen) {
             return $this;

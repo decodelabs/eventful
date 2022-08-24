@@ -13,14 +13,14 @@ use DecodeLabs\Exceptional;
 
 trait ProviderTrait
 {
-    protected $eventDispatcher;
+    protected Dispatcher $eventDispatcher;
 
     /**
      * Replace current active event loop
      *
      * @return $this
      */
-    public function setEventDispatcher(Dispatcher $dispatcher): Provider
+    public function setEventDispatcher(Dispatcher $dispatcher): static
     {
         if ($this->isRunning()) {
             throw Exceptional::Runtime(
