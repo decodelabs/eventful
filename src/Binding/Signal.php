@@ -33,7 +33,7 @@ class Signal implements Binding
     /**
      * Init with timer information
      *
-     * @param iterable<mixed> $signals
+     * @param iterable<SignalObject|int|string> $signals
      */
     public function __construct(
         Dispatcher $dispatcher,
@@ -52,7 +52,6 @@ class Signal implements Binding
         $this->resource = [];
 
         foreach ($signals as $signal) {
-            /** @var SignalObject $signal */
             $signal = Systemic::$process->newSignal($signal);
             $number = $signal->getNumber();
             $this->signals[$number] = $signal;

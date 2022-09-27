@@ -19,6 +19,7 @@ use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
 
 use DecodeLabs\Exceptional;
 use DecodeLabs\Systemic;
+use DecodeLabs\Systemic\Process\Signal as SignalObject;
 
 trait DispatcherTrait
 {
@@ -1347,7 +1348,7 @@ trait DispatcherTrait
         $id = $binding->getId();
 
         if (isset($this->signals[$id])) {
-            $this->removeSignal($binding);
+            $this->removeSignalBinding($binding);
         }
 
         $this->signals[$id] = $binding;
@@ -1370,8 +1371,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeSignal(mixed $signal): static
-    {
+    public function freezeSignal(
+        SignalObject|int|string $signal
+    ): static {
         $number = $this->normalizeSignal($signal);
 
         foreach ($this->signals as $binding) {
@@ -1427,8 +1429,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeSignal(mixed $signal): static
-    {
+    public function unfreezeSignal(
+        SignalObject|int|string $signal
+    ): static {
         $number = $this->normalizeSignal($signal);
 
         foreach ($this->signals as $binding) {
@@ -1484,8 +1487,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSignal(mixed $signal): static
-    {
+    public function removeSignal(
+        SignalObject|int|string $signal
+    ): static {
         $number = $this->normalizeSignal($signal);
 
         foreach ($this->signals as $binding) {
@@ -1573,8 +1577,9 @@ trait DispatcherTrait
     /**
      * Count bindings with signal
      */
-    public function countSignalBindingsFor(mixed $signal): int
-    {
+    public function countSignalBindingsFor(
+        SignalObject|int|string $signal
+    ): int {
         $count = 0;
         $number = $this->normalizeSignal($signal);
 
@@ -1598,8 +1603,9 @@ trait DispatcherTrait
     /**
      * Get bidings with signal
      */
-    public function getSignalBindingsFor(mixed $signal): array
-    {
+    public function getSignalBindingsFor(
+        SignalObject|int|string $signal
+    ): array {
         $output = [];
         $number = $this->normalizeSignal($signal);
 
@@ -1615,8 +1621,9 @@ trait DispatcherTrait
     /**
      * Normalize signal input
      */
-    protected function normalizeSignal(mixed $signal): int
-    {
+    protected function normalizeSignal(
+        SignalObject|int|string $signal
+    ): int {
         if (!class_exists(Systemic::class)) {
             throw Exceptional::ComponentUnavailable(
                 'Dispatcher Signal support requires DecodeLabs Systemic'
