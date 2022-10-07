@@ -7,7 +7,13 @@
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-44CC11.svg?longCache=true&style=flat)](https://github.com/phpstan/phpstan)
 [![License](https://img.shields.io/packagist/l/decodelabs/eventful?style=flat)](https://packagist.org/packages/decodelabs/eventful)
 
-Asynchronous IO event dispatcher for PHP
+### Asynchronous IO event dispatcher for PHP
+
+Eventful provides an extensible IO event dispatcher for use in interactive and asynchronous processes.
+
+_Get news and updates on the [DecodeLabs blog](https://blog.decodelabs.com)._
+
+---
 
 
 ## Installation
