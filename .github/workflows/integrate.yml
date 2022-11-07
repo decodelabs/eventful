@@ -60,6 +60,7 @@ jobs:
         php-version:
           - "8.0"
           - "8.1"
+          - "8.2"
         dependencies:
           - "lowest"
           - "highest"
@@ -107,6 +108,7 @@ jobs:
         php-version:
           - "8.0"
           - "8.1"
+          - "8.2"
     steps:
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
