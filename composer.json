@@ -13,7 +13,7 @@
 
         "decodelabs/coercion": "^0.2",
         "decodelabs/deliverance": "^0.2",
-        "decodelabs/systemic": "^0.9",
+        "decodelabs/systemic": "^0.9|^0.10",
         "decodelabs/exceptional": "^0.4"
     },
     "require-dev": {
