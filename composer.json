@@ -17,6 +17,8 @@
         "decodelabs/exceptional": "^0.4"
     },
     "require-dev": {
+        "ext-event": "*",
+
         "phpunit/phpunit": "^9",
         "phpstan/phpstan": "^1",
         "phpstan/extension-installer": "^1.0",
