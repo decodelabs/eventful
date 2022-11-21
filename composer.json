@@ -19,12 +19,6 @@
     "require-dev": {
         "ext-event": "*",
 
-        "phpunit/phpunit": "^9",
-        "phpstan/phpstan": "^1",
-        "phpstan/extension-installer": "^1.0",
-        "php-parallel-lint/php-parallel-lint": "^1.3",
-        "symplify/easy-coding-standard": "^11",
-
         "decodelabs/phpstan-decodelabs": "^0.6"
     },
     "suggest": {
@@ -38,11 +32,6 @@
     "extra": {
         "branch-alias": {
             "dev-develop": "0.3.x-dev"
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "phpstan/extension-installer": true
         }
     }
 }
