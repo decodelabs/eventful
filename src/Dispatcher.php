@@ -11,13 +11,11 @@ namespace DecodeLabs\Eventful;
 
 use DecodeLabs\Deliverance\Channel\Stream;
 use DecodeLabs\Deliverance\Socket;
-
 use DecodeLabs\Eventful\Binding\Signal as SignalBinding;
 use DecodeLabs\Eventful\Binding\Socket as SocketBinding;
 use DecodeLabs\Eventful\Binding\Stream as StreamBinding;
 use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
-
-use DecodeLabs\Systemic\Process\Signal as SignalObject;
+use DecodeLabs\Eventful\Signal as SignalObject;
 
 interface Dispatcher
 {

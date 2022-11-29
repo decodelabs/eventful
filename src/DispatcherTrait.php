@@ -18,8 +18,6 @@ use DecodeLabs\Eventful\Binding\Stream as StreamBinding;
 use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
 
 use DecodeLabs\Exceptional;
-use DecodeLabs\Systemic;
-use DecodeLabs\Systemic\Process\Signal as SignalObject;
 
 trait DispatcherTrait
 {
@@ -1372,7 +1370,7 @@ trait DispatcherTrait
      * @return $this
      */
     public function freezeSignal(
-        SignalObject|int|string $signal
+        Signal|int|string $signal
     ): static {
         $number = $this->normalizeSignal($signal);
 
@@ -1430,7 +1428,7 @@ trait DispatcherTrait
      * @return $this
      */
     public function unfreezeSignal(
-        SignalObject|int|string $signal
+        Signal|int|string $signal
     ): static {
         $number = $this->normalizeSignal($signal);
 
@@ -1488,7 +1486,7 @@ trait DispatcherTrait
      * @return $this
      */
     public function removeSignal(
-        SignalObject|int|string $signal
+        Signal|int|string $signal
     ): static {
         $number = $this->normalizeSignal($signal);
 
@@ -1578,7 +1576,7 @@ trait DispatcherTrait
      * Count bindings with signal
      */
     public function countSignalBindingsFor(
-        SignalObject|int|string $signal
+        Signal|int|string $signal
     ): int {
         $count = 0;
         $number = $this->normalizeSignal($signal);
@@ -1604,7 +1602,7 @@ trait DispatcherTrait
      * Get bidings with signal
      */
     public function getSignalBindingsFor(
-        SignalObject|int|string $signal
+        Signal|int|string $signal
     ): array {
         $output = [];
         $number = $this->normalizeSignal($signal);
@@ -1622,15 +1620,9 @@ trait DispatcherTrait
      * Normalize signal input
      */
     protected function normalizeSignal(
-        SignalObject|int|string $signal
+        Signal|int|string $signal
     ): int {
-        if (!class_exists(Systemic::class)) {
-            throw Exceptional::ComponentUnavailable(
-                'Dispatcher Signal support requires DecodeLabs Systemic'
-            );
-        }
-
-        return Systemic::$process->normalizeSignal($signal);
+        return Signal::create($signal)->getNumber();
     }
 
 
