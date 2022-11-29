@@ -14,10 +14,7 @@ use DecodeLabs\Coercion;
 use DecodeLabs\Eventful\Binding;
 use DecodeLabs\Eventful\BindingTrait;
 use DecodeLabs\Eventful\Dispatcher;
-
-use DecodeLabs\Exceptional;
-use DecodeLabs\Systemic;
-use DecodeLabs\Systemic\Process\Signal as SignalObject;
+use DecodeLabs\Eventful\Signal as SignalObject;
 
 class Signal implements Binding
 {
@@ -33,7 +30,7 @@ class Signal implements Binding
     /**
      * Init with timer information
      *
-     * @param iterable<mixed> $signals
+     * @param iterable<SignalObject|int|string> $signals
      */
     public function __construct(
         Dispatcher $dispatcher,
@@ -42,18 +39,11 @@ class Signal implements Binding
         iterable $signals,
         callable $callback
     ) {
-        if (!class_exists(Systemic::class)) {
-            throw Exceptional::ComponentUnavailable(
-                'Event dispatcher Signal support requires DecodeLabs Systemic'
-            );
-        }
-
         $this->__traitConstruct($dispatcher, $id, $persistent, $callback);
         $this->resource = [];
 
         foreach ($signals as $signal) {
-            /** @var SignalObject $signal */
-            $signal = Systemic::$process->newSignal($signal);
+            $signal = SignalObject::create($signal);
             $number = $signal->getNumber();
             $this->signals[$number] = $signal;
             $this->resource[$number] = null;

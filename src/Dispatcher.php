@@ -11,11 +11,11 @@ namespace DecodeLabs\Eventful;
 
 use DecodeLabs\Deliverance\Channel\Stream;
 use DecodeLabs\Deliverance\Socket;
-
 use DecodeLabs\Eventful\Binding\Signal as SignalBinding;
 use DecodeLabs\Eventful\Binding\Socket as SocketBinding;
 use DecodeLabs\Eventful\Binding\Stream as StreamBinding;
 use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
+use DecodeLabs\Eventful\Signal as SignalObject;
 
 interface Dispatcher
 {
@@ -432,7 +432,7 @@ interface Dispatcher
 
 
     /**
-     * @param iterable<mixed> $signals
+     * @param iterable<SignalObject|int|string> $signals
      * @return $this
      */
     public function bindSignal(
@@ -442,7 +442,7 @@ interface Dispatcher
     ): static;
 
     /**
-     * @param iterable<mixed> $signals
+     * @param iterable<SignalObject|int|string> $signals
      * @return $this
      */
     public function bindFrozenSignal(
@@ -452,7 +452,7 @@ interface Dispatcher
     ): static;
 
     /**
-     * @param iterable<mixed> $signals
+     * @param iterable<SignalObject|int|string> $signals
      * @return $this
      */
     public function bindSignalOnce(
@@ -462,7 +462,7 @@ interface Dispatcher
     ): static;
 
     /**
-     * @param iterable<mixed> $signals
+     * @param iterable<SignalObject|int|string> $signals
      * @return $this
      */
     public function bindFrozenSignalOnce(
@@ -474,7 +474,9 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function freezeSignal(mixed $signal): static;
+    public function freezeSignal(
+        SignalObject|int|string $signal
+    ): static;
 
     /**
      * @return $this
@@ -491,7 +493,9 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function unfreezeSignal(mixed $signal): static;
+    public function unfreezeSignal(
+        SignalObject|int|string $signal
+    ): static;
 
     /**
      * @return $this
@@ -509,7 +513,7 @@ interface Dispatcher
      * @return $this
      */
     public function removeSignal(
-        mixed $signal
+        SignalObject|int|string $signal
     ): static;
 
     /**
@@ -530,7 +534,9 @@ interface Dispatcher
 
     public function countSignalBindings(): int;
 
-    public function countSignalBindingsFor(mixed $signal): int;
+    public function countSignalBindingsFor(
+        SignalObject|int|string $signal
+    ): int;
 
     /**
      * @return array<string, Binding>
@@ -540,7 +546,9 @@ interface Dispatcher
     /**
      * @return array<string, Binding>
      */
-    public function getSignalBindingsFor(mixed $signal): array;
+    public function getSignalBindingsFor(
+        SignalObject|int|string $signal
+    ): array;
 
 
 
