@@ -135,7 +135,7 @@ class Signal
     protected function __construct(string $name)
     {
         if (!isset(self::$signalMap[$name])) {
-            throw Exceptional::InvalidArgument('Signal not recognised: '.$name);
+            throw Exceptional::InvalidArgument('Signal not recognised: ' . $name);
         }
 
         $this->name = $name;
