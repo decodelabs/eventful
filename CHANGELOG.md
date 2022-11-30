@@ -1,4 +1,5 @@
 * Fixed fallback signal resolver
+* Fixed PCNTL check on close
 
 ## v0.3.2 (2022-11-28)
 * Added tick handlers

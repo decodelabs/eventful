@@ -186,6 +186,7 @@ class Select implements Dispatcher
                     $res = false;
                 }
 
+
                 if ($res === false) {
                     // TODO: deal with error
                 } elseif ($res > 0) {
@@ -453,7 +454,7 @@ class Select implements Dispatcher
      */
     protected function stopSignalHandlers(): void
     {
-        if ($this->hasPcntl) {
+        if (!$this->hasPcntl) {
             return;
         }
 
