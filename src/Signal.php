@@ -94,7 +94,7 @@ class Signal
                     }
                 }
             } else {
-                $list = explode(' ', trim((string)shell_exec("kill -l")));
+                $list = explode("\n", trim((string)shell_exec("kill -l")));
 
                 foreach ($list as $i => $name) {
                     $name = 'SIG' . $name;
@@ -135,7 +135,7 @@ class Signal
     protected function __construct(string $name)
     {
         if (!isset(self::$signalMap[$name])) {
-            throw Exceptional::InvalidArgument('Signal not recognised');
+            throw Exceptional::InvalidArgument('Signal not recognised: ' . $name);
         }
 
         $this->name = $name;
