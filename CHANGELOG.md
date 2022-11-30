@@ -1,3 +1,5 @@
+* Fixed fallback signal resolver
+
 ## v0.3.2 (2022-11-28)
 * Added tick handlers
 
