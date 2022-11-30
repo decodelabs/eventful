@@ -1,4 +1,7 @@
 ## v0.3.2 (2022-11-28)
+* Added tick handlers
+
+## v0.3.2 (2022-11-28)
 * Imported Signal from Systemic
 * Migrated to use effigy in CI workflow
 * Fixed PHP8.1 testing
