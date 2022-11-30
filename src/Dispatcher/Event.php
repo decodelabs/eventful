@@ -33,6 +33,7 @@ class Event implements Dispatcher
 
     protected EventLibBase $base;
     protected ?EventLib $cycleHandlerEvent = null;
+    protected ?EventLib $tickHandlerEvent = null;
 
     /**
      * Setup event base
@@ -137,6 +138,45 @@ class Event implements Dispatcher
                 }
 
                 $this->registerCycleHandler($this->cycleHandler);
+            }
+        );
+    }
+
+
+    /**
+     * Add cycle handler to loop
+     */
+    protected function registerTickHandler(?callable $callback): void
+    {
+        if ($this->tickHandlerEvent) {
+            $this->tickHandlerEvent->free();
+            $this->tickHandlerEvent = null;
+        }
+
+        if (!$callback) {
+            return;
+        }
+
+        $this->tickHandlerEvent = $this->registerEvent(
+            null,
+            EventLib::TIMEOUT | EventLib::PERSIST,
+            0.01,
+            function () {
+                if (!$this->tickHandler) {
+                    return;
+                }
+
+                try {
+                    $res = ($this->tickHandler)($this);
+                } catch (Throwable $e) {
+                    $this->stop();
+                    throw $e;
+                }
+
+                if ($res === false) {
+                    $this->stop();
+                    return;
+                }
             }
         );
     }

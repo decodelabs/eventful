@@ -9,25 +9,20 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful;
 
+use Closure;
 use DecodeLabs\Deliverance\Channel\Stream;
 use DecodeLabs\Deliverance\Socket;
-
 use DecodeLabs\Eventful\Binding\Signal as SignalBinding;
 use DecodeLabs\Eventful\Binding\Socket as SocketBinding;
 use DecodeLabs\Eventful\Binding\Stream as StreamBinding;
 use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
-
 use DecodeLabs\Exceptional;
 
 trait DispatcherTrait
 {
     protected bool $listening = false;
-
-    /**
-     * @var callable|null
-     */
-    protected $cycleHandler;
-
+    protected ?Closure $cycleHandler = null;
+    protected ?Closure $tickHandler = null;
     protected int $cycles = 0;
 
 
@@ -140,7 +135,7 @@ trait DispatcherTrait
      */
     public function setCycleHandler(?callable $callback = null): static
     {
-        $this->cycleHandler = $callback;
+        $this->cycleHandler = $callback ? Closure::fromCallable($callback) : null;
         $this->registerCycleHandler($callback);
         return $this;
     }
@@ -148,7 +143,7 @@ trait DispatcherTrait
     /**
      * Get registered cycle callback
      */
-    public function getCycleHandler(): ?callable
+    public function getCycleHandler(): ?Closure
     {
         return $this->cycleHandler;
     }
@@ -159,6 +154,37 @@ trait DispatcherTrait
     protected function registerCycleHandler(?callable $callback): void
     {
     }
+
+
+    /**
+     * Register tick callback for testing run conditions
+     *
+     * @return $this
+     */
+    public function setTickHandler(?callable $callback = null): static
+    {
+        $this->tickHandler = $callback ? Closure::fromCallable($callback) : null;
+        $this->registerTickHandler($callback);
+        return $this;
+    }
+
+    /**
+     * Get registered cycle callback
+     */
+    public function getTickHandler(): ?Closure
+    {
+        return $this->tickHandler;
+    }
+
+    /**
+     * Add cycle handler to event loop
+     */
+    protected function registerTickHandler(?callable $callback): void
+    {
+    }
+
+
+
 
 
 

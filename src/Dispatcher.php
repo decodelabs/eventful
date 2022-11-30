@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful;
 
+use Closure;
 use DecodeLabs\Deliverance\Channel\Stream;
 use DecodeLabs\Deliverance\Socket;
 use DecodeLabs\Eventful\Binding\Signal as SignalBinding;
@@ -71,7 +72,13 @@ interface Dispatcher
      * @return $this
      */
     public function setCycleHandler(?callable $callback = null): static;
-    public function getCycleHandler(): ?callable;
+    public function getCycleHandler(): ?Closure;
+
+    /**
+     * @return $this
+     */
+    public function setTickHandler(?callable $callback = null): static;
+    public function getTickHandler(): ?Closure;
 
 
 

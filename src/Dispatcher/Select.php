@@ -212,8 +212,21 @@ class Select implements Dispatcher
             }
 
 
+            // Tick
+            if (
+                !$this->breakLoop &&
+                $this->tickHandler
+            ) {
+                if (false === ($this->tickHandler)($this)) {
+                    $this->breakLoop = true;
+                }
+            }
+
             // Cycle
-            if ($this->cycleHandler) {
+            if (
+                !$this->breakLoop &&
+                $this->cycleHandler
+            ) {
                 $time = microtime(true);
 
                 if ($time - $lastCycle > 1) {
@@ -224,6 +237,7 @@ class Select implements Dispatcher
                     }
                 }
             }
+
 
             if (!$hasHandler) {
                 $this->breakLoop = true;
