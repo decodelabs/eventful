@@ -20,8 +20,9 @@ trait ProviderTrait
      *
      * @return $this
      */
-    public function setEventDispatcher(Dispatcher $dispatcher): static
-    {
+    public function setEventDispatcher(
+        Dispatcher $dispatcher
+    ): static {
         if ($this->isRunning()) {
             throw Exceptional::Runtime(
                 'You cannot change the event dispatcher while it is running'

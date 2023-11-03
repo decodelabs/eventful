@@ -71,8 +71,9 @@ class Signal implements Binding
     /**
      * Has signal registered?
      */
-    public function hasSignal(int $number): bool
-    {
+    public function hasSignal(
+        int $number
+    ): bool {
         return isset($this->signals[$number]);
     }
 
@@ -88,8 +89,9 @@ class Signal implements Binding
     /**
      * Trigger event callback
      */
-    public function trigger(mixed $number): static
-    {
+    public function trigger(
+        mixed $number
+    ): static {
         if ($this->frozen) {
             return $this;
         }

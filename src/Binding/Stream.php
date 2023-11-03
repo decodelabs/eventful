@@ -84,8 +84,9 @@ class Stream implements IoBinding
     /**
      * Trigger event callback
      */
-    public function trigger(mixed $resource): static
-    {
+    public function trigger(
+        mixed $resource
+    ): static {
         if ($this->frozen) {
             return $this;
         }
@@ -102,8 +103,9 @@ class Stream implements IoBinding
     /**
      * Trigger timeout event callback
      */
-    public function triggerTimeout(mixed $resource): static
-    {
+    public function triggerTimeout(
+        mixed $resource
+    ): static {
         if ($this->frozen) {
             return $this;
         }

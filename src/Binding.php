@@ -28,7 +28,9 @@ interface Binding
     /**
      * @return $this
      */
-    public function setEventResource(mixed $resource): static;
+    public function setEventResource(
+        mixed $resource
+    ): static;
 
     public function getEventResource(): mixed;
 
@@ -45,12 +47,16 @@ interface Binding
     /**
      * @return $this
      */
-    public function setFrozen(bool $frozen): static;
+    public function setFrozen(
+        bool $frozen
+    ): static;
 
     /**
      * @return $this
      */
-    public function markFrozen(bool $frozen): static;
+    public function markFrozen(
+        bool $frozen
+    ): static;
 
     public function isFrozen(): bool;
 
@@ -62,5 +68,7 @@ interface Binding
     /**
      * @return $this
      */
-    public function trigger(mixed $targetResource): static;
+    public function trigger(
+        mixed $targetResource
+    ): static;
 }

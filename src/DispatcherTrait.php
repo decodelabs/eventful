@@ -133,8 +133,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function setCycleHandler(?callable $callback = null): static
-    {
+    public function setCycleHandler(
+        ?callable $callback = null
+    ): static {
         $this->cycleHandler = $callback ? Closure::fromCallable($callback) : null;
         $this->registerCycleHandler($callback);
         return $this;
@@ -151,8 +152,9 @@ trait DispatcherTrait
     /**
      * Add cycle handler to event loop
      */
-    protected function registerCycleHandler(?callable $callback): void
-    {
+    protected function registerCycleHandler(
+        ?callable $callback
+    ): void {
     }
 
 
@@ -161,8 +163,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function setTickHandler(?callable $callback = null): static
-    {
+    public function setTickHandler(
+        ?callable $callback = null
+    ): static {
         $this->tickHandler = $callback ? Closure::fromCallable($callback) : null;
         $this->registerTickHandler($callback);
         return $this;
@@ -179,8 +182,9 @@ trait DispatcherTrait
     /**
      * Add cycle handler to event loop
      */
-    protected function registerTickHandler(?callable $callback): void
-    {
+    protected function registerTickHandler(
+        ?callable $callback
+    ): void {
     }
 
 
@@ -400,8 +404,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeSocket(Socket $socket): static
-    {
+    public function freezeSocket(
+        Socket $socket
+    ): static {
         $id = $socket->getId();
 
         if (isset($this->sockets['r:' . $id])) {
@@ -420,8 +425,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeSocketRead(Socket $socket): static
-    {
+    public function freezeSocketRead(
+        Socket $socket
+    ): static {
         $id = $socket->getId();
 
         if (isset($this->sockets['r:' . $id])) {
@@ -436,8 +442,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeSocketWrite(Socket $socket): static
-    {
+    public function freezeSocketWrite(
+        Socket $socket
+    ): static {
         $id = $socket->getId();
 
         if (isset($this->sockets['w:' . $id])) {
@@ -468,8 +475,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeSocket(Socket $socket): static
-    {
+    public function unfreezeSocket(
+        Socket $socket
+    ): static {
         $id = $socket->getId();
 
         if (isset($this->sockets['r:' . $id])) {
@@ -488,8 +496,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeSocketRead(Socket $socket): static
-    {
+    public function unfreezeSocketRead(
+        Socket $socket
+    ): static {
         $id = $socket->getId();
 
         if (isset($this->sockets['r:' . $id])) {
@@ -504,8 +513,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeSocketWrite(Socket $socket): static
-    {
+    public function unfreezeSocketWrite(
+        Socket $socket
+    ): static {
         $id = $socket->getId();
 
         if (isset($this->sockets['w:' . $id])) {
@@ -536,8 +546,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSocket(Socket $socket): static
-    {
+    public function removeSocket(
+        Socket $socket
+    ): static {
         $id = $socket->getId();
 
         if (isset($this->sockets['r:' . $id])) {
@@ -556,8 +567,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSocketRead(Socket $socket): static
-    {
+    public function removeSocketRead(
+        Socket $socket
+    ): static {
         $id = $socket->getId();
 
         if (isset($this->sockets['r:' . $id])) {
@@ -572,8 +584,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSocketWrite(Socket $socket): static
-    {
+    public function removeSocketWrite(
+        Socket $socket
+    ): static {
         $id = $socket->getId();
 
         if (isset($this->sockets['w:' . $id])) {
@@ -588,8 +601,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeSocketBinding(SocketBinding $binding): static
-    {
+    public function removeSocketBinding(
+        SocketBinding $binding
+    ): static {
         $this->unregisterSocketBinding($binding);
         unset($this->sockets[$binding->getId()]);
 
@@ -623,8 +637,9 @@ trait DispatcherTrait
     /**
      * Count all bindings for socket
      */
-    public function countSocketBindingsFor(Socket $socket): int
-    {
+    public function countSocketBindingsFor(
+        Socket $socket
+    ): int {
         $count = 0;
         $id = $socket->getId();
 
@@ -650,8 +665,9 @@ trait DispatcherTrait
     /**
      * Get all bindings for socket
      */
-    public function getSocketBindingsFor(Socket $socket): array
-    {
+    public function getSocketBindingsFor(
+        Socket $socket
+    ): array {
         $output = [];
         $id = $socket->getId();
 
@@ -935,8 +951,14 @@ trait DispatcherTrait
         return $this;
     }
 
-    abstract protected function registerStreamBinding(StreamBinding $binding): void;
-    abstract protected function unregisterStreamBinding(StreamBinding $binding): void;
+    abstract protected function registerStreamBinding(
+        StreamBinding $binding
+    ): void;
+
+    abstract protected function unregisterStreamBinding(
+        StreamBinding $binding
+    ): void;
+
 
 
     /**
@@ -944,8 +966,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeStream(Stream $stream): static
-    {
+    public function freezeStream(
+        Stream $stream
+    ): static {
         $id = $this->getStreamId($stream);
 
         if (isset($this->streams['r:' . $id])) {
@@ -964,8 +987,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeStreamRead(Stream $stream): static
-    {
+    public function freezeStreamRead(
+        Stream $stream
+    ): static {
         $id = $this->getStreamId($stream);
 
         if (isset($this->streams['r:' . $id])) {
@@ -980,8 +1004,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function freezeStreamWrite(Stream $stream): static
-    {
+    public function freezeStreamWrite(
+        Stream $stream
+    ): static {
         $id = $this->getStreamId($stream);
 
         if (isset($this->streams['w:' . $id])) {
@@ -1011,8 +1036,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeStream(Stream $stream): static
-    {
+    public function unfreezeStream(
+        Stream $stream
+    ): static {
         $id = $this->getStreamId($stream);
 
         if (isset($this->streams['r:' . $id])) {
@@ -1031,8 +1057,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeStreamRead(Stream $stream): static
-    {
+    public function unfreezeStreamRead(
+        Stream $stream
+    ): static {
         $id = $this->getStreamId($stream);
 
         if (isset($this->streams['r:' . $id])) {
@@ -1047,8 +1074,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function unfreezeStreamWrite(Stream $stream): static
-    {
+    public function unfreezeStreamWrite(
+        Stream $stream
+    ): static {
         $id = $this->getStreamId($stream);
 
         if (isset($this->streams['w:' . $id])) {
@@ -1079,8 +1107,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeStream(Stream $stream): static
-    {
+    public function removeStream(
+        Stream $stream
+    ): static {
         $id = $this->getStreamId($stream);
 
         if (isset($this->streams['r:' . $id])) {
@@ -1099,8 +1128,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeStreamRead(Stream $stream): static
-    {
+    public function removeStreamRead(
+        Stream $stream
+    ): static {
         $id = $this->getStreamId($stream);
 
         if (isset($this->streams['r:' . $id])) {
@@ -1115,8 +1145,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeStreamWrite(Stream $stream): static
-    {
+    public function removeStreamWrite(
+        Stream $stream
+    ): static {
         $id = $this->getStreamId($stream);
 
         if (isset($this->streams['w:' . $id])) {
@@ -1131,8 +1162,9 @@ trait DispatcherTrait
      *
      * @return $this
      */
-    public function removeStreamBinding(StreamBinding $binding): static
-    {
+    public function removeStreamBinding(
+        StreamBinding $binding
+    ): static {
         $this->unregisterStreamBinding($binding);
         unset($this->streams[$binding->getId()]);
 
@@ -1166,8 +1198,9 @@ trait DispatcherTrait
     /**
      * Count all bindings for stream
      */
-    public function countStreamBindingsFor(Stream $stream): int
-    {
+    public function countStreamBindingsFor(
+        Stream $stream
+    ): int {
         $count = 0;
         $id = $this->getStreamId($stream);
 
@@ -1193,8 +1226,9 @@ trait DispatcherTrait
     /**
      * Get all bindings for stream
      */
-    public function getStreamBindingsFor(Stream $stream): array
-    {
+    public function getStreamBindingsFor(
+        Stream $stream
+    ): array {
         $output = [];
         $id = $this->getStreamId($stream);
 
@@ -1276,8 +1310,9 @@ trait DispatcherTrait
     /**
      * Get id for stream
      */
-    protected function getStreamId(Stream $stream): string
-    {
+    protected function getStreamId(
+        Stream $stream
+    ): string {
         return (string)spl_object_id($stream);
     }
 
@@ -1386,8 +1421,14 @@ trait DispatcherTrait
         return $this;
     }
 
-    abstract protected function registerSignalBinding(SignalBinding $binding): void;
-    abstract protected function unregisterSignalBinding(SignalBinding $binding): void;
+    abstract protected function registerSignalBinding(
+        SignalBinding $binding
+    ): void;
+
+    abstract protected function unregisterSignalBinding(
+        SignalBinding $binding
+    ): void;
+
 
 
     /**
@@ -1756,8 +1797,14 @@ trait DispatcherTrait
         return $this;
     }
 
-    abstract protected function registerTimerBinding(TimerBinding $binding): void;
-    abstract protected function unregisterTimerBinding(TimerBinding $binding): void;
+    abstract protected function registerTimerBinding(
+        TimerBinding $binding
+    ): void;
+
+    abstract protected function unregisterTimerBinding(
+        TimerBinding $binding
+    ): void;
+
 
 
     /**

@@ -63,8 +63,9 @@ class Timer implements Binding
     /**
      * Trigger event callback
      */
-    public function trigger(mixed $time): static
-    {
+    public function trigger(
+        mixed $time
+    ): static {
         if ($this->frozen) {
             return $this;
         }

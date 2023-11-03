@@ -37,12 +37,16 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function freezeBinding(Binding $binding): static;
+    public function freezeBinding(
+        Binding $binding
+    ): static;
 
     /**
      * @return $this
      */
-    public function unfreezeBinding(Binding $binding): static;
+    public function unfreezeBinding(
+        Binding $binding
+    ): static;
 
 
     /**
@@ -71,13 +75,19 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function setCycleHandler(?callable $callback = null): static;
+    public function setCycleHandler(
+        ?callable $callback = null
+    ): static;
+
     public function getCycleHandler(): ?Closure;
 
     /**
      * @return $this
      */
-    public function setTickHandler(?callable $callback = null): static;
+    public function setTickHandler(
+        ?callable $callback = null
+    ): static;
+
     public function getTickHandler(): ?Closure;
 
 
@@ -166,17 +176,23 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function freezeSocket(Socket $socket): static;
+    public function freezeSocket(
+        Socket $socket
+    ): static;
 
     /**
      * @return $this
      */
-    public function freezeSocketRead(Socket $socket): static;
+    public function freezeSocketRead(
+        Socket $socket
+    ): static;
 
     /**
      * @return $this
      */
-    public function freezeSocketWrite(Socket $socket): static;
+    public function freezeSocketWrite(
+        Socket $socket
+    ): static;
 
     /**
      * @return $this
@@ -187,17 +203,23 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function unfreezeSocket(Socket $socket): static;
+    public function unfreezeSocket(
+        Socket $socket
+    ): static;
 
     /**
      * @return $this
      */
-    public function unfreezeSocketRead(Socket $socket): static;
+    public function unfreezeSocketRead(
+        Socket $socket
+    ): static;
 
     /**
      * @return $this
      */
-    public function unfreezeSocketWrite(Socket $socket): static;
+    public function unfreezeSocketWrite(
+        Socket $socket
+    ): static;
 
     /**
      * @return $this
@@ -208,22 +230,30 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function removeSocket(Socket $socket): static;
+    public function removeSocket(
+        Socket $socket
+    ): static;
 
     /**
      * @return $this
      */
-    public function removeSocketRead(Socket $socket): static;
+    public function removeSocketRead(
+        Socket $socket
+    ): static;
 
     /**
      * @return $this
      */
-    public function removeSocketWrite(Socket $socket): static;
+    public function removeSocketWrite(
+        Socket $socket
+    ): static;
 
     /**
      * @return $this
      */
-    public function removeSocketBinding(SocketBinding $binding): static;
+    public function removeSocketBinding(
+        SocketBinding $binding
+    ): static;
 
     /**
      * @return $this
@@ -232,7 +262,10 @@ interface Dispatcher
 
 
     public function countSocketBindings(): int;
-    public function countSocketBindingsFor(Socket $socket): int;
+
+    public function countSocketBindingsFor(
+        Socket $socket
+    ): int;
 
     /**
      * @return array<string, Binding>
@@ -242,7 +275,9 @@ interface Dispatcher
     /**
      * @return array<string, Binding>
      */
-    public function getSocketBindingsFor(Socket $socket): array;
+    public function getSocketBindingsFor(
+        Socket $socket
+    ): array;
 
     public function countSocketReadBindings(): int;
 
@@ -344,17 +379,23 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function freezeStream(Stream $stream): static;
+    public function freezeStream(
+        Stream $stream
+    ): static;
 
     /**
      * @return $this
      */
-    public function freezeStreamRead(Stream $stream): static;
+    public function freezeStreamRead(
+        Stream $stream
+    ): static;
 
     /**
      * @return $this
      */
-    public function freezeStreamWrite(Stream $stream): static;
+    public function freezeStreamWrite(
+        Stream $stream
+    ): static;
 
     /**
      * @return $this
@@ -365,17 +406,23 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function unfreezeStream(Stream $stream): static;
+    public function unfreezeStream(
+        Stream $stream
+    ): static;
 
     /**
      * @return $this
      */
-    public function unfreezeStreamRead(Stream $stream): static;
+    public function unfreezeStreamRead(
+        Stream $stream
+    ): static;
 
     /**
      * @return $this
      */
-    public function unfreezeStreamWrite(Stream $stream): static;
+    public function unfreezeStreamWrite(
+        Stream $stream
+    ): static;
 
     /**
      * @return $this
@@ -386,22 +433,30 @@ interface Dispatcher
     /**
      * @return $this
      */
-    public function removeStream(Stream $stream): static;
+    public function removeStream(
+        Stream $stream
+    ): static;
 
     /**
      * @return $this
      */
-    public function removeStreamRead(Stream $stream): static;
+    public function removeStreamRead(
+        Stream $stream
+    ): static;
 
     /**
      * @return $this
      */
-    public function removeStreamWrite(Stream $stream): static;
+    public function removeStreamWrite(
+        Stream $stream
+    ): static;
 
     /**
      * @return $this
      */
-    public function removeStreamBinding(StreamBinding $binding): static;
+    public function removeStreamBinding(
+        StreamBinding $binding
+    ): static;
 
     /**
      * @return $this
@@ -409,7 +464,9 @@ interface Dispatcher
     public function removeAllStreams(): static;
 
     public function countStreamBindings(): int;
-    public function countStreamBindingsFor(Stream $stream): int;
+    public function countStreamBindingsFor(
+        Stream $stream
+    ): int;
 
     /**
      * @return array<string, Binding>
@@ -419,7 +476,9 @@ interface Dispatcher
     /**
      * @return array<string, Binding>
      */
-    public function getStreamBindingsFor(Stream $stream): array;
+    public function getStreamBindingsFor(
+        Stream $stream
+    ): array;
 
     public function countStreamReadBindings(): int;
 

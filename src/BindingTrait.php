@@ -77,8 +77,9 @@ trait BindingTrait
      * @param mixed $resource
      * @return $this
      */
-    public function setEventResource(mixed $resource): static
-    {
+    public function setEventResource(
+        mixed $resource
+    ): static {
         $this->resource = $resource;
         return $this;
     }
@@ -119,8 +120,9 @@ trait BindingTrait
      *
      * @return $this
      */
-    public function setFrozen(bool $frozen): static
-    {
+    public function setFrozen(
+        bool $frozen
+    ): static {
         if ($frozen) {
             $this->freeze();
         } else {
@@ -135,8 +137,9 @@ trait BindingTrait
      *
      * @return $this
      */
-    public function markFrozen(bool $frozen): static
-    {
+    public function markFrozen(
+        bool $frozen
+    ): static {
         $this->frozen = $frozen;
         return $this;
     }

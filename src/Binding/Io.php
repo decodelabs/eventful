@@ -21,5 +21,7 @@ interface Io extends Binding
     /**
      * @return $this
      */
-    public function triggerTimeout(mixed $targetResource): static;
+    public function triggerTimeout(
+        mixed $targetResource
+    ): static;
 }
