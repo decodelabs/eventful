@@ -18,6 +18,9 @@ use DecodeLabs\Eventful\Binding\Stream as StreamBinding;
 use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
 use DecodeLabs\Exceptional;
 
+/**
+ * @phpstan-require-implements Dispatcher
+ */
 trait DispatcherTrait
 {
     protected bool $listening = false;

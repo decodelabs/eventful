@@ -9,8 +9,9 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful\Binding;
 
-use DecodeLabs\Eventful\Binding;
-
+/**
+ * @phpstan-require-implements Io
+ */
 trait IoTrait
 {
     public string $ioMode = 'r';

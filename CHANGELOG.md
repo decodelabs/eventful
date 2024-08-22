@@ -1,3 +1,5 @@
+* Added @phpstan-require-implements constraints
+
 ## v0.3.5 (2024-08-21)
 * Converted consts to protected PascalCase
 * Made PHP8.1 minimum version

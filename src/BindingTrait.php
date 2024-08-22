@@ -9,6 +9,9 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful;
 
+/**
+ * @phpstan-require-implements Binding
+ */
 trait BindingTrait
 {
     public string $id;

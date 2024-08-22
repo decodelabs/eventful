@@ -11,6 +11,9 @@ namespace DecodeLabs\Eventful;
 
 use DecodeLabs\Exceptional;
 
+/**
+ * @phpstan-require-implements Provider
+ */
 trait ProviderTrait
 {
     protected Dispatcher $eventDispatcher;
