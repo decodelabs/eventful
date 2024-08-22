@@ -10,19 +10,15 @@ declare(strict_types=1);
 namespace DecodeLabs\Eventful\Dispatcher;
 
 use DecodeLabs\Coercion;
-
 use DecodeLabs\Eventful\Binding;
 use DecodeLabs\Eventful\Binding\Io as IoBinding;
 use DecodeLabs\Eventful\Binding\Signal as SignalBinding;
 use DecodeLabs\Eventful\Binding\Socket as SocketBinding;
 use DecodeLabs\Eventful\Binding\Stream as StreamBinding;
 use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
-
 use DecodeLabs\Eventful\Dispatcher;
 use DecodeLabs\Eventful\DispatcherTrait;
-
 use DecodeLabs\Exceptional;
-
 use Event as EventLib;
 use EventBase as EventLibBase;
 use Throwable;
