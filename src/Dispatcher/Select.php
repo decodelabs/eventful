@@ -10,18 +10,14 @@ declare(strict_types=1);
 namespace DecodeLabs\Eventful\Dispatcher;
 
 use DecodeLabs\Coercion;
-
 use DecodeLabs\Eventful\Binding;
 use DecodeLabs\Eventful\Binding\Signal as SignalBinding;
 use DecodeLabs\Eventful\Binding\Socket as SocketBinding;
 use DecodeLabs\Eventful\Binding\Stream as StreamBinding;
 use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
-
 use DecodeLabs\Eventful\Dispatcher;
 use DecodeLabs\Eventful\DispatcherTrait;
-
 use DecodeLabs\Exceptional;
-
 use Socket;
 use Throwable;
 
@@ -29,16 +25,11 @@ class Select implements Dispatcher
 {
     use DispatcherTrait;
 
-    public const SIGNAL = 0;
-    public const SOCKET = 1;
-    public const STREAM = 2;
-    public const TIMER = 3;
+    protected const Read = 'r';
+    protected const Write = 'w';
 
-    public const READ = 'r';
-    public const WRITE = 'w';
-
-    public const RESOURCE = 0;
-    public const HANDLER = 1;
+    protected const Resource = 0;
+    protected const Handler = 1;
 
     protected bool $breakLoop = false;
     protected bool $generateMaps = true;
@@ -134,9 +125,9 @@ class Select implements Dispatcher
                 $e = null;
 
                 /** @var array<int, resource|Socket> $read */
-                $read = $this->socketMap[self::RESOURCE][self::READ];
+                $read = $this->socketMap[self::Resource][self::Read];
                 /** @var array<int, resource|Socket> $write */
-                $write = $this->socketMap[self::RESOURCE][self::WRITE];
+                $write = $this->socketMap[self::Resource][self::Write];
 
                 try {
                     /* @phpstan-ignore-next-line */
@@ -150,7 +141,7 @@ class Select implements Dispatcher
                 } elseif ($res > 0) {
                     foreach ($read as $resourceId => $socket) {
                         foreach (Coercion::toArray(
-                            $this->socketMap[self::HANDLER][self::READ][$resourceId]
+                            $this->socketMap[self::Handler][self::Read][$resourceId]
                         ) as $id => $binding) {
                             /** @var Binding $binding */
                             $binding->trigger($socket);
@@ -159,7 +150,7 @@ class Select implements Dispatcher
 
                     foreach ($write as $resourceId => $socket) {
                         foreach (Coercion::toArray(
-                            $this->socketMap[self::HANDLER][self::WRITE][$resourceId]
+                            $this->socketMap[self::Handler][self::Write][$resourceId]
                         ) as $id => $binding) {
                             /** @var Binding $binding */
                             $binding->trigger($socket);
@@ -176,9 +167,9 @@ class Select implements Dispatcher
                 $e = null;
 
                 /** @var array<int, resource> $read */
-                $read = $this->streamMap[self::RESOURCE][self::READ];
+                $read = $this->streamMap[self::Resource][self::Read];
                 /** @var array<int, resource> $write */
-                $write = $this->streamMap[self::RESOURCE][self::WRITE];
+                $write = $this->streamMap[self::Resource][self::Write];
 
                 try {
                     $res = stream_select($read, $write, $e, 0, 10000);
@@ -192,7 +183,7 @@ class Select implements Dispatcher
                 } elseif ($res > 0) {
                     foreach ($read as $resourceId => $stream) {
                         foreach (Coercion::toArray(
-                            $this->streamMap[self::HANDLER][self::READ][$resourceId]
+                            $this->streamMap[self::Handler][self::Read][$resourceId]
                         ) as $id => $binding) {
                             /** @var Binding $binding */
                             $binding->trigger($stream);
@@ -201,7 +192,7 @@ class Select implements Dispatcher
 
                     foreach ($write as $resourceId => $stream) {
                         foreach (Coercion::toArray(
-                            $this->streamMap[self::HANDLER][self::WRITE][$resourceId]
+                            $this->streamMap[self::Handler][self::Write][$resourceId]
                         ) as $id => $binding) {
                             /** @var Binding $binding */
                             $binding->trigger($stream);
@@ -277,13 +268,13 @@ class Select implements Dispatcher
     private function generateMaps(): void
     {
         $this->socketMap = $this->streamMap = [
-            self::RESOURCE => [
-                self::READ => [],
-                self::WRITE => []
+            self::Resource => [
+                self::Read => [],
+                self::Write => []
             ],
-            self::HANDLER => [
-                self::READ => [],
-                self::WRITE => []
+            self::Handler => [
+                self::Read => [],
+                self::Write => []
             ]
         ];
 
@@ -299,12 +290,12 @@ class Select implements Dispatcher
 
             if ($binding->isStreamBased()) {
                 /** @var resource $socket */
-                $this->streamMap[self::RESOURCE][$binding->ioMode][$resourceId] = $socket;
-                $this->streamMap[self::HANDLER][$binding->ioMode][$resourceId][$id] = $binding;
+                $this->streamMap[self::Resource][$binding->ioMode][$resourceId] = $socket;
+                $this->streamMap[self::Handler][$binding->ioMode][$resourceId][$id] = $binding;
                 $streamCount++;
             } else {
-                $this->socketMap[self::RESOURCE][$binding->ioMode][$resourceId] = $socket;
-                $this->socketMap[self::HANDLER][$binding->ioMode][$resourceId][$id] = $binding;
+                $this->socketMap[self::Resource][$binding->ioMode][$resourceId] = $socket;
+                $this->socketMap[self::Handler][$binding->ioMode][$resourceId][$id] = $binding;
                 $socketCount++;
             }
         }
@@ -316,8 +307,8 @@ class Select implements Dispatcher
             $stream = $binding->getIoResource();
             $resourceId = (int)$stream;
 
-            $this->streamMap[self::RESOURCE][$binding->ioMode][$resourceId] = $stream;
-            $this->streamMap[self::HANDLER][$binding->ioMode][$resourceId][$id] = $binding;
+            $this->streamMap[self::Resource][$binding->ioMode][$resourceId] = $stream;
+            $this->streamMap[self::Handler][$binding->ioMode][$resourceId][$id] = $binding;
             $streamCount++;
         }
 
@@ -347,8 +338,9 @@ class Select implements Dispatcher
     /**
      * Convert socket resource to ID string
      */
-    protected function identifySocket(mixed $socket): int
-    {
+    protected function identifySocket(
+        mixed $socket
+    ): int {
         if (is_resource($socket)) {
             return (int)$socket;
         }
@@ -377,8 +369,9 @@ class Select implements Dispatcher
     /**
      * Freeze binding
      */
-    public function freezeBinding(Binding $binding): static
-    {
+    public function freezeBinding(
+        Binding $binding
+    ): static {
         $binding->markFrozen(true);
         return $this;
     }
@@ -386,8 +379,9 @@ class Select implements Dispatcher
     /**
      * Unfreeze binding
      */
-    public function unfreezeBinding(Binding $binding): static
-    {
+    public function unfreezeBinding(
+        Binding $binding
+    ): static {
         $binding->markFrozen(false);
         return $this;
     }
@@ -397,16 +391,18 @@ class Select implements Dispatcher
     /**
      * Add new socket to maps
      */
-    protected function registerSocketBinding(SocketBinding $binding): void
-    {
+    protected function registerSocketBinding(
+        SocketBinding $binding
+    ): void {
         $this->regenerateMaps();
     }
 
     /**
      * Remove socket from maps
      */
-    protected function unregisterSocketBinding(SocketBinding $binding): void
-    {
+    protected function unregisterSocketBinding(
+        SocketBinding $binding
+    ): void {
         $this->regenerateMaps();
     }
 
@@ -415,16 +411,18 @@ class Select implements Dispatcher
     /**
      * Add new stream to maps
      */
-    protected function registerStreamBinding(StreamBinding $binding): void
-    {
+    protected function registerStreamBinding(
+        StreamBinding $binding
+    ): void {
         $this->regenerateMaps();
     }
 
     /**
      * Remove stream from maps
      */
-    protected function unregisterStreamBinding(StreamBinding $binding): void
-    {
+    protected function unregisterStreamBinding(
+        StreamBinding $binding
+    ): void {
         $this->regenerateMaps();
     }
 
@@ -467,16 +465,18 @@ class Select implements Dispatcher
     /**
      * Add new signal to maps
      */
-    protected function registerSignalBinding(SignalBinding $binding): void
-    {
+    protected function registerSignalBinding(
+        SignalBinding $binding
+    ): void {
         $this->regenerateMaps();
     }
 
     /**
      * Remove signal from maps
      */
-    protected function unregisterSignalBinding(SignalBinding $binding): void
-    {
+    protected function unregisterSignalBinding(
+        SignalBinding $binding
+    ): void {
         $this->regenerateMaps();
     }
 
@@ -486,14 +486,16 @@ class Select implements Dispatcher
     /**
      * Noop
      */
-    protected function registerTimerBinding(TimerBinding $binding): void
-    {
+    protected function registerTimerBinding(
+        TimerBinding $binding
+    ): void {
     }
 
     /**
      * Noop
      */
-    protected function unregisterTimerBinding(TimerBinding $binding): void
-    {
+    protected function unregisterTimerBinding(
+        TimerBinding $binding
+    ): void {
     }
 }

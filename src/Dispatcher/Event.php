@@ -10,19 +10,15 @@ declare(strict_types=1);
 namespace DecodeLabs\Eventful\Dispatcher;
 
 use DecodeLabs\Coercion;
-
 use DecodeLabs\Eventful\Binding;
 use DecodeLabs\Eventful\Binding\Io as IoBinding;
 use DecodeLabs\Eventful\Binding\Signal as SignalBinding;
 use DecodeLabs\Eventful\Binding\Socket as SocketBinding;
 use DecodeLabs\Eventful\Binding\Stream as StreamBinding;
 use DecodeLabs\Eventful\Binding\Timer as TimerBinding;
-
 use DecodeLabs\Eventful\Dispatcher;
 use DecodeLabs\Eventful\DispatcherTrait;
-
 use DecodeLabs\Exceptional;
-
 use Event as EventLib;
 use EventBase as EventLibBase;
 use Throwable;
@@ -73,8 +69,9 @@ class Event implements Dispatcher
     /**
      * Temporarily remove binding from loop
      */
-    public function freezeBinding(Binding $binding): static
-    {
+    public function freezeBinding(
+        Binding $binding
+    ): static {
         if ($binding->isFrozen()) {
             return $this;
         }
@@ -88,8 +85,9 @@ class Event implements Dispatcher
     /**
      * Re-register frozen binding
      */
-    public function unfreezeBinding(Binding $binding): static
-    {
+    public function unfreezeBinding(
+        Binding $binding
+    ): static {
         if (!$binding->isFrozen()) {
             return $this;
         }
@@ -105,8 +103,9 @@ class Event implements Dispatcher
     /**
      * Add cycle handler to loop
      */
-    protected function registerCycleHandler(?callable $callback): void
-    {
+    protected function registerCycleHandler(
+        ?callable $callback
+    ): void {
         if ($this->cycleHandlerEvent) {
             $this->cycleHandlerEvent->free();
             $this->cycleHandlerEvent = null;
@@ -146,8 +145,9 @@ class Event implements Dispatcher
     /**
      * Add cycle handler to loop
      */
-    protected function registerTickHandler(?callable $callback): void
-    {
+    protected function registerTickHandler(
+        ?callable $callback
+    ): void {
         if ($this->tickHandlerEvent) {
             $this->tickHandlerEvent->free();
             $this->tickHandlerEvent = null;
@@ -186,8 +186,9 @@ class Event implements Dispatcher
     /**
      * Register socket binding to event loop
      */
-    protected function registerSocketBinding(SocketBinding $binding): void
-    {
+    protected function registerSocketBinding(
+        SocketBinding $binding
+    ): void {
         $binding->resource = $this->registerEvent(
             $binding->socket->getResource(),
             $this->getIoEventFlags($binding),
@@ -215,8 +216,9 @@ class Event implements Dispatcher
     /**
      * Unregister socket binding to event loop
      */
-    protected function unregisterSocketBinding(SocketBinding $binding): void
-    {
+    protected function unregisterSocketBinding(
+        SocketBinding $binding
+    ): void {
         if ($binding->resource instanceof EventLib) {
             $binding->resource->free();
         }
@@ -231,8 +233,9 @@ class Event implements Dispatcher
     /**
      * Register stream binding to event loop
      */
-    protected function registerStreamBinding(StreamBinding $binding): void
-    {
+    protected function registerStreamBinding(
+        StreamBinding $binding
+    ): void {
         $binding->resource = $this->registerEvent(
             $binding->stream->getResource(),
             $this->getIoEventFlags($binding),
@@ -260,8 +263,9 @@ class Event implements Dispatcher
     /**
      * Unregister stream binding to event loop
      */
-    protected function unregisterStreamBinding(StreamBinding $binding): void
-    {
+    protected function unregisterStreamBinding(
+        StreamBinding $binding
+    ): void {
         if ($binding->resource instanceof EventLib) {
             $binding->resource->free();
         }
@@ -274,8 +278,9 @@ class Event implements Dispatcher
     /**
      * Register signal binding to event loop
      */
-    protected function registerSignalBinding(SignalBinding $binding): void
-    {
+    protected function registerSignalBinding(
+        SignalBinding $binding
+    ): void {
         $flags = EventLib::SIGNAL;
 
         if ($binding->persistent) {
@@ -313,8 +318,9 @@ class Event implements Dispatcher
     /**
      * Unregister signal binding to event loop
      */
-    protected function unregisterSignalBinding(SignalBinding $binding): void
-    {
+    protected function unregisterSignalBinding(
+        SignalBinding $binding
+    ): void {
         if (is_array($binding->resource)) {
             foreach ($binding->resource as $number => $resource) {
                 if ($resource instanceof EventLib) {
@@ -331,8 +337,9 @@ class Event implements Dispatcher
     /**
      * Register timer binding to event loop
      */
-    protected function registerTimerBinding(TimerBinding $binding): void
-    {
+    protected function registerTimerBinding(
+        TimerBinding $binding
+    ): void {
         $flags = EventLib::TIMEOUT;
 
         if ($binding->persistent) {
@@ -364,8 +371,9 @@ class Event implements Dispatcher
     /**
      * Unregister timer binding to event loop
      */
-    protected function unregisterTimerBinding(TimerBinding $binding): void
-    {
+    protected function unregisterTimerBinding(
+        TimerBinding $binding
+    ): void {
         if ($binding->resource instanceof EventLib) {
             $binding->resource->free();
         }
@@ -419,8 +427,9 @@ class Event implements Dispatcher
     /**
      * Get read / write flags
      */
-    protected function getIoEventFlags(IoBinding $binding): int
-    {
+    protected function getIoEventFlags(
+        IoBinding $binding
+    ): int {
         switch ($type = $binding->getIoMode()) {
             case 'r':
                 $flags = EventLib::READ;
@@ -446,8 +455,9 @@ class Event implements Dispatcher
     /**
      * Get timeout duration
      */
-    protected function getTimeout(Binding $binding): ?float
-    {
+    protected function getTimeout(
+        Binding $binding
+    ): ?float {
         if ($binding instanceof IoBinding) {
             return $binding->getTimeout();
         } else {

@@ -82,8 +82,9 @@ class Signal
     /**
      * Normalize signal name
      */
-    public static function normalizeSignalName(string $signal): string
-    {
+    public static function normalizeSignalName(
+        string $signal
+    ): string {
         if (!self::$init) {
             self::$init = true;
 
@@ -132,8 +133,9 @@ class Signal
     /**
      * Init with signal name
      */
-    protected function __construct(string $name)
-    {
+    protected function __construct(
+        string $name
+    ) {
         if (!isset(self::$signalMap[$name])) {
             throw Exceptional::InvalidArgument('Signal not recognised: ' . $name);
         }

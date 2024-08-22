@@ -1,3 +1,7 @@
+## v0.3.5 (2024-08-21)
+* Converted consts to protected PascalCase
+* Made PHP8.1 minimum version
+
 ## v0.3.4 (2022-11-30)
 * Fixed fallback signal resolver
 * Fixed PCNTL check on close
