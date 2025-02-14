@@ -23,10 +23,10 @@ use DecodeLabs\Exceptional;
  */
 trait DispatcherTrait
 {
-    protected bool $listening = false;
-    protected ?Closure $cycleHandler = null;
-    protected ?Closure $tickHandler = null;
-    protected int $cycles = 0;
+    protected(set) bool $listening = false;
+    protected(set) ?Closure $cycleHandler = null;
+    protected(set) ?Closure $tickHandler = null;
+    protected(set) int $cycles = 0;
 
 
     /**
@@ -380,7 +380,7 @@ trait DispatcherTrait
         SocketBinding $binding,
         bool $frozen
     ): static {
-        $id = $binding->getId();
+        $id = $binding->id;
 
         if (isset($this->sockets[$id])) {
             $this->removeSocketBinding($binding);
@@ -389,7 +389,7 @@ trait DispatcherTrait
         $this->sockets[$id] = $binding;
 
         if ($frozen) {
-            $binding->setFrozen(true);
+            $binding->freeze();
         } else {
             $this->registerSocketBinding($binding);
         }
@@ -608,7 +608,7 @@ trait DispatcherTrait
         SocketBinding $binding
     ): static {
         $this->unregisterSocketBinding($binding);
-        unset($this->sockets[$binding->getId()]);
+        unset($this->sockets[$binding->id]);
 
         return $this;
     }
@@ -693,7 +693,7 @@ trait DispatcherTrait
         $count = 0;
 
         foreach ($this->sockets as $binding) {
-            if ($binding->getIoMode() == 'r') {
+            if ($binding->ioMode == 'r') {
                 $count++;
             }
         }
@@ -709,7 +709,7 @@ trait DispatcherTrait
         $output = [];
 
         foreach ($this->sockets as $id => $binding) {
-            if ($binding->getIoMode() == 'r') {
+            if ($binding->ioMode == 'r') {
                 $output[$id] = $binding;
             }
         }
@@ -725,7 +725,7 @@ trait DispatcherTrait
         $count = 0;
 
         foreach ($this->sockets as $binding) {
-            if ($binding->getIoMode() == 'w') {
+            if ($binding->ioMode == 'w') {
                 $count++;
             }
         }
@@ -741,7 +741,7 @@ trait DispatcherTrait
         $output = [];
 
         foreach ($this->sockets as $id => $binding) {
-            if ($binding->getIoMode() == 'w') {
+            if ($binding->ioMode == 'w') {
                 $output[$id] = $binding;
             }
         }
@@ -937,7 +937,7 @@ trait DispatcherTrait
         StreamBinding $binding,
         bool $frozen
     ): static {
-        $id = $binding->getId();
+        $id = $binding->id;
 
         if (isset($this->streams[$id])) {
             $this->removeStreamBinding($binding);
@@ -946,7 +946,7 @@ trait DispatcherTrait
         $this->streams[$id] = $binding;
 
         if ($frozen) {
-            $binding->setFrozen(true);
+            $binding->freeze();
         } else {
             $this->registerStreamBinding($binding);
         }
@@ -1169,7 +1169,7 @@ trait DispatcherTrait
         StreamBinding $binding
     ): static {
         $this->unregisterStreamBinding($binding);
-        unset($this->streams[$binding->getId()]);
+        unset($this->streams[$binding->id]);
 
         return $this;
     }
@@ -1254,7 +1254,7 @@ trait DispatcherTrait
         $count = 0;
 
         foreach ($this->streams as $binding) {
-            if ($binding->getIoMode() == 'r') {
+            if ($binding->ioMode == 'r') {
                 $count++;
             }
         }
@@ -1270,7 +1270,7 @@ trait DispatcherTrait
         $output = [];
 
         foreach ($this->streams as $id => $binding) {
-            if ($binding->getIoMode() == 'r') {
+            if ($binding->ioMode == 'r') {
                 $output[$id] = $binding;
             }
         }
@@ -1286,7 +1286,7 @@ trait DispatcherTrait
         $count = 0;
 
         foreach ($this->streams as $binding) {
-            if ($binding->getIoMode() == 'w') {
+            if ($binding->ioMode == 'w') {
                 $count++;
             }
         }
@@ -1302,7 +1302,7 @@ trait DispatcherTrait
         $output = [];
 
         foreach ($this->streams as $id => $binding) {
-            if ($binding->getIoMode() == 'w') {
+            if ($binding->ioMode == 'w') {
                 $output[$id] = $binding;
             }
         }
@@ -1407,7 +1407,7 @@ trait DispatcherTrait
         SignalBinding $binding,
         bool $frozen
     ): static {
-        $id = $binding->getId();
+        $id = $binding->id;
 
         if (isset($this->signals[$id])) {
             $this->removeSignalBinding($binding);
@@ -1416,7 +1416,7 @@ trait DispatcherTrait
         $this->signals[$id] = $binding;
 
         if ($frozen) {
-            $binding->setFrozen(true);
+            $binding->freeze();
         } else {
             $this->registerSignalBinding($binding);
         }
@@ -1466,9 +1466,8 @@ trait DispatcherTrait
 
             if (!$binding = $this->getSignalBinding($binding)) {
                 throw Exceptional::InvalidArgument(
-                    'Invalid signal binding',
-                    null,
-                    $orig
+                    message: 'Invalid signal binding',
+                    data: $orig
                 );
             }
         }
@@ -1524,9 +1523,8 @@ trait DispatcherTrait
 
             if (!$binding = $this->getSignalBinding($binding)) {
                 throw Exceptional::InvalidArgument(
-                    'Invalid signal binding',
-                    null,
-                    $orig
+                    message: 'Invalid signal binding',
+                    data: $orig
                 );
             }
         }
@@ -1582,14 +1580,13 @@ trait DispatcherTrait
 
             if (!$binding = $this->getSignalBinding($binding)) {
                 throw Exceptional::InvalidArgument(
-                    'Invalid signal binding',
-                    null,
-                    $orig
+                    message: 'Invalid signal binding',
+                    data: $orig
                 );
             }
         }
 
-        $id = $binding->getId();
+        $id = $binding->id;
         $this->unregisterSignalBinding($binding);
         unset($this->signals[$id]);
 
@@ -1620,15 +1617,7 @@ trait DispatcherTrait
         string|SignalBinding $id
     ): ?SignalBinding {
         if ($id instanceof SignalBinding) {
-            $id = $id->getId();
-        }
-
-        if (!is_string($id)) {
-            throw Exceptional::InvalidArgument(
-                'Invalid signal id',
-                null,
-                $id
-            );
+            $id = $id->id;
         }
 
         return $this->signals[$id] ?? null;
@@ -1692,7 +1681,7 @@ trait DispatcherTrait
     protected function normalizeSignal(
         Signal|int|string $signal
     ): int {
-        return Signal::create($signal)->getNumber();
+        return Signal::create($signal)->number;
     }
 
 
@@ -1783,7 +1772,7 @@ trait DispatcherTrait
         TimerBinding $binding,
         bool $frozen
     ): static {
-        $id = $binding->getId();
+        $id = $binding->id;
 
         if (isset($this->timers[$id])) {
             $this->removeTimer($binding);
@@ -1792,7 +1781,7 @@ trait DispatcherTrait
         $this->timers[$id] = $binding;
 
         if ($frozen) {
-            $binding->setFrozen(true);
+            $binding->freeze();
         } else {
             $this->registerTimerBinding($binding);
         }
@@ -1823,9 +1812,8 @@ trait DispatcherTrait
 
             if (!$binding = $this->getTimerBinding($binding)) {
                 throw Exceptional::InvalidArgument(
-                    'Invalid timer binding',
-                    null,
-                    $orig
+                    message: 'Invalid timer binding',
+                    data: $orig
                 );
             }
         }
@@ -1862,9 +1850,8 @@ trait DispatcherTrait
 
             if (!$binding = $this->getTimerBinding($binding)) {
                 throw Exceptional::InvalidArgument(
-                    'Invalid timer binding',
-                    null,
-                    $orig
+                    message: 'Invalid timer binding',
+                    data: $orig
                 );
             }
         }
@@ -1901,14 +1888,13 @@ trait DispatcherTrait
 
             if (!$binding = $this->getTimerBinding($binding)) {
                 throw Exceptional::InvalidArgument(
-                    'Invalid timer binding',
-                    null,
-                    $orig
+                    message: 'Invalid timer binding',
+                    data: $orig
                 );
             }
         }
 
-        $id = $binding->getId();
+        $id = $binding->id;
         $this->unregisterTimerBinding($binding);
         unset($this->timers[$id]);
 
@@ -1938,15 +1924,7 @@ trait DispatcherTrait
         string|TimerBinding $id
     ): ?TimerBinding {
         if ($id instanceof TimerBinding) {
-            $id = $id->getId();
-        }
-
-        if (!is_string($id)) {
-            throw Exceptional::InvalidArgument(
-                'Invalid timer id',
-                null,
-                $id
-            );
+            $id = $id->id;
         }
 
         return $this->timers[$id] ?? null;

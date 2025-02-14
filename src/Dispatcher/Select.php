@@ -114,7 +114,10 @@ class Select implements Dispatcher
 
 
             // Signals
-            if (!empty($this->signals) && $this->hasPcntl) {
+            if (
+                !empty($this->signals) &&
+                $this->hasPcntl
+            ) {
                 $hasHandler = true;
                 pcntl_signal_dispatch();
             }
@@ -124,13 +127,12 @@ class Select implements Dispatcher
                 $hasHandler = true;
                 $e = null;
 
-                /** @var array<int, resource|Socket> $read */
+                /** @var array<int,resource|Socket> $read */
                 $read = $this->socketMap[self::Resource][self::Read];
-                /** @var array<int, resource|Socket> $write */
+                /** @var array<int,resource|Socket> $write */
                 $write = $this->socketMap[self::Resource][self::Write];
 
                 try {
-                    /* @phpstan-ignore-next-line */
                     $res = socket_select($read, $write, $e, 0, 10000);
                 } catch (Throwable $e) {
                     $res = false;
@@ -285,7 +287,7 @@ class Select implements Dispatcher
         // Sockets
         foreach ($this->sockets as $id => $binding) {
             /** @var resource|Socket $socket */
-            $socket = $binding->getIoResource();
+            $socket = $binding->ioResource;
             $resourceId = $this->identifySocket($socket);
 
             if ($binding->isStreamBased()) {
@@ -304,7 +306,7 @@ class Select implements Dispatcher
         // Streams
         foreach ($this->streams as $id => $binding) {
             /** @var resource $stream */
-            $stream = $binding->getIoResource();
+            $stream = $binding->ioResource;
             $resourceId = (int)$stream;
 
             $this->streamMap[self::Resource][$binding->ioMode][$resourceId] = $stream;
@@ -349,7 +351,9 @@ class Select implements Dispatcher
             return spl_object_id($socket);
         }
 
-        throw Exceptional::InvalidArgument('Unable to identify socket');
+        throw Exceptional::InvalidArgument(
+            message: 'Unable to identify socket'
+        );
     }
 
 

@@ -11,13 +11,7 @@ namespace DecodeLabs\Eventful;
 
 interface Provider
 {
-    /**
-     * @return $this
-     */
-    public function setEventDispatcher(
-        Dispatcher $dispatcher
-    ): static;
+    public Dispatcher $eventDispatcher { get; set; }
 
-    public function getEventDispatcher(): Dispatcher;
     public function isRunning(): bool;
 }

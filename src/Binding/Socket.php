@@ -8,9 +8,8 @@
 declare(strict_types=1);
 
 namespace DecodeLabs\Eventful\Binding {
+    use Closure;
     use DecodeLabs\Deliverance\Socket as SocketChannel;
-
-    use DecodeLabs\Eventful\Binding;
     use DecodeLabs\Eventful\Binding\Io as IoBinding;
     use DecodeLabs\Eventful\Binding\IoTrait as IoBindingTrait;
     use DecodeLabs\Eventful\BindingTrait;
@@ -23,15 +22,13 @@ namespace DecodeLabs\Eventful\Binding {
         }
         use IoBindingTrait;
 
-        /**
-         * @var SocketChannel
-         */
-        public $socket;
+        public string $type { get => 'Socket'; }
 
-        /**
-         * @var string
-         */
-        public $socketId;
+        protected(set) SocketChannel $socket;
+
+        public mixed $ioResource { get => $this->socket->getResource(); }
+
+        protected(set) string $socketId;
 
         /**
          * Init with timer information
@@ -51,24 +48,12 @@ namespace DecodeLabs\Eventful\Binding {
 
             $this->__traitConstruct($dispatcher, $this->ioMode . ':' . $this->socketId, $persistent, $callback);
             $this->timeout = $timeout;
-            $this->timeoutHandler = $timeoutHandler;
+
+            if($timeoutHandler) {
+                $this->timeoutHandler = Closure::fromCallable($timeoutHandler);
+            }
         }
 
-        /**
-         * Get binding type
-         */
-        public function getType(): string
-        {
-            return 'Socket';
-        }
-
-        /**
-         * Get socket object
-         */
-        public function getSocket(): SocketChannel
-        {
-            return $this->socket;
-        }
 
         /**
          * Is socket stream based?
@@ -77,14 +62,6 @@ namespace DecodeLabs\Eventful\Binding {
         {
             return true;
             //return $this->socket->isStreamBased();
-        }
-
-        /**
-         * Get io resource
-         */
-        public function getIoResource(): mixed
-        {
-            return $this->socket->getResource();
         }
 
         /**
