@@ -22,10 +22,12 @@ class Signal implements Binding
         __construct as __traitConstruct;
     }
 
+    public string $type { get => 'Signal'; }
+
     /**
-     * @var array<int, SignalObject>
+     * @var array<int,SignalObject>
      */
-    public array $signals = [];
+    protected(set) array $signals = [];
 
     /**
      * Init with timer information
@@ -44,28 +46,10 @@ class Signal implements Binding
 
         foreach ($signals as $signal) {
             $signal = SignalObject::create($signal);
-            $number = $signal->getNumber();
+            $number = $signal->number;
             $this->signals[$number] = $signal;
             $this->resource[$number] = null;
         }
-    }
-
-    /**
-     * Get binding type
-     */
-    public function getType(): string
-    {
-        return 'Signal';
-    }
-
-    /**
-     * Get signal list
-     *
-     * @return array<int, SignalObject>
-     */
-    public function getSignals(): array
-    {
-        return $this->signals;
     }
 
     /**

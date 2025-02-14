@@ -11,7 +11,7 @@ namespace DecodeLabs\Eventful\Binding;
 
 use DecodeLabs\Deliverance\Channel\Stream as StreamChannel;
 
-use DecodeLabs\Eventful\Binding;
+use Closure;
 use DecodeLabs\Eventful\Binding\Io as IoBinding;
 use DecodeLabs\Eventful\Binding\IoTrait as IoBindingTrait;
 use DecodeLabs\Eventful\BindingTrait;
@@ -24,8 +24,13 @@ class Stream implements IoBinding
     }
     use IoBindingTrait;
 
-    public StreamChannel $stream;
-    public string $streamId;
+    public string $type { get => 'Stream'; }
+
+    protected(set) StreamChannel $stream;
+
+    public mixed $ioResource { get => $this->stream->getResource(); }
+
+    protected(set) string $streamId;
 
     /**
      * Init with timer information
@@ -45,31 +50,10 @@ class Stream implements IoBinding
 
         $this->__traitConstruct($dispatcher, $this->ioMode . ':' . $this->streamId, $persistent, $callback);
         $this->timeout = $timeout;
-        $this->timeoutHandler = $timeoutHandler;
-    }
 
-    /**
-     * Get binding type
-     */
-    public function getType(): string
-    {
-        return 'Stream';
-    }
-
-    /**
-     * Get stream object
-     */
-    public function getStream(): StreamChannel
-    {
-        return $this->stream;
-    }
-
-    /**
-     * Get io resource
-     */
-    public function getIoResource(): mixed
-    {
-        return $this->stream->getResource();
+        if($timeoutHandler) {
+            $this->timeoutHandler = Closure::fromCallable($timeoutHandler);
+        }
     }
 
     /**

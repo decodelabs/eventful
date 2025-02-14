@@ -9,14 +9,15 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful\Binding;
 
+use Closure;
 use DecodeLabs\Eventful\Binding;
 
 interface Io extends Binding
 {
-    public function getIoMode(): string;
-    public function getIoResource(): mixed;
-    public function getTimeout(): ?float;
-    public function getTimeoutHandler(): ?callable;
+    public string $ioMode { get; }
+    public ?float $timeout { get; }
+    public ?Closure $timeoutHandler { get; }
+    public mixed $ioResource { get; }
 
     /**
      * @return $this

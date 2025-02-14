@@ -9,19 +9,22 @@ declare(strict_types=1);
 
 namespace DecodeLabs\Eventful;
 
+use Closure;
+
+/**
+ * @phpstan-require-implements Binding
+ */
 trait BindingTrait
 {
-    public string $id;
-    public bool $persistent = true;
-    public bool $frozen = false;
+    protected(set) string $id;
+    protected(set) bool $persistent = true;
 
-    /**
-     * @var callable
-     */
-    public $handler;
+    protected(set) bool $frozen = false;
+
+    protected(set) Closure $handler;
 
     public mixed $resource;
-    public Dispatcher $dispatcher;
+    protected(set) Dispatcher $dispatcher;
 
     /**
      * Init with ref to event loop, id, options and handler
@@ -34,64 +37,9 @@ trait BindingTrait
     ) {
         $this->id = $id;
         $this->persistent = $persistent;
-        $this->handler = $handler;
+        $this->handler = Closure::fromCallable($handler);
         $this->dispatcher = $dispatcher;
     }
-
-    /**
-     * Get designated id for type
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * Will this binding persist after use?
-     */
-    public function isPersistent(): bool
-    {
-        return $this->persistent;
-    }
-
-    /**
-     * Get handler callback
-     */
-    public function getHandler(): callable
-    {
-        return $this->handler;
-    }
-
-    /**
-     * Get parent event loop
-     */
-    public function getDispatcher(): Dispatcher
-    {
-        return $this->dispatcher;
-    }
-
-
-    /**
-     * Set event lib resource
-     *
-     * @param mixed $resource
-     * @return $this
-     */
-    public function setEventResource(
-        mixed $resource
-    ): static {
-        $this->resource = $resource;
-        return $this;
-    }
-
-    /**
-     * Get event lib resource
-     */
-    public function getEventResource(): mixed
-    {
-        return $this->resource;
-    }
-
 
     /**
      * Freeze this binding
@@ -115,22 +63,6 @@ trait BindingTrait
         return $this;
     }
 
-    /**
-     * Toggle freezing
-     *
-     * @return $this
-     */
-    public function setFrozen(
-        bool $frozen
-    ): static {
-        if ($frozen) {
-            $this->freeze();
-        } else {
-            $this->unfreeze();
-        }
-
-        return $this;
-    }
 
     /**
      * Actually mark this binding as frozen - should only be used internally

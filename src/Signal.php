@@ -15,7 +15,7 @@ use DecodeLabs\Exceptional;
 class Signal
 {
     /**
-     * @var array<string, int|null>
+     * @var array<string,int|null>
      */
     protected static array $signalMap = [
         'SIGHUP' => null,
@@ -55,8 +55,8 @@ class Signal
 
     protected static bool $init = false;
 
-    protected string $name;
-    protected int $number;
+    protected(set) string $name;
+    protected(set) int $number;
 
     /**
      * Normalize or create a new signal instance
@@ -72,7 +72,7 @@ class Signal
 
         if (!$signal) {
             throw Exceptional::InvalidArgument(
-                'Signal is not defined'
+                message: 'Signal is not defined'
             );
         }
 
@@ -137,26 +137,12 @@ class Signal
         string $name
     ) {
         if (!isset(self::$signalMap[$name])) {
-            throw Exceptional::InvalidArgument('Signal not recognised: ' . $name);
+            throw Exceptional::InvalidArgument(
+                message: 'Signal not recognised: ' . $name
+            );
         }
 
         $this->name = $name;
         $this->number = self::$signalMap[$name];
-    }
-
-    /**
-     * Get signal name
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * Get signal number
-     */
-    public function getNumber(): int
-    {
-        return $this->number;
     }
 }

@@ -19,7 +19,9 @@ class Timer implements Binding
         __construct as __traitConstruct;
     }
 
-    public float $duration;
+    public string $type { get => 'Timer'; }
+
+    protected(set) float $duration;
 
     /**
      * Init with timer information
@@ -33,22 +35,6 @@ class Timer implements Binding
     ) {
         $this->__traitConstruct($dispatcher, $id, $persistent, $callback);
         $this->duration = $duration;
-    }
-
-    /**
-     * Get binding type
-     */
-    public function getType(): string
-    {
-        return 'Timer';
-    }
-
-    /**
-     * Get timer duration
-     */
-    public function getDuration(): float
-    {
-        return $this->duration;
     }
 
     /**

@@ -76,7 +76,7 @@ class Event implements Dispatcher
             return $this;
         }
 
-        $this->{'unregister' . $binding->getType() . 'Binding'}($binding);
+        $this->{'unregister' . $binding->type . 'Binding'}($binding);
         $binding->markFrozen(true);
 
         return $this;
@@ -92,7 +92,7 @@ class Event implements Dispatcher
             return $this;
         }
 
-        $this->{'register' . $binding->getType() . 'Binding'}($binding);
+        $this->{'register' . $binding->type . 'Binding'}($binding);
         $binding->markFrozen(false);
 
         return $this;
@@ -193,7 +193,7 @@ class Event implements Dispatcher
             $binding->socket->getResource(),
             $this->getIoEventFlags($binding),
             $this->getTimeout($binding),
-            function ($target, $flags, SocketBinding $binding) {
+            function ($target, int $flags, SocketBinding $binding) {
                 try {
                     if ($flags & EventLib::TIMEOUT) {
                         $binding->triggerTimeout($target);
@@ -240,7 +240,7 @@ class Event implements Dispatcher
             $binding->stream->getResource(),
             $this->getIoEventFlags($binding),
             $this->getTimeout($binding),
-            function ($target, $flags, StreamBinding $binding) {
+            function ($target, int $flags, StreamBinding $binding) {
                 try {
                     if ($flags & EventLib::TIMEOUT) {
                         $binding->triggerTimeout($target);
@@ -415,8 +415,9 @@ class Event implements Dispatcher
         if (!$res) {
             $event->free();
 
+            // @phpstan-ignore-next-line
             throw Exceptional::{'Binding,Runtime'}(
-                'Could not add event'
+                message: 'Could not add event'
             );
         }
 
@@ -430,7 +431,7 @@ class Event implements Dispatcher
     protected function getIoEventFlags(
         IoBinding $binding
     ): int {
-        switch ($type = $binding->getIoMode()) {
+        switch ($type = $binding->ioMode) {
             case 'r':
                 $flags = EventLib::READ;
                 break;
@@ -441,11 +442,11 @@ class Event implements Dispatcher
 
             default:
                 throw Exceptional::InvalidArgument(
-                    'Unknown event io type: ' . $type
+                    message: 'Unknown event io type: ' . $type
                 );
         }
 
-        if ($binding->isPersistent()) {
+        if ($binding->persistent) {
             $flags |= EventLib::PERSIST;
         }
 
@@ -459,7 +460,7 @@ class Event implements Dispatcher
         Binding $binding
     ): ?float {
         if ($binding instanceof IoBinding) {
-            return $binding->getTimeout();
+            return $binding->timeout;
         } else {
             return null;
         }

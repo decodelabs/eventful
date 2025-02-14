@@ -11,40 +11,33 @@ namespace DecodeLabs\Eventful;
 
 use DecodeLabs\Exceptional;
 
+/**
+ * @phpstan-require-implements Provider
+ */
 trait ProviderTrait
 {
-    protected Dispatcher $eventDispatcher;
+    public Dispatcher $eventDispatcher {
+        get {
+            if (!isset($this->eventDispatcher)) {
+                throw Exceptional::Runtime(
+                    message: 'No event dispatcher has been deployed yet'
+                );
+            }
 
-    /**
-     * Replace current active event loop
-     *
-     * @return $this
-     */
-    public function setEventDispatcher(
-        Dispatcher $dispatcher
-    ): static {
-        if ($this->isRunning()) {
-            throw Exceptional::Runtime(
-                'You cannot change the event dispatcher while it is running'
-            );
+            return $this->eventDispatcher;
         }
+        set {
+            if (
+                isset($this->eventDispatcher) &&
+                $this->eventDispatcher->isListening()
+            ) {
+                throw Exceptional::Runtime(
+                    message: 'You cannot change the event dispatcher while it is running'
+                );
+            }
 
-        $this->eventDispatcher = $dispatcher;
-        return $this;
-    }
-
-    /**
-     * Get current active event loop
-     */
-    public function getEventDispatcher(): Dispatcher
-    {
-        if (!$this->eventDispatcher) {
-            throw Exceptional::Runtime(
-                'No event dispatcher has been deployed yet'
-            );
+            $this->eventDispatcher = $value;
         }
-
-        return $this->eventDispatcher;
     }
 
     /**
@@ -52,6 +45,6 @@ trait ProviderTrait
      */
     public function isRunning(): bool
     {
-        return $this->eventDispatcher && $this->eventDispatcher->isListening();
+        return $this->eventDispatcher->isListening();
     }
 }
