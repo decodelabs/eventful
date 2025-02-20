@@ -91,7 +91,7 @@ class Signal
             if (extension_loaded('pcntl')) {
                 foreach (array_keys(self::$signalMap) as $signalName) {
                     if (defined($signalName)) {
-                        self::$signalMap[$signalName] = Coercion::toInt(constant($signalName));
+                        self::$signalMap[$signalName] = Coercion::asInt(constant($signalName));
                     }
                 }
             } else {
