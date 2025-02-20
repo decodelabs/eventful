@@ -80,7 +80,7 @@ class Signal implements Binding
             return $this;
         }
 
-        $number = Coercion::toInt($number);
+        $number = Coercion::asInt($number);
         ($this->handler)($this->signals[$number], $this);
 
         if (!$this->persistent) {

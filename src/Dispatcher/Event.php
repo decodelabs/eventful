@@ -398,7 +398,7 @@ class Event implements Dispatcher
         }
 
         if ($flags & EventLib::SIGNAL) {
-            $target = Coercion::toInt($target);
+            $target = Coercion::asInt($target);
             $event = EventLib::signal($this->base, $target, $callback, $arg);
         } elseif ($target === null) {
             $event = EventLib::timer($this->base, $callback, $arg);

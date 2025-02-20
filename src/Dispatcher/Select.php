@@ -142,7 +142,7 @@ class Select implements Dispatcher
                     // TODO: deal with error
                 } elseif ($res > 0) {
                     foreach ($read as $resourceId => $socket) {
-                        foreach (Coercion::toArray(
+                        foreach (Coercion::asArray(
                             $this->socketMap[self::Handler][self::Read][$resourceId]
                         ) as $id => $binding) {
                             /** @var Binding $binding */
@@ -151,7 +151,7 @@ class Select implements Dispatcher
                     }
 
                     foreach ($write as $resourceId => $socket) {
-                        foreach (Coercion::toArray(
+                        foreach (Coercion::asArray(
                             $this->socketMap[self::Handler][self::Write][$resourceId]
                         ) as $id => $binding) {
                             /** @var Binding $binding */
@@ -184,7 +184,7 @@ class Select implements Dispatcher
                     // TODO: deal with error
                 } elseif ($res > 0) {
                     foreach ($read as $resourceId => $stream) {
-                        foreach (Coercion::toArray(
+                        foreach (Coercion::asArray(
                             $this->streamMap[self::Handler][self::Read][$resourceId]
                         ) as $id => $binding) {
                             /** @var Binding $binding */
@@ -193,7 +193,7 @@ class Select implements Dispatcher
                     }
 
                     foreach ($write as $resourceId => $stream) {
-                        foreach (Coercion::toArray(
+                        foreach (Coercion::asArray(
                             $this->streamMap[self::Handler][self::Write][$resourceId]
                         ) as $id => $binding) {
                             /** @var Binding $binding */
