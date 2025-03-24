@@ -415,7 +415,6 @@ class Event implements Dispatcher
         if (!$res) {
             $event->free();
 
-            // @phpstan-ignore-next-line
             throw Exceptional::{'Binding,Runtime'}(
                 message: 'Could not add event'
             );
