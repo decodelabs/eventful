@@ -11,8 +11,6 @@
 
 Eventful provides an extensible IO event dispatcher for use in interactive and asynchronous processes.
 
-_Get news and updates on the [DecodeLabs blog](https://blog.decodelabs.com)._
-
 ---
 
 
