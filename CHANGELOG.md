@@ -1,56 +1,133 @@
-## v0.4.1 (2025-02-20)
-* Upgraded Coercion dependency
+# Changelog
 
-## v0.4.0 (2025-02-14)
-* Replaced accessors with property hooks
-* Upgraded PHPStan to v2
-* Tidied boolean logic
-* Fixed Exceptional syntax
-* Added @phpstan-require-implements constraints
-* Added PHP8.4 to CI workflow
-* Made PHP8.4 minimum version
+All notable changes to this project will be documented in this file.<br>
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.3.5 (2024-08-21)
-* Converted consts to protected PascalCase
-* Made PHP8.1 minimum version
+### Unreleased
+--
 
-## v0.3.4 (2022-11-30)
-* Fixed fallback signal resolver
-* Fixed PCNTL check on close
+---
 
-## v0.3.3 (2022-11-29)
-* Added tick handlers
+### [v0.4.1](https://github.com/decodelabs/eventful/commits/v0.4.1) - 20th February 2025
 
-## v0.3.2 (2022-11-28)
-* Imported Signal from Systemic
-* Migrated to use effigy in CI workflow
-* Fixed PHP8.1 testing
-* Updated composer check script
-* Updated CI environment
+- Upgraded Coercion dependency
 
-## v0.3.1 (2022-08-24)
-* Added concrete types to all members
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.4.0...v0.4.1)
 
-## v0.3.0 (2022-08-23)
-* Removed PHP7 compatibility
-* Updated ECS to v11
-* Updated PHPUnit to v9
+---
 
-## v0.2.3 (2022-03-10)
-* Transitioned from Travis to GHA
-* Updated PHPStan and ECS dependencies
+### [v0.4.0](https://github.com/decodelabs/eventful/commits/v0.4.0) - 14th February 2025
 
-## v0.2.2 (2021-05-01)
-* Improved return type hints
+- Replaced accessors with property hooks
+- Upgraded PHPStan to v2
+- Tidied boolean logic
+- Fixed Exceptional syntax
+- Added @phpstan-require-implements constraints
+- Added PHP8.4 to CI workflow
+- Made PHP8.4 minimum version
 
-## v0.2.1 (2021-04-09)
-* Updated Systemic dependency
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.3.5...v0.4.0)
 
-## v0.2.0 (2021-04-09)
-* Swapped Atlas for Deliverance
+---
 
-## v0.1.1 (2021-04-06)
-* Updated for max PHPStan conformance
+### [v0.3.5](https://github.com/decodelabs/eventful/commits/v0.3.5) - 21st August 2024
 
-## v0.1.0 (2021-03-18)
-* Ported EventLoop codebase from Atlas
+- Converted consts to protected PascalCase
+- Made PHP8.1 minimum version
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.3.4...v0.3.5)
+
+---
+
+### [v0.3.4](https://github.com/decodelabs/eventful/commits/v0.3.4) - 30th November 2022
+
+- Fixed fallback signal resolver
+- Fixed PCNTL check on close
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.3.3...v0.3.4)
+
+---
+
+### [v0.3.3](https://github.com/decodelabs/eventful/commits/v0.3.3) - 29th November 2022
+
+- Added tick handlers
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.3.2...v0.3.3)
+
+---
+
+### [v0.3.2](https://github.com/decodelabs/eventful/commits/v0.3.2) - 28th November 2022
+
+- Imported Signal from Systemic
+- Migrated to use effigy in CI workflow
+- Fixed PHP8.1 testing
+- Updated composer check script
+- Updated CI environment
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.3.1...v0.3.2)
+
+---
+
+### [v0.3.1](https://github.com/decodelabs/eventful/commits/v0.3.1) - 24th August 2022
+
+- Added concrete types to all members
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.3.0...v0.3.1)
+
+---
+
+### [v0.3.0](https://github.com/decodelabs/eventful/commits/v0.3.0) - 23rd August 2022
+
+- Removed PHP7 compatibility
+- Updated ECS to v11
+- Updated PHPUnit to v9
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.2.3...v0.3.0)
+
+---
+
+### [v0.2.3](https://github.com/decodelabs/eventful/commits/v0.2.3) - 10th March 2022
+
+- Transitioned from Travis to GHA
+- Updated PHPStan and ECS dependencies
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.2.2...v0.2.3)
+
+---
+
+### [v0.2.2](https://github.com/decodelabs/eventful/commits/v0.2.2) - 1st May 2021
+
+- Improved return type hints
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.2.1...v0.2.2)
+
+---
+
+### [v0.2.1](https://github.com/decodelabs/eventful/commits/v0.2.1) - 9th April 2021
+
+- Updated Systemic dependency
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.2.0...v0.2.1)
+
+---
+
+### [v0.2.0](https://github.com/decodelabs/eventful/commits/v0.2.0) - 9th April 2021
+
+- Swapped Atlas for Deliverance
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.1.1...v0.2.0)
+
+---
+
+### [v0.1.1](https://github.com/decodelabs/eventful/commits/v0.1.1) - 6th April 2021
+
+- Updated for max PHPStan conformance
+
+[Full list of changes](https://github.com/decodelabs/eventful/compare/v0.1.0...v0.1.1)
+
+---
+
+### [v0.1.0](https://github.com/decodelabs/eventful/commits/v0.1.0) - 18th March 2021
+
+- Ported EventLoop codebase from Atlas
