@@ -410,7 +410,7 @@ trait DispatcherTrait
     public function freezeSocket(
         Socket $socket
     ): static {
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['r:' . $id])) {
             $this->freezeBinding($this->sockets['r:' . $id]);
@@ -431,7 +431,7 @@ trait DispatcherTrait
     public function freezeSocketRead(
         Socket $socket
     ): static {
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['r:' . $id])) {
             $this->freezeBinding($this->sockets['r:' . $id]);
@@ -448,7 +448,7 @@ trait DispatcherTrait
     public function freezeSocketWrite(
         Socket $socket
     ): static {
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['w:' . $id])) {
             $this->freezeBinding($this->sockets['w:' . $id]);
@@ -481,7 +481,7 @@ trait DispatcherTrait
     public function unfreezeSocket(
         Socket $socket
     ): static {
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['r:' . $id])) {
             $this->unfreezeBinding($this->sockets['r:' . $id]);
@@ -502,7 +502,7 @@ trait DispatcherTrait
     public function unfreezeSocketRead(
         Socket $socket
     ): static {
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['r:' . $id])) {
             $this->unfreezeBinding($this->sockets['r:' . $id]);
@@ -519,7 +519,7 @@ trait DispatcherTrait
     public function unfreezeSocketWrite(
         Socket $socket
     ): static {
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['w:' . $id])) {
             $this->unfreezeBinding($this->sockets['w:' . $id]);
@@ -552,7 +552,7 @@ trait DispatcherTrait
     public function removeSocket(
         Socket $socket
     ): static {
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['r:' . $id])) {
             $this->removeSocketBinding($this->sockets['r:' . $id]);
@@ -573,7 +573,7 @@ trait DispatcherTrait
     public function removeSocketRead(
         Socket $socket
     ): static {
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['r:' . $id])) {
             $this->removeSocketBinding($this->sockets['r:' . $id]);
@@ -590,7 +590,7 @@ trait DispatcherTrait
     public function removeSocketWrite(
         Socket $socket
     ): static {
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['w:' . $id])) {
             $this->removeSocketBinding($this->sockets['w:' . $id]);
@@ -644,7 +644,7 @@ trait DispatcherTrait
         Socket $socket
     ): int {
         $count = 0;
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['r:' . $id])) {
             $count++;
@@ -672,7 +672,7 @@ trait DispatcherTrait
         Socket $socket
     ): array {
         $output = [];
-        $id = $socket->getId();
+        $id = $socket->id;
 
         if (isset($this->sockets['r:' . $id])) {
             $output['r:' . $id] = $this->sockets['r:' . $id];

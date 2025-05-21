@@ -26,7 +26,9 @@ namespace DecodeLabs\Eventful\Binding {
 
         protected(set) SocketChannel $socket;
 
-        public mixed $ioResource { get => $this->socket->getResource(); }
+        public mixed $ioResource {
+            get => $this->socket->ioResource;
+        }
 
         protected(set) string $socketId;
 
@@ -43,7 +45,7 @@ namespace DecodeLabs\Eventful\Binding {
             ?callable $timeoutHandler = null
         ) {
             $this->socket = $socket;
-            $this->socketId = $socket->getId();
+            $this->socketId = $socket->id;
             $this->ioMode = $ioMode;
 
             $this->__traitConstruct($dispatcher, $this->ioMode . ':' . $this->socketId, $persistent, $callback);

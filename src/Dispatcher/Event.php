@@ -190,7 +190,7 @@ class Event implements Dispatcher
         SocketBinding $binding
     ): void {
         $binding->resource = $this->registerEvent(
-            $binding->socket->getResource(),
+            $binding->socket->ioResource,
             $this->getIoEventFlags($binding),
             $this->getTimeout($binding),
             function ($target, int $flags, SocketBinding $binding) {
@@ -237,7 +237,7 @@ class Event implements Dispatcher
         StreamBinding $binding
     ): void {
         $binding->resource = $this->registerEvent(
-            $binding->stream->getResource(),
+            $binding->stream->ioResource,
             $this->getIoEventFlags($binding),
             $this->getTimeout($binding),
             function ($target, int $flags, StreamBinding $binding) {

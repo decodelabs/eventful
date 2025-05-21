@@ -28,7 +28,9 @@ class Stream implements IoBinding
 
     protected(set) StreamChannel $stream;
 
-    public mixed $ioResource { get => $this->stream->getResource(); }
+    public mixed $ioResource {
+        get => $this->stream->ioResource;
+    }
 
     protected(set) string $streamId;
 
