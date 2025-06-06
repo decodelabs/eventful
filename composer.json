@@ -13,7 +13,7 @@
 
         "decodelabs/coercion": "^0.3",
         "decodelabs/deliverance": "^0.3",
-        "decodelabs/exceptional": "^0.5.2"
+        "decodelabs/exceptional": "^0.6"
     },
     "require-dev": {
         "ext-event": "*",
