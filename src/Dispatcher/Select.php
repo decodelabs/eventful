@@ -50,6 +50,11 @@ class Select implements Dispatcher
      */
     protected ?array $signalMap = [];
 
+    /**
+     * @var array<int,int|callable>
+     */
+    protected ?array $originalSignalHandlers = [];
+
     private bool $hasPcntl = false;
 
     /**
@@ -442,6 +447,9 @@ class Select implements Dispatcher
         }
 
         foreach ($this->signalMap ?? [] as $number => $set) {
+            // @phpstan-ignore-next-line
+            $this->originalSignalHandlers[$number] = pcntl_signal_get_handler($number);
+
             pcntl_signal($number, function ($number) use ($set) {
                 foreach ($set as $binding) {
                     /** @var Binding $binding */
@@ -461,8 +469,10 @@ class Select implements Dispatcher
         }
 
         foreach (array_keys($this->signalMap ?? []) as $number) {
-            pcntl_signal((int)$number, \SIG_IGN);
+            pcntl_signal((int)$number, $this->originalSignalHandlers[$number] ?? \SIG_IGN);
         }
+
+        $this->originalSignalHandlers = [];
     }
 
 
