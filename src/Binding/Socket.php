@@ -24,13 +24,13 @@ namespace DecodeLabs\Eventful\Binding {
 
         public string $type { get => 'Socket'; }
 
-        protected(set) SocketChannel $socket;
+        public protected(set) SocketChannel $socket;
 
         public mixed $ioResource {
             get => $this->socket->ioResource;
         }
 
-        protected(set) string $socketId;
+        public protected(set) string $socketId;
 
         /**
          * Init with timer information
@@ -51,7 +51,7 @@ namespace DecodeLabs\Eventful\Binding {
             $this->__traitConstruct($dispatcher, $this->ioMode . ':' . $this->socketId, $persistent, $callback);
             $this->timeout = $timeout;
 
-            if($timeoutHandler) {
+            if ($timeoutHandler) {
                 $this->timeoutHandler = Closure::fromCallable($timeoutHandler);
             }
         }

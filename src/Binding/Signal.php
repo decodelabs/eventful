@@ -27,7 +27,7 @@ class Signal implements Binding
     /**
      * @var array<int,SignalObject>
      */
-    protected(set) array $signals = [];
+    public protected(set) array $signals = [];
 
     /**
      * Init with timer information

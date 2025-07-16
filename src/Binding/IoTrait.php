@@ -16,7 +16,7 @@ use Closure;
  */
 trait IoTrait
 {
-    protected(set) string $ioMode = 'r';
-    protected(set) ?float $timeout = null;
-    protected(set) ?Closure $timeoutHandler = null;
+    public protected(set) string $ioMode = 'r';
+    public protected(set) ?float $timeout = null;
+    public protected(set) ?Closure $timeoutHandler = null;
 }

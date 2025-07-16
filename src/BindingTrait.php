@@ -16,15 +16,15 @@ use Closure;
  */
 trait BindingTrait
 {
-    protected(set) string $id;
-    protected(set) bool $persistent = true;
+    public protected(set) string $id;
+    public protected(set) bool $persistent = true;
 
-    protected(set) bool $frozen = false;
+    public protected(set) bool $frozen = false;
 
-    protected(set) Closure $handler;
+    public protected(set) Closure $handler;
 
     public mixed $resource;
-    protected(set) Dispatcher $dispatcher;
+    public protected(set) Dispatcher $dispatcher;
 
     /**
      * Init with ref to event loop, id, options and handler

@@ -55,8 +55,8 @@ class Signal
 
     protected static bool $init = false;
 
-    protected(set) string $name;
-    protected(set) int $number;
+    public protected(set) string $name;
+    public protected(set) int $number;
 
     /**
      * Normalize or create a new signal instance

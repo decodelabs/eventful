@@ -23,10 +23,10 @@ use DecodeLabs\Exceptional;
  */
 trait DispatcherTrait
 {
-    protected(set) bool $listening = false;
-    protected(set) ?Closure $cycleHandler = null;
-    protected(set) ?Closure $tickHandler = null;
-    protected(set) int $cycles = 0;
+    public protected(set) bool $listening = false;
+    public protected(set) ?Closure $cycleHandler = null;
+    public protected(set) ?Closure $tickHandler = null;
+    public protected(set) int $cycles = 0;
 
 
     /**

@@ -21,7 +21,7 @@ class Timer implements Binding
 
     public string $type { get => 'Timer'; }
 
-    protected(set) float $duration;
+    public protected(set) float $duration;
 
     /**
      * Init with timer information
