@@ -26,9 +26,6 @@ trait BindingTrait
     public mixed $resource;
     public protected(set) Dispatcher $dispatcher;
 
-    /**
-     * Init with ref to event loop, id, options and handler
-     */
     public function __construct(
         Dispatcher $dispatcher,
         string $id,
@@ -42,8 +39,6 @@ trait BindingTrait
     }
 
     /**
-     * Freeze this binding
-     *
      * @return $this
      */
     public function freeze(): static
@@ -53,8 +48,6 @@ trait BindingTrait
     }
 
     /**
-     * Unfreeze this binding
-     *
      * @return $this
      */
     public function unfreeze(): static
@@ -65,8 +58,6 @@ trait BindingTrait
 
 
     /**
-     * Actually mark this binding as frozen - should only be used internally
-     *
      * @return $this
      */
     public function markFrozen(
@@ -76,9 +67,6 @@ trait BindingTrait
         return $this;
     }
 
-    /**
-     * Has this binding been frozen?
-     */
     public function isFrozen(): bool
     {
         return $this->frozen;

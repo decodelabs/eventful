@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace DecodeLabs\Eventful\Binding;
 
 use DecodeLabs\Coercion;
-
 use DecodeLabs\Eventful\Binding;
 use DecodeLabs\Eventful\BindingTrait;
 use DecodeLabs\Eventful\Dispatcher;
@@ -30,8 +29,6 @@ class Signal implements Binding
     public protected(set) array $signals = [];
 
     /**
-     * Init with timer information
-     *
      * @param iterable<SignalObject|int|string> $signals
      */
     public function __construct(
@@ -52,27 +49,18 @@ class Signal implements Binding
         }
     }
 
-    /**
-     * Has signal registered?
-     */
     public function hasSignal(
         int $number
     ): bool {
         return isset($this->signals[$number]);
     }
 
-    /**
-     * Destroy and unregister this binding
-     */
     public function destroy(): static
     {
         $this->dispatcher->removeSignalBinding($this);
         return $this;
     }
 
-    /**
-     * Trigger event callback
-     */
     public function trigger(
         mixed $number
     ): static {

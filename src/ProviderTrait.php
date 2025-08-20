@@ -40,9 +40,7 @@ trait ProviderTrait
         }
     }
 
-    /**
-     * Check if event loop is running
-     */
+
     public function isRunning(): bool
     {
         return $this->eventDispatcher->isListening();

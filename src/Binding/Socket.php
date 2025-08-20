@@ -32,9 +32,6 @@ namespace DecodeLabs\Eventful\Binding {
 
         public protected(set) string $socketId;
 
-        /**
-         * Init with timer information
-         */
         public function __construct(
             Dispatcher $dispatcher,
             bool $persistent,
@@ -57,27 +54,18 @@ namespace DecodeLabs\Eventful\Binding {
         }
 
 
-        /**
-         * Is socket stream based?
-         */
         public function isStreamBased(): bool
         {
             return true;
             //return $this->socket->isStreamBased();
         }
 
-        /**
-         * Destroy and unregister this binding
-         */
         public function destroy(): static
         {
             $this->dispatcher->removeSocketBinding($this);
             return $this;
         }
 
-        /**
-         * Trigger event callback
-         */
         public function trigger(
             mixed $resource
         ): static {
@@ -94,9 +82,6 @@ namespace DecodeLabs\Eventful\Binding {
             return $this;
         }
 
-        /**
-         * Trigger timeout event callback
-         */
         public function triggerTimeout(
             mixed $resource
         ): static {

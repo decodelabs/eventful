@@ -31,17 +31,11 @@ class Event implements Dispatcher
     protected ?EventLib $cycleHandlerEvent = null;
     protected ?EventLib $tickHandlerEvent = null;
 
-    /**
-     * Setup event base
-     */
     public function __construct()
     {
         $this->base = new EventLibBase();
     }
 
-    /**
-     * Begin event loop
-     */
     public function listen(): static
     {
         $this->listening = true;
@@ -51,9 +45,6 @@ class Event implements Dispatcher
         return $this;
     }
 
-    /**
-     * End event loop and return control
-     */
     public function stop(): static
     {
         if ($this->listening) {
@@ -66,9 +57,6 @@ class Event implements Dispatcher
 
 
 
-    /**
-     * Temporarily remove binding from loop
-     */
     public function freezeBinding(
         Binding $binding
     ): static {
@@ -82,9 +70,6 @@ class Event implements Dispatcher
         return $this;
     }
 
-    /**
-     * Re-register frozen binding
-     */
     public function unfreezeBinding(
         Binding $binding
     ): static {
@@ -100,9 +85,6 @@ class Event implements Dispatcher
 
 
 
-    /**
-     * Add cycle handler to loop
-     */
     protected function registerCycleHandler(
         ?callable $callback
     ): void {
@@ -142,9 +124,6 @@ class Event implements Dispatcher
     }
 
 
-    /**
-     * Add cycle handler to loop
-     */
     protected function registerTickHandler(
         ?callable $callback
     ): void {
@@ -183,9 +162,6 @@ class Event implements Dispatcher
 
 
 
-    /**
-     * Register socket binding to event loop
-     */
     protected function registerSocketBinding(
         SocketBinding $binding
     ): void {
@@ -213,9 +189,6 @@ class Event implements Dispatcher
         );
     }
 
-    /**
-     * Unregister socket binding to event loop
-     */
     protected function unregisterSocketBinding(
         SocketBinding $binding
     ): void {
@@ -230,9 +203,6 @@ class Event implements Dispatcher
 
 
 
-    /**
-     * Register stream binding to event loop
-     */
     protected function registerStreamBinding(
         StreamBinding $binding
     ): void {
@@ -260,9 +230,7 @@ class Event implements Dispatcher
         );
     }
 
-    /**
-     * Unregister stream binding to event loop
-     */
+
     protected function unregisterStreamBinding(
         StreamBinding $binding
     ): void {
@@ -275,9 +243,7 @@ class Event implements Dispatcher
 
 
 
-    /**
-     * Register signal binding to event loop
-     */
+
     protected function registerSignalBinding(
         SignalBinding $binding
     ): void {
@@ -315,9 +281,7 @@ class Event implements Dispatcher
         }
     }
 
-    /**
-     * Unregister signal binding to event loop
-     */
+
     protected function unregisterSignalBinding(
         SignalBinding $binding
     ): void {
@@ -334,9 +298,7 @@ class Event implements Dispatcher
 
 
 
-    /**
-     * Register timer binding to event loop
-     */
+
     protected function registerTimerBinding(
         TimerBinding $binding
     ): void {
@@ -368,9 +330,7 @@ class Event implements Dispatcher
         );
     }
 
-    /**
-     * Unregister timer binding to event loop
-     */
+
     protected function unregisterTimerBinding(
         TimerBinding $binding
     ): void {
@@ -383,9 +343,7 @@ class Event implements Dispatcher
 
 
 
-    /**
-     * Register resource with event base
-     */
+
     protected function registerEvent(
         mixed $target,
         int $flags,
@@ -424,9 +382,7 @@ class Event implements Dispatcher
     }
 
 
-    /**
-     * Get read / write flags
-     */
+
     protected function getIoEventFlags(
         IoBinding $binding
     ): int {
@@ -452,9 +408,7 @@ class Event implements Dispatcher
         return $flags;
     }
 
-    /**
-     * Get timeout duration
-     */
+
     protected function getTimeout(
         Binding $binding
     ): ?float {

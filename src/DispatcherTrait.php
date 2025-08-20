@@ -30,29 +30,27 @@ trait DispatcherTrait
 
 
     /**
-     * @var array<string, SocketBinding>
+     * @var array<string,SocketBinding>
      */
     protected array $sockets = [];
 
     /**
-     * @var array<string, StreamBinding>
+     * @var array<string,StreamBinding>
      */
     protected array $streams = [];
 
     /**
-     * @var array<string, SignalBinding>
+     * @var array<string,SignalBinding>
      */
     protected array $signals = [];
 
     /**
-     * @var array<string, TimerBinding>
+     * @var array<string,TimerBinding>
      */
     protected array $timers = [];
 
 
-    /**
-     * Has the event loop been started?
-     */
+
     public function isListening(): bool
     {
         return $this->listening;
@@ -60,8 +58,6 @@ trait DispatcherTrait
 
 
     /**
-     * Freeze all registered bindings
-     *
      * @return $this
      */
     public function freezeAllBindings(): static
@@ -75,8 +71,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze all registered bindings
-     *
      * @return $this
      */
     public function unfreezeAllBindings(): static
@@ -90,8 +84,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove all registered bindings
-     *
      * @return $this
      */
     public function removeAllBindings(): static
@@ -104,9 +96,6 @@ trait DispatcherTrait
         return $this;
     }
 
-    /**
-     * Get combined list of all bindings
-     */
     public function getAllBindings(): array
     {
         return array_merge(
@@ -117,9 +106,6 @@ trait DispatcherTrait
         );
     }
 
-    /**
-     * Count all registered bindings
-     */
     public function countAllBindings(): int
     {
         return
@@ -132,8 +118,6 @@ trait DispatcherTrait
 
 
     /**
-     * Register 1sec timed callback for testing run conditions
-     *
      * @return $this
      */
     public function setCycleHandler(
@@ -144,17 +128,12 @@ trait DispatcherTrait
         return $this;
     }
 
-    /**
-     * Get registered cycle callback
-     */
     public function getCycleHandler(): ?Closure
     {
         return $this->cycleHandler;
     }
 
-    /**
-     * Add cycle handler to event loop
-     */
+
     protected function registerCycleHandler(
         ?callable $callback
     ): void {
@@ -162,8 +141,6 @@ trait DispatcherTrait
 
 
     /**
-     * Register tick callback for testing run conditions
-     *
      * @return $this
      */
     public function setTickHandler(
@@ -174,17 +151,11 @@ trait DispatcherTrait
         return $this;
     }
 
-    /**
-     * Get registered cycle callback
-     */
     public function getTickHandler(): ?Closure
     {
         return $this->tickHandler;
     }
 
-    /**
-     * Add cycle handler to event loop
-     */
     protected function registerTickHandler(
         ?callable $callback
     ): void {
@@ -196,8 +167,6 @@ trait DispatcherTrait
 
 
     /**
-     * Bind to socket read event
-     *
      * @return $this
      */
     public function bindSocketRead(
@@ -218,8 +187,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to socket read event, frozen
-     *
      * @return $this
      */
     public function bindFrozenSocketRead(
@@ -240,8 +207,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single socket read event
-     *
      * @return $this
      */
     public function bindSocketReadOnce(
@@ -262,8 +227,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single socket read event, frozen
-     *
      * @return $this
      */
     public function bindFrozenSocketReadOnce(
@@ -284,8 +247,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to socket write event
-     *
      * @return $this
      */
     public function bindSocketWrite(
@@ -306,8 +267,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to socket write event, frozen
-     *
      * @return $this
      */
     public function bindFrozenSocketWrite(
@@ -328,8 +287,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single socket write event
-     *
      * @return $this
      */
     public function bindSocketWriteOnce(
@@ -350,8 +307,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single socket read event, frozen
-     *
      * @return $this
      */
     public function bindFrozenSocketWriteOnce(
@@ -372,8 +327,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Register a socket binding
-     *
      * @return $this
      */
     protected function addSocketBinding(
@@ -403,8 +356,6 @@ trait DispatcherTrait
 
 
     /**
-     * Freeze all bindings for socket
-     *
      * @return $this
      */
     public function freezeSocket(
@@ -424,8 +375,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Freeze read bindings for socket
-     *
      * @return $this
      */
     public function freezeSocketRead(
@@ -441,8 +390,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Freeze write bindings for socket
-     *
      * @return $this
      */
     public function freezeSocketWrite(
@@ -458,8 +405,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Freeze all socket bindings
-     *
      * @return $this
      */
     public function freezeAllSockets(): static
@@ -474,8 +419,6 @@ trait DispatcherTrait
 
 
     /**
-     * Unfreeze all bindings for socket
-     *
      * @return $this
      */
     public function unfreezeSocket(
@@ -495,8 +438,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze bindings for socket reads
-     *
      * @return $this
      */
     public function unfreezeSocketRead(
@@ -512,8 +453,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze bindings for socket writes
-     *
      * @return $this
      */
     public function unfreezeSocketWrite(
@@ -529,8 +468,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze all socket bindings
-     *
      * @return $this
      */
     public function unfreezeAllSockets(): static
@@ -545,8 +482,6 @@ trait DispatcherTrait
 
 
     /**
-     * Remove all bindings for socket
-     *
      * @return $this
      */
     public function removeSocket(
@@ -566,8 +501,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove bindings for socket read
-     *
      * @return $this
      */
     public function removeSocketRead(
@@ -583,8 +516,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove bindings for socket write
-     *
      * @return $this
      */
     public function removeSocketWrite(
@@ -600,8 +531,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove specific socket binding
-     *
      * @return $this
      */
     public function removeSocketBinding(
@@ -614,8 +543,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove all socket bindings
-     *
      * @return $this
      */
     public function removeAllSockets(): static
@@ -629,17 +556,11 @@ trait DispatcherTrait
     }
 
 
-    /**
-     * Count all socket bindings
-     */
     public function countSocketBindings(): int
     {
         return count($this->sockets);
     }
 
-    /**
-     * Count all bindings for socket
-     */
     public function countSocketBindingsFor(
         Socket $socket
     ): int {
@@ -657,17 +578,11 @@ trait DispatcherTrait
         return $count;
     }
 
-    /**
-     * Get all socket bindings
-     */
     public function getSocketBindings(): array
     {
         return $this->sockets;
     }
 
-    /**
-     * Get all bindings for socket
-     */
     public function getSocketBindingsFor(
         Socket $socket
     ): array {
@@ -685,9 +600,6 @@ trait DispatcherTrait
         return $output;
     }
 
-    /**
-     * Count all bindings for socket read
-     */
     public function countSocketReadBindings(): int
     {
         $count = 0;
@@ -701,9 +613,6 @@ trait DispatcherTrait
         return $count;
     }
 
-    /**
-     * Get all bindings for socket read
-     */
     public function getSocketReadBindings(): array
     {
         $output = [];
@@ -717,9 +626,6 @@ trait DispatcherTrait
         return $output;
     }
 
-    /**
-     * Count all bindings for socket write
-     */
     public function countSocketWriteBindings(): int
     {
         $count = 0;
@@ -733,9 +639,6 @@ trait DispatcherTrait
         return $count;
     }
 
-    /**
-     * Get all bindings for socket write
-     */
     public function getSocketWriteBindings(): array
     {
         $output = [];
@@ -753,8 +656,6 @@ trait DispatcherTrait
 
 
     /**
-     * Bind to stream read event
-     *
      * @return $this
      */
     public function bindStreamRead(
@@ -775,8 +676,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to stream read event, frozen
-     *
      * @return $this
      */
     public function bindFrozenStreamRead(
@@ -797,8 +696,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single stream read event
-     *
      * @return $this
      */
     public function bindStreamReadOnce(
@@ -819,8 +716,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single stream read event, frozen
-     *
      * @return $this
      */
     public function bindFrozenStreamReadOnce(
@@ -841,8 +736,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to socket write event
-     *
      * @return $this
      */
     public function bindStreamWrite(
@@ -863,8 +756,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to socket write event, frozen
-     *
      * @return $this
      */
     public function bindFrozenStreamWrite(
@@ -885,8 +776,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single socket write event
-     *
      * @return $this
      */
     public function bindStreamWriteOnce(
@@ -907,8 +796,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single socket read event, frozen
-     *
      * @return $this
      */
     public function bindFrozenStreamWriteOnce(
@@ -929,8 +816,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Register a stream binding
-     *
      * @return $this
      */
     protected function addStreamBinding(
@@ -965,8 +850,6 @@ trait DispatcherTrait
 
 
     /**
-     * Freeze all bindings for stream
-     *
      * @return $this
      */
     public function freezeStream(
@@ -1003,8 +886,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Freeze write bindings for stream
-     *
      * @return $this
      */
     public function freezeStreamWrite(
@@ -1020,8 +901,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Freeze all stream bindings
-     *
      * @return $this
      */
     public function freezeAllStreams(): static
@@ -1035,8 +914,6 @@ trait DispatcherTrait
 
 
     /**
-     * Unfreeze all bindings for stream
-     *
      * @return $this
      */
     public function unfreezeStream(
@@ -1056,8 +933,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze bindings for stream reads
-     *
      * @return $this
      */
     public function unfreezeStreamRead(
@@ -1073,8 +948,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze bindings for stream writes
-     *
      * @return $this
      */
     public function unfreezeStreamWrite(
@@ -1090,8 +963,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze all stream bindings
-     *
      * @return $this
      */
     public function unfreezeAllStreams(): static
@@ -1106,8 +977,6 @@ trait DispatcherTrait
 
 
     /**
-     * Remove all bindings for stream
-     *
      * @return $this
      */
     public function removeStream(
@@ -1127,8 +996,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove bindings for stream read
-     *
      * @return $this
      */
     public function removeStreamRead(
@@ -1144,8 +1011,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove bindings for stream write
-     *
      * @return $this
      */
     public function removeStreamWrite(
@@ -1161,8 +1026,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove specific stream binding
-     *
      * @return $this
      */
     public function removeStreamBinding(
@@ -1175,8 +1038,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove all stream bindings
-     *
      * @return $this
      */
     public function removeAllStreams(): static
@@ -1190,17 +1051,13 @@ trait DispatcherTrait
     }
 
 
-    /**
-     * Count all stream bindings
-     */
+
     public function countStreamBindings(): int
     {
         return count($this->streams);
     }
 
-    /**
-     * Count all bindings for stream
-     */
+
     public function countStreamBindingsFor(
         Stream $stream
     ): int {
@@ -1218,17 +1075,13 @@ trait DispatcherTrait
         return $count;
     }
 
-    /**
-     * Get all stream bindings
-     */
+
     public function getStreamBindings(): array
     {
         return $this->streams;
     }
 
-    /**
-     * Get all bindings for stream
-     */
+
     public function getStreamBindingsFor(
         Stream $stream
     ): array {
@@ -1246,9 +1099,7 @@ trait DispatcherTrait
         return $output;
     }
 
-    /**
-     * Count all bindings for stream read
-     */
+
     public function countStreamReadBindings(): int
     {
         $count = 0;
@@ -1262,9 +1113,7 @@ trait DispatcherTrait
         return $count;
     }
 
-    /**
-     * Get all bindings for stream read
-     */
+
     public function getStreamReadBindings(): array
     {
         $output = [];
@@ -1278,9 +1127,7 @@ trait DispatcherTrait
         return $output;
     }
 
-    /**
-     * Count all bindings for socket write
-     */
+
     public function countStreamWriteBindings(): int
     {
         $count = 0;
@@ -1294,9 +1141,7 @@ trait DispatcherTrait
         return $count;
     }
 
-    /**
-     * Get all bindings for socket write
-     */
+
     public function getStreamWriteBindings(): array
     {
         $output = [];
@@ -1310,9 +1155,7 @@ trait DispatcherTrait
         return $output;
     }
 
-    /**
-     * Get id for stream
-     */
+
     protected function getStreamId(
         Stream $stream
     ): string {
@@ -1323,8 +1166,6 @@ trait DispatcherTrait
 
 
     /**
-     * Bind to signal event
-     *
      * @return $this
      */
     public function bindSignal(
@@ -1342,8 +1183,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to signal event, frozen
-     *
      * @return $this
      */
     public function bindFrozenSignal(
@@ -1361,8 +1200,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single signal event
-     *
      * @return $this
      */
     public function bindSignalOnce(
@@ -1380,8 +1217,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to single signal event, frozen
-     *
      * @return $this
      */
     public function bindFrozenSignalOnce(
@@ -1399,8 +1234,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Register a signal binding
-     *
      * @return $this
      */
     protected function addSignalBinding(
@@ -1435,8 +1268,6 @@ trait DispatcherTrait
 
 
     /**
-     * Freeze all bindings with signal
-     *
      * @return $this
      */
     public function freezeSignal(
@@ -1454,8 +1285,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Freeze specific signal binding by object or id
-     *
      * @return $this
      */
     public function freezeSignalBinding(
@@ -1477,8 +1306,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Freeze all signal bindings
-     *
      * @return $this
      */
     public function freezeAllSignals(): static
@@ -1492,8 +1319,6 @@ trait DispatcherTrait
 
 
     /**
-     * Unfreeze all bindings with signal
-     *
      * @return $this
      */
     public function unfreezeSignal(
@@ -1511,8 +1336,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze specific signal binding by object or id
-     *
      * @return $this
      */
     public function unfreezeSignalBinding(
@@ -1534,8 +1357,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze all signal bindings
-     *
      * @return $this
      */
     public function unfreezeAllSignals(): static
@@ -1549,8 +1370,6 @@ trait DispatcherTrait
 
 
     /**
-     * Remove all bindings with signal
-     *
      * @return $this
      */
     public function removeSignal(
@@ -1568,8 +1387,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove specific signal binding
-     *
      * @return $this
      */
     public function removeSignalBinding(
@@ -1594,8 +1411,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove all signal bindings
-     *
      * @return $this
      */
     public function removeAllSignals(): static
@@ -1610,9 +1425,6 @@ trait DispatcherTrait
 
 
 
-    /**
-     * Get signal binding by id or object
-     */
     public function getSignalBinding(
         string|SignalBinding $id
     ): ?SignalBinding {
@@ -1623,17 +1435,13 @@ trait DispatcherTrait
         return $this->signals[$id] ?? null;
     }
 
-    /**
-     * Count all signal bindings
-     */
+
     public function countSignalBindings(): int
     {
         return count($this->signals);
     }
 
-    /**
-     * Count bindings with signal
-     */
+
     public function countSignalBindingsFor(
         Signal|int|string $signal
     ): int {
@@ -1649,17 +1457,13 @@ trait DispatcherTrait
         return $count;
     }
 
-    /**
-     * Get all signal bindings
-     */
+
     public function getSignalBindings(): array
     {
         return $this->signals;
     }
 
-    /**
-     * Get bidings with signal
-     */
+
     public function getSignalBindingsFor(
         Signal|int|string $signal
     ): array {
@@ -1675,9 +1479,7 @@ trait DispatcherTrait
         return $output;
     }
 
-    /**
-     * Normalize signal input
-     */
+
     protected function normalizeSignal(
         Signal|int|string $signal
     ): int {
@@ -1688,8 +1490,6 @@ trait DispatcherTrait
 
 
     /**
-     * Bind to a timer event
-     *
      * @return $this
      */
     public function bindTimer(
@@ -1707,8 +1507,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to a timer event, frozen
-     *
      * @return $this
      */
     public function bindFrozenTimer(
@@ -1726,8 +1524,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to a single timer event
-     *
      * @return $this
      */
     public function bindTimerOnce(
@@ -1745,8 +1541,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Bind to a single timer event, frozen
-     *
      * @return $this
      */
     public function bindFrozenTimerOnce(
@@ -1764,8 +1558,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Register a timing binding
-     *
      * @return $this
      */
     protected function addTimerBinding(
@@ -1800,8 +1592,6 @@ trait DispatcherTrait
 
 
     /**
-     * Freeze timer binding by id
-     *
      * @return $this
      */
     public function freezeTimer(
@@ -1823,8 +1613,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Freeze all timer bindings
-     *
      * @return $this
      */
     public function freezeAllTimers(): static
@@ -1838,8 +1626,6 @@ trait DispatcherTrait
 
 
     /**
-     * Unfreeze timer binding by id
-     *
      * @return $this
      */
     public function unfreezeTimer(
@@ -1861,8 +1647,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Unfreeze all timer bindings
-     *
      * @return $this
      */
     public function unfreezeAllTimers(): static
@@ -1876,8 +1660,6 @@ trait DispatcherTrait
 
 
     /**
-     * Remove a timer binding by id or object
-     *
      * @return $this
      */
     public function removeTimer(
@@ -1902,8 +1684,6 @@ trait DispatcherTrait
     }
 
     /**
-     * Remove all timer bindings
-     *
      * @return $this
      */
     public function removeAllTimers(): static
@@ -1917,9 +1697,6 @@ trait DispatcherTrait
     }
 
 
-    /**
-     * Get signal binding by id or object
-     */
     public function getTimerBinding(
         string|TimerBinding $id
     ): ?TimerBinding {
@@ -1930,17 +1707,13 @@ trait DispatcherTrait
         return $this->timers[$id] ?? null;
     }
 
-    /**
-     * Count all timer bindings
-     */
+
     public function countTimerBindings(): int
     {
         return count($this->timers);
     }
 
-    /**
-     * Get all timer bindings
-     */
+
     public function getTimerBindings(): array
     {
         return $this->timers;

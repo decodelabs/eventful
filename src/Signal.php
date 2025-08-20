@@ -58,9 +58,6 @@ class Signal
     public protected(set) string $name;
     public protected(set) int $number;
 
-    /**
-     * Normalize or create a new signal instance
-     */
     public static function create(
         Signal|string|int $signal
     ): Signal {
@@ -79,9 +76,6 @@ class Signal
         return new self($signal);
     }
 
-    /**
-     * Normalize signal name
-     */
     public static function normalizeSignalName(
         string $signal
     ): string {
@@ -130,9 +124,6 @@ class Signal
         return $signal;
     }
 
-    /**
-     * Init with signal name
-     */
     protected function __construct(
         string $name
     ) {

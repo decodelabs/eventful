@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace DecodeLabs\Eventful\Binding;
 
 use Closure;
-
 use DecodeLabs\Deliverance\Channel\Stream as StreamChannel;
 use DecodeLabs\Eventful\Binding\Io as IoBinding;
 use DecodeLabs\Eventful\Binding\IoTrait as IoBindingTrait;
@@ -34,9 +33,6 @@ class Stream implements IoBinding
 
     public protected(set) string $streamId;
 
-    /**
-     * Init with timer information
-     */
     public function __construct(
         Dispatcher $dispatcher,
         bool $persistent,
@@ -58,18 +54,12 @@ class Stream implements IoBinding
         }
     }
 
-    /**
-     * Destroy and unregister this binding
-     */
     public function destroy(): static
     {
         $this->dispatcher->removeStreamBinding($this);
         return $this;
     }
 
-    /**
-     * Trigger event callback
-     */
     public function trigger(
         mixed $resource
     ): static {
@@ -86,9 +76,6 @@ class Stream implements IoBinding
         return $this;
     }
 
-    /**
-     * Trigger timeout event callback
-     */
     public function triggerTimeout(
         mixed $resource
     ): static {

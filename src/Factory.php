@@ -14,9 +14,6 @@ use DecodeLabs\Eventful\Dispatcher\Select as SelectDispatcher;
 
 class Factory
 {
-    /**
-     * Create an event loop
-     */
     public static function newDispatcher(): Dispatcher
     {
         if (extension_loaded('event')) {

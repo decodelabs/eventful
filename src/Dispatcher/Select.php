@@ -36,17 +36,17 @@ class Select implements Dispatcher
 
 
     /**
-     * @var array<int, array<string, array<int, resource|Socket|array<string, Binding>>>>|null
+     * @var array<int,array<string,array<int,resource|Socket|array<string,Binding>>>>|null
      */
     protected ?array $socketMap = [];
 
     /**
-     * @var array<int, array<string, array<int, resource|array<string, Binding>>>>|null
+     * @var array<int,array<string,array<int,resource|array<string,Binding>>>>|null
      */
     protected ?array $streamMap = [];
 
     /**
-     * @var array<int, array<string, Binding>>|null
+     * @var array<int,array<string,Binding>>|null
      */
     protected ?array $signalMap = [];
 
@@ -57,18 +57,12 @@ class Select implements Dispatcher
 
     private bool $hasPcntl = false;
 
-    /**
-     * Check pcntl loaded
-     */
     public function __construct()
     {
         $this->hasPcntl = extension_loaded('pcntl');
     }
 
 
-    /**
-     * Listen for events in loop
-     */
     public function listen(): static
     {
         $this->breakLoop = false;
@@ -260,18 +254,12 @@ class Select implements Dispatcher
         return $this;
     }
 
-    /**
-     * Flag to regenerate maps on next loop
-     */
     public function regenerateMaps(): static
     {
         $this->generateMaps = true;
         return $this;
     }
 
-    /**
-     * Generate resource maps for select()
-     */
     private function generateMaps(): void
     {
         $this->socketMap = $this->streamMap = [
@@ -342,9 +330,6 @@ class Select implements Dispatcher
     }
 
 
-    /**
-     * Convert socket resource to ID string
-     */
     protected function identifySocket(
         mixed $socket
     ): int {
@@ -362,9 +347,6 @@ class Select implements Dispatcher
     }
 
 
-    /**
-     * Stop listening and return control
-     */
     public function stop(): static
     {
         if ($this->listening) {
@@ -375,9 +357,6 @@ class Select implements Dispatcher
     }
 
 
-    /**
-     * Freeze binding
-     */
     public function freezeBinding(
         Binding $binding
     ): static {
@@ -385,9 +364,6 @@ class Select implements Dispatcher
         return $this;
     }
 
-    /**
-     * Unfreeze binding
-     */
     public function unfreezeBinding(
         Binding $binding
     ): static {
@@ -397,18 +373,12 @@ class Select implements Dispatcher
 
 
 
-    /**
-     * Add new socket to maps
-     */
     protected function registerSocketBinding(
         SocketBinding $binding
     ): void {
         $this->regenerateMaps();
     }
 
-    /**
-     * Remove socket from maps
-     */
     protected function unregisterSocketBinding(
         SocketBinding $binding
     ): void {
@@ -417,18 +387,12 @@ class Select implements Dispatcher
 
 
 
-    /**
-     * Add new stream to maps
-     */
     protected function registerStreamBinding(
         StreamBinding $binding
     ): void {
         $this->regenerateMaps();
     }
 
-    /**
-     * Remove stream from maps
-     */
     protected function unregisterStreamBinding(
         StreamBinding $binding
     ): void {
@@ -437,9 +401,7 @@ class Select implements Dispatcher
 
 
 
-    /**
-     * Start listening for signals
-     */
+
     protected function startSignalHandlers(): void
     {
         if (!$this->hasPcntl) {
@@ -459,9 +421,7 @@ class Select implements Dispatcher
         }
     }
 
-    /**
-     * Stop listening for signals
-     */
+
     protected function stopSignalHandlers(): void
     {
         if (!$this->hasPcntl) {
@@ -476,18 +436,14 @@ class Select implements Dispatcher
     }
 
 
-    /**
-     * Add new signal to maps
-     */
+
     protected function registerSignalBinding(
         SignalBinding $binding
     ): void {
         $this->regenerateMaps();
     }
 
-    /**
-     * Remove signal from maps
-     */
+
     protected function unregisterSignalBinding(
         SignalBinding $binding
     ): void {
@@ -497,17 +453,13 @@ class Select implements Dispatcher
 
 
 
-    /**
-     * Noop
-     */
+
     protected function registerTimerBinding(
         TimerBinding $binding
     ): void {
     }
 
-    /**
-     * Noop
-     */
+
     protected function unregisterTimerBinding(
         TimerBinding $binding
     ): void {

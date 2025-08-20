@@ -23,9 +23,6 @@ class Timer implements Binding
 
     public protected(set) float $duration;
 
-    /**
-     * Init with timer information
-     */
     public function __construct(
         Dispatcher $dispatcher,
         string $id,
@@ -37,18 +34,12 @@ class Timer implements Binding
         $this->duration = $duration;
     }
 
-    /**
-     * Destroy and unregister this binding
-     */
     public function destroy(): static
     {
         $this->dispatcher->removeTimer($this);
         return $this;
     }
 
-    /**
-     * Trigger event callback
-     */
     public function trigger(
         mixed $time
     ): static {
