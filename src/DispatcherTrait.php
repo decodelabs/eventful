@@ -175,15 +175,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addSocketBinding(new SocketBinding(
-            $this,
-            true,
-            $socket,
-            'r',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), false);
+        return $this->addSocketBinding(
+            binding: new SocketBinding(
+                dispatcher: $this,
+                persistent: true,
+                socket: $socket,
+                ioMode: 'r',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -195,15 +198,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addSocketBinding(new SocketBinding(
-            $this,
-            true,
-            $socket,
-            'r',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), true);
+        return $this->addSocketBinding(
+            binding: new SocketBinding(
+                dispatcher: $this,
+                persistent: true,
+                socket: $socket,
+                ioMode: 'r',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -215,15 +221,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addSocketBinding(new SocketBinding(
-            $this,
-            false,
-            $socket,
-            'r',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), false);
+        return $this->addSocketBinding(
+            binding: new SocketBinding(
+                dispatcher: $this,
+                persistent: false,
+                socket: $socket,
+                ioMode: 'r',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -235,15 +244,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addSocketBinding(new SocketBinding(
-            $this,
-            false,
-            $socket,
-            'r',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), true);
+        return $this->addSocketBinding(
+            binding: new SocketBinding(
+                dispatcher: $this,
+                persistent: false,
+                socket: $socket,
+                ioMode: 'r',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -255,15 +267,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addSocketBinding(new SocketBinding(
-            $this,
-            true,
-            $socket,
-            'w',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), false);
+        return $this->addSocketBinding(
+            binding: new SocketBinding(
+                dispatcher: $this,
+                persistent: true,
+                socket: $socket,
+                ioMode: 'w',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -275,15 +290,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addSocketBinding(new SocketBinding(
-            $this,
-            true,
-            $socket,
-            'w',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), true);
+        return $this->addSocketBinding(
+            binding: new SocketBinding(
+                dispatcher: $this,
+                persistent: true,
+                socket: $socket,
+                ioMode: 'w',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -295,15 +313,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addSocketBinding(new SocketBinding(
-            $this,
-            false,
-            $socket,
-            'w',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), false);
+        return $this->addSocketBinding(
+            binding: new SocketBinding(
+                dispatcher: $this,
+                persistent: false,
+                socket: $socket,
+                ioMode: 'w',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -315,15 +336,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addSocketBinding(new SocketBinding(
-            $this,
-            false,
-            $socket,
-            'w',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), true);
+        return $this->addSocketBinding(
+            binding: new SocketBinding(
+                dispatcher: $this,
+                persistent: false,
+                socket: $socket,
+                ioMode: 'w',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -664,15 +688,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addStreamBinding(new StreamBinding(
-            $this,
-            true,
-            $stream,
-            'r',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), false);
+        return $this->addStreamBinding(
+            binding: new StreamBinding(
+                dispatcher: $this,
+                persistent: true,
+                stream: $stream,
+                ioMode: 'r',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -684,15 +711,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addStreamBinding(new StreamBinding(
-            $this,
-            true,
-            $stream,
-            'r',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), true);
+        return $this->addStreamBinding(
+            binding: new StreamBinding(
+                dispatcher: $this,
+                persistent: true,
+                stream: $stream,
+                ioMode: 'r',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -704,15 +734,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addStreamBinding(new StreamBinding(
-            $this,
-            false,
-            $stream,
-            'r',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), false);
+        return $this->addStreamBinding(
+            binding: new StreamBinding(
+                dispatcher: $this,
+                persistent: false,
+                stream: $stream,
+                ioMode: 'r',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -724,15 +757,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addStreamBinding(new StreamBinding(
-            $this,
-            false,
-            $stream,
-            'r',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), true);
+        return $this->addStreamBinding(
+            binding: new StreamBinding(
+                dispatcher: $this,
+                persistent: false,
+                stream: $stream,
+                ioMode: 'r',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -744,15 +780,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addStreamBinding(new StreamBinding(
-            $this,
-            true,
-            $stream,
-            'w',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), false);
+        return $this->addStreamBinding(
+            binding: new StreamBinding(
+                dispatcher: $this,
+                persistent: true,
+                stream: $stream,
+                ioMode: 'w',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -764,15 +803,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addStreamBinding(new StreamBinding(
-            $this,
-            true,
-            $stream,
-            'w',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), true);
+        return $this->addStreamBinding(
+            binding: new StreamBinding(
+                dispatcher: $this,
+                persistent: true,
+                stream: $stream,
+                ioMode: 'w',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -784,15 +826,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addStreamBinding(new StreamBinding(
-            $this,
-            false,
-            $stream,
-            'w',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), false);
+        return $this->addStreamBinding(
+            binding: new StreamBinding(
+                dispatcher: $this,
+                persistent: false,
+                stream: $stream,
+                ioMode: 'w',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -804,15 +849,18 @@ trait DispatcherTrait
         ?float $timeout = null,
         ?callable $timeoutHandler = null
     ): static {
-        return $this->addStreamBinding(new StreamBinding(
-            $this,
-            false,
-            $stream,
-            'w',
-            $callback,
-            $timeout,
-            $timeoutHandler
-        ), true);
+        return $this->addStreamBinding(
+            binding: new StreamBinding(
+                dispatcher: $this,
+                persistent: false,
+                stream: $stream,
+                ioMode: 'w',
+                callback: $callback,
+                timeout: $timeout,
+                timeoutHandler: $timeoutHandler
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -1173,13 +1221,16 @@ trait DispatcherTrait
         iterable $signals,
         callable $callback
     ): static {
-        return $this->addSignalBinding(new SignalBinding(
-            $this,
-            $id,
-            true,
-            $signals,
-            $callback
-        ), false);
+        return $this->addSignalBinding(
+            binding: new SignalBinding(
+                dispatcher: $this,
+                id: $id,
+                persistent: true,
+                signals: $signals,
+                callback: $callback
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -1190,13 +1241,16 @@ trait DispatcherTrait
         iterable $signals,
         callable $callback
     ): static {
-        return $this->addSignalBinding(new SignalBinding(
-            $this,
-            $id,
-            true,
-            $signals,
-            $callback
-        ), true);
+        return $this->addSignalBinding(
+            binding: new SignalBinding(
+                dispatcher: $this,
+                id: $id,
+                persistent: true,
+                signals: $signals,
+                callback: $callback
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -1207,13 +1261,16 @@ trait DispatcherTrait
         iterable $signals,
         callable $callback
     ): static {
-        return $this->addSignalBinding(new SignalBinding(
-            $this,
-            $id,
-            false,
-            $signals,
-            $callback
-        ), false);
+        return $this->addSignalBinding(
+            binding: new SignalBinding(
+                dispatcher: $this,
+                id: $id,
+                persistent: false,
+                signals: $signals,
+                callback: $callback
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -1224,13 +1281,16 @@ trait DispatcherTrait
         iterable $signals,
         callable $callback
     ): static {
-        return $this->addSignalBinding(new SignalBinding(
-            $this,
-            $id,
-            false,
-            $signals,
-            $callback
-        ), true);
+        return $this->addSignalBinding(
+            binding: new SignalBinding(
+                dispatcher: $this,
+                id: $id,
+                persistent: false,
+                signals: $signals,
+                callback: $callback
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -1497,13 +1557,16 @@ trait DispatcherTrait
         float $duration,
         callable $callback
     ): static {
-        return $this->addTimerBinding(new TimerBinding(
-            $this,
-            $id,
-            true,
-            $duration,
-            $callback
-        ), false);
+        return $this->addTimerBinding(
+            binding: new TimerBinding(
+                dispatcher: $this,
+                id: $id,
+                persistent: true,
+                duration: $duration,
+                callback: $callback
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -1514,13 +1577,16 @@ trait DispatcherTrait
         float $duration,
         callable $callback
     ): static {
-        return $this->addTimerBinding(new TimerBinding(
-            $this,
-            $id,
-            true,
-            $duration,
-            $callback
-        ), true);
+        return $this->addTimerBinding(
+            binding: new TimerBinding(
+                dispatcher: $this,
+                id: $id,
+                persistent: true,
+                duration: $duration,
+                callback: $callback
+            ),
+            frozen: true
+        );
     }
 
     /**
@@ -1531,13 +1597,16 @@ trait DispatcherTrait
         float $duration,
         callable $callback
     ): static {
-        return $this->addTimerBinding(new TimerBinding(
-            $this,
-            $id,
-            false,
-            $duration,
-            $callback
-        ), false);
+        return $this->addTimerBinding(
+            binding: new TimerBinding(
+                dispatcher: $this,
+                id: $id,
+                persistent: false,
+                duration: $duration,
+                callback: $callback
+            ),
+            frozen: false
+        );
     }
 
     /**
@@ -1548,13 +1617,16 @@ trait DispatcherTrait
         float $duration,
         callable $callback
     ): static {
-        return $this->addTimerBinding(new TimerBinding(
-            $this,
-            $id,
-            false,
-            $duration,
-            $callback
-        ), true);
+        return $this->addTimerBinding(
+            binding: new TimerBinding(
+                dispatcher: $this,
+                id: $id,
+                persistent: false,
+                duration: $duration,
+                callback: $callback
+            ),
+            frozen: true
+        );
     }
 
     /**
