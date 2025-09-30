@@ -16,7 +16,9 @@ Eventful provides an extensible IO event dispatcher for use in interactive and a
 
 ## Installation
 
-Install the library via composer:
+This package requires PHP 8.4 or higher.
+
+Install via Composer:
 
 ```bash
 composer require decodelabs/eventful
