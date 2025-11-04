@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @package Eventful
- * @license http://opensource.org/licenses/MIT
+ * Eventful
+ * @license https://opensource.org/licenses/MIT
  */
 
 declare(strict_types=1);
