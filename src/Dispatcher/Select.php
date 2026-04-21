@@ -409,7 +409,6 @@ class Select implements Dispatcher
         }
 
         foreach ($this->signalMap ?? [] as $number => $set) {
-            // @phpstan-ignore-next-line
             $this->originalSignalHandlers[$number] = pcntl_signal_get_handler($number);
 
             pcntl_signal($number, function ($number) use ($set) {
